@@ -6,6 +6,11 @@ export default defineConfig({
     dts: {
       generator: "tsgo",
     },
-    exports: true,
+    exports: {
+      // Keep optional JOJO chrome CSS reachable after `vp pack` rewrites exports.
+      customExports: {
+        "./styles.css": "./styles.css",
+      },
+    },
   },
 });

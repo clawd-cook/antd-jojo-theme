@@ -15,7 +15,7 @@ export const jojoColors = {
   skyHot: "#FFD400",
   paper: "#FFF8E7",
   paperDeep: "#FFE08A",
-  /** Part 5 fashion violet */
+  /** Fashion violet — primary brand force */
   purple: "#6B1FA0",
   purpleHot: "#9B2BC7",
   purpleDeep: "#3B0A5C",
@@ -37,6 +37,10 @@ export type JojoColorKey = keyof typeof jojoColors;
 export const jojoInkShadow = `5px 5px 0 ${jojoColors.ink}`;
 export const jojoInkShadowLg = `8px 8px 0 ${jojoColors.ink}`;
 export const jojoInkShadowSm = `3px 3px 0 ${jojoColors.ink}`;
+
+/** Jewelry / menace accent shadow (magenta stamp) */
+export const jojoMagentaShadow = `4px 4px 0 ${jojoColors.magenta}`;
+export const jojoGoldShadow = `4px 4px 0 ${jojoColors.gold}`;
 
 /**
  * Crosshatching / screentone as CSS background layers.
@@ -73,5 +77,17 @@ export const jojoHatchDense = [
     transparent 3px,
     rgba(26, 10, 46, 0.18) 3px,
     rgba(26, 10, 46, 0.18) 4px
+  )`,
+].join(", ");
+
+/** Fashion-fabric pattern hatch (magenta + gold jewelry flecks) */
+export const jojoHatchFashion = [
+  jojoHatch,
+  `repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 7px,
+    rgba(230, 0, 122, 0.06) 7px,
+    rgba(230, 0, 122, 0.06) 8px
   )`,
 ].join(", ");

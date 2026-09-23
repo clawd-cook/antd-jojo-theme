@@ -2,6 +2,7 @@ import type { ThemeConfig } from "antd";
 import { theme } from "antd";
 
 import { jojoColors, jojoInkShadow, jojoInkShadowLg, jojoInkShadowSm } from "./colors.ts";
+import { jojoMotion, jojoPoseEase } from "./motion.ts";
 
 /**
  * Ant Design theme — Hirohiko Araki / JoJo’s Bizarre Adventure.
@@ -10,9 +11,13 @@ import { jojoColors, jojoInkShadow, jojoInkShadowLg, jojoInkShadowSm } from "./c
  * exaggerated dynamic poses (pointing-hand tension), vibrant saturated
  * non-naturalistic color, high-fashion pattern & jewelry accents, dramatic
  * solid-black shading — not soft anime.
+ *
+ * For pose-skew, hatch texture, and uppercase chrome, also import
+ * `@clawd-cook/antd-jojo-theme/styles.css` and wrap with `jojoRootClass`.
  */
 export const jojoTheme: ThemeConfig = {
   algorithm: theme.defaultAlgorithm,
+  cssVar: { key: "jojo" },
   token: {
     colorPrimary: jojoColors.purple,
     colorSuccess: jojoColors.teal,
@@ -28,12 +33,21 @@ export const jojoTheme: ThemeConfig = {
     colorTextTertiary: "#5C4A78",
     colorTextQuaternary: "#8A769E",
 
+    colorLink: jojoColors.magenta,
+    colorLinkHover: jojoColors.purpleHot,
+    colorLinkActive: jojoColors.purpleDeep,
+
     // Flat paper panels — no soft marble gradient feel
     colorBgContainer: jojoColors.paper,
     colorBgElevated: jojoColors.paper,
     colorBgLayout: jojoColors.sky,
     colorBgSpotlight: jojoColors.shade,
-    colorBgMask: "rgba(26, 10, 46, 0.62)",
+    colorBgMask: "rgba(26, 10, 46, 0.72)",
+    colorBgSolid: jojoColors.ink,
+    colorBgSolidHover: jojoColors.shade,
+    colorFillSecondary: jojoColors.paperDeep,
+    colorFillTertiary: jojoColors.standAura,
+    colorFillQuaternary: "rgba(107, 31, 160, 0.12)",
 
     colorBorder: jojoColors.ink,
     colorBorderSecondary: jojoColors.ink,
@@ -51,31 +65,47 @@ export const jojoTheme: ThemeConfig = {
 
     colorSuccessBg: jojoColors.teal,
     colorSuccessBorder: jojoColors.ink,
+    colorSuccessText: jojoColors.ink,
     colorWarningBg: jojoColors.gold,
     colorWarningBorder: jojoColors.ink,
+    colorWarningText: jojoColors.ink,
     colorErrorBg: jojoColors.crimson,
     colorErrorBorder: jojoColors.ink,
+    colorErrorText: jojoColors.paper,
     colorInfoBg: jojoColors.cyan,
     colorInfoBorder: jojoColors.ink,
+    colorInfoText: jojoColors.ink,
+
+    // Kill soft focus rings — ink contour only
+    controlOutlineWidth: 0,
+    controlOutline: "transparent",
+    controlTmpOutline: "transparent",
 
     // Thick ink contour
     lineWidth: 4,
     lineWidthBold: 5,
     lineType: "solid",
+    lineWidthFocus: 4,
 
-    // Sharp sculpted edges — Michelangelo / chiselled jaw
+    // Sharp sculpted edges — classical anatomy / chiselled jaw
     borderRadius: 0,
     borderRadiusXS: 0,
     borderRadiusSM: 0,
     borderRadiusLG: 0,
     borderRadiusOuter: 0,
 
-    controlHeight: 42,
-    controlHeightSM: 34,
-    controlHeightLG: 50,
+    controlHeight: 44,
+    controlHeightSM: 36,
+    controlHeightLG: 52,
 
     fontSize: 15,
     fontSizeLG: 18,
+    fontSizeXL: 22,
+    fontSizeHeading1: 42,
+    fontSizeHeading2: 32,
+    fontSizeHeading3: 26,
+    fontSizeHeading4: 20,
+    fontSizeHeading5: 16,
     fontWeightStrong: 900,
     // Condensed fashion-editorial type
     fontFamily:
@@ -85,9 +115,18 @@ export const jojoTheme: ThemeConfig = {
     boxShadowSecondary: jojoInkShadowLg,
     boxShadowTertiary: jojoInkShadowSm,
 
-    // Snappy pose — tension, not soft ease
-    motionDurationMid: "0.14s",
-    motionEaseInOut: "cubic-bezier(0.22, 1, 0.36, 1)",
+    // Pose snap — tension, not soft ease
+    motionDurationFast: jojoMotion.fast,
+    motionDurationMid: jojoMotion.mid,
+    motionDurationSlow: jojoMotion.slow,
+    motionEaseInOut: jojoPoseEase,
+    motionEaseOut: jojoPoseEase,
+    motionEaseOutBack: jojoPoseEase,
+    motionEaseInBack: jojoPoseEase,
+    motionEaseInOutCirc: jojoPoseEase,
+    motionEaseOutCirc: jojoPoseEase,
+    motionEaseInQuint: jojoPoseEase,
+    motionEaseOutQuint: jojoPoseEase,
   },
   components: {
     Button: {
@@ -95,6 +134,8 @@ export const jojoTheme: ThemeConfig = {
       defaultShadow: jojoInkShadow,
       dangerShadow: jojoInkShadow,
       fontWeight: 900,
+      contentFontSize: 15,
+      contentFontSizeLG: 17,
       borderColorDisabled: jojoColors.inkMuted,
       defaultBorderColor: jojoColors.ink,
       defaultColor: jojoColors.ink,
@@ -105,9 +146,14 @@ export const jojoTheme: ThemeConfig = {
       defaultActiveBg: jojoColors.goldDeep,
       defaultActiveBorderColor: jojoColors.ink,
       defaultActiveColor: jojoColors.ink,
+      primaryColor: jojoColors.paper,
+      dangerColor: jojoColors.paper,
+      textHoverBg: jojoColors.paperDeep,
       borderRadius: 0,
-      paddingInline: 22,
-      controlHeight: 42,
+      paddingInline: 24,
+      paddingInlineLG: 28,
+      controlHeight: 44,
+      controlHeightLG: 52,
     },
     Input: {
       activeShadow: jojoInkShadowSm,
@@ -115,11 +161,14 @@ export const jojoTheme: ThemeConfig = {
       activeBorderColor: jojoColors.ink,
       borderRadius: 0,
       colorBgContainer: jojoColors.paper,
+      paddingBlock: 8,
+      paddingInline: 14,
     },
     InputNumber: {
       activeShadow: jojoInkShadowSm,
       hoverBorderColor: jojoColors.magenta,
       activeBorderColor: jojoColors.ink,
+      borderRadius: 0,
     },
     Select: {
       optionSelectedBg: jojoColors.standAura,
@@ -127,12 +176,27 @@ export const jojoTheme: ThemeConfig = {
       optionSelectedFontWeight: 800,
       borderRadius: 0,
       colorBgContainer: jojoColors.paper,
+      selectorBg: jojoColors.paper,
+    },
+    Cascader: {
+      optionSelectedBg: jojoColors.standAura,
+      dropdownHeight: 220,
+    },
+    DatePicker: {
+      activeShadow: jojoInkShadowSm,
+      hoverBorderColor: jojoColors.magenta,
+      activeBorderColor: jojoColors.ink,
+      cellActiveWithRangeBg: jojoColors.standAura,
+      cellHoverBg: jojoColors.paperDeep,
     },
     Card: {
       borderRadiusLG: 0,
       colorBgContainer: jojoColors.paper,
       boxShadow: jojoInkShadow,
       colorBorderSecondary: jojoColors.ink,
+      headerBg: jojoColors.gold,
+      headerFontSize: 16,
+      headerHeight: 52,
     },
     Modal: {
       borderRadiusLG: 0,
@@ -140,10 +204,18 @@ export const jojoTheme: ThemeConfig = {
       contentBg: jojoColors.paper,
       headerBg: jojoColors.gold,
       titleColor: jojoColors.ink,
+      titleFontSize: 18,
       footerBg: jojoColors.sky,
+    },
+    Drawer: {
+      colorBgElevated: jojoColors.paper,
+      footerPaddingBlock: 16,
+      footerPaddingInline: 20,
     },
     Alert: {
       borderRadiusLG: 0,
+      withDescriptionPadding: "14px 18px",
+      defaultPadding: "10px 14px",
     },
     Tag: {
       borderRadiusSM: 0,
@@ -155,12 +227,27 @@ export const jojoTheme: ThemeConfig = {
       colorBgSpotlight: jojoColors.ink,
       colorTextLightSolid: jojoColors.gold,
     },
+    Popover: {
+      borderRadiusLG: 0,
+      colorBgElevated: jojoColors.paper,
+    },
+    Dropdown: {
+      borderRadiusLG: 0,
+      colorBgElevated: jojoColors.paper,
+      paddingBlock: 6,
+    },
     Notification: {
       width: 384,
+      borderRadiusLG: 0,
       colorSuccessBg: jojoColors.teal,
       colorErrorBg: jojoColors.crimson,
       colorInfoBg: jojoColors.cyan,
       colorWarningBg: jojoColors.gold,
+    },
+    Message: {
+      contentBg: jojoColors.paper,
+      contentPadding: "12px 16px",
+      borderRadiusLG: 0,
     },
     Progress: {
       circleTextColor: jojoColors.ink,
@@ -173,28 +260,36 @@ export const jojoTheme: ThemeConfig = {
       trackHoverBg: jojoColors.purpleHot,
       handleColor: jojoColors.gold,
       handleActiveColor: jojoColors.skyHot,
+      handleSize: 18,
+      handleSizeHover: 22,
+      handleLineWidth: 3,
+      handleLineWidthHover: 4,
       railBg: jojoColors.shade,
       railHoverBg: jojoColors.inkMuted,
-      railSize: 8,
-      handleSize: 18,
-      handleSizeHover: 20,
+      railSize: 10,
       dotBorderColor: jojoColors.ink,
       dotActiveBorderColor: jojoColors.magenta,
+      dotSize: 10,
     },
     Switch: {
-      trackHeight: 26,
-      trackMinWidth: 52,
-      handleSize: 22,
+      trackHeight: 28,
+      trackMinWidth: 56,
+      handleSize: 24,
+      innerMinMargin: 6,
+      innerMaxMargin: 28,
     },
     Checkbox: {
       borderRadiusSM: 0,
+      size: 18,
     },
     Radio: {
       radioSize: 20,
       dotSize: 10,
+      wrapperMarginInlineEnd: 12,
     },
     Steps: {
-      iconSize: 38,
+      iconSize: 40,
+      iconSizeSM: 28,
       titleLineHeight: 1.15,
     },
     Layout: {
@@ -203,53 +298,171 @@ export const jojoTheme: ThemeConfig = {
       headerBg: jojoColors.gold,
       headerColor: jojoColors.ink,
       headerHeight: 64,
+      headerPadding: "0 28px",
       siderBg: jojoColors.shade,
       lightSiderBg: jojoColors.shade,
       triggerBg: jojoColors.magenta,
       triggerColor: jojoColors.gold,
+      triggerHeight: 48,
+      lightTriggerBg: jojoColors.magenta,
+      lightTriggerColor: jojoColors.gold,
+      zeroTriggerWidth: 48,
+      zeroTriggerHeight: 48,
     },
     Menu: {
       activeBarBorderWidth: 0,
-      activeBarWidth: 5,
+      activeBarWidth: 6,
       itemBg: "transparent",
       subMenuItemBg: "transparent",
-      itemColor: "rgba(255, 248, 231, 0.72)",
+      itemColor: "rgba(255, 248, 231, 0.78)",
       itemHoverColor: jojoColors.gold,
       itemSelectedColor: jojoColors.gold,
       subMenuItemSelectedColor: jojoColors.gold,
-      itemHoverBg: "rgba(245, 197, 24, 0.18)",
-      itemSelectedBg: "rgba(230, 0, 122, 0.42)",
+      itemHoverBg: "rgba(245, 197, 24, 0.22)",
+      itemSelectedBg: "rgba(230, 0, 122, 0.48)",
+      itemActiveBg: "rgba(230, 0, 122, 0.32)",
       itemBorderRadius: 0,
       itemMarginInline: 8,
-      itemHeight: 46,
+      itemHeight: 48,
+      iconSize: 16,
       darkItemBg: "transparent",
-      darkItemColor: "rgba(255, 248, 231, 0.72)",
-      darkItemHoverBg: "rgba(245, 197, 24, 0.18)",
+      darkItemColor: "rgba(255, 248, 231, 0.78)",
+      darkItemHoverBg: "rgba(245, 197, 24, 0.22)",
       darkItemHoverColor: jojoColors.gold,
-      darkItemSelectedBg: "rgba(230, 0, 122, 0.42)",
+      darkItemSelectedBg: "rgba(230, 0, 122, 0.48)",
       darkItemSelectedColor: jojoColors.gold,
       darkSubMenuItemBg: "transparent",
       darkPopupBg: jojoColors.shade,
+      popupBg: jojoColors.paper,
     },
     Table: {
       headerBg: jojoColors.gold,
       headerColor: jojoColors.ink,
+      headerSortActiveBg: jojoColors.goldDeep,
+      headerSortHoverBg: jojoColors.skyHot,
+      headerFilterHoverBg: jojoColors.paperDeep,
       borderColor: jojoColors.ink,
       rowHoverBg: jojoColors.standAura,
+      rowSelectedBg: "rgba(230, 0, 122, 0.16)",
+      rowSelectedHoverBg: "rgba(230, 0, 122, 0.28)",
       headerBorderRadius: 0,
+      footerBg: jojoColors.paperDeep,
+      cellPaddingBlock: 14,
+      cellPaddingInline: 16,
     },
     Tabs: {
       itemSelectedColor: jojoColors.magenta,
       inkBarColor: jojoColors.magenta,
       itemHoverColor: jojoColors.purpleHot,
+      itemActiveColor: jojoColors.purpleDeep,
       titleFontSize: 15,
+      horizontalItemPadding: "12px 18px",
+      cardBg: jojoColors.paper,
+      cardHeight: 44,
+    },
+    Segmented: {
+      trackBg: jojoColors.paperDeep,
+      trackPadding: 0,
+      itemSelectedBg: jojoColors.magenta,
+      itemSelectedColor: jojoColors.gold,
+      itemHoverBg: jojoColors.paper,
+      itemColor: jojoColors.inkMuted,
+      itemHoverColor: jojoColors.ink,
+      borderRadius: 0,
+      borderRadiusSM: 0,
+      borderRadiusLG: 0,
+      controlHeight: 40,
     },
     Badge: {
       textFontSize: 12,
       textFontWeight: 900,
+      statusSize: 10,
+      dotSize: 10,
     },
     Divider: {
       colorSplit: jojoColors.ink,
+      orientationMargin: 0.08,
+    },
+    Breadcrumb: {
+      itemColor: jojoColors.inkMuted,
+      lastItemColor: jojoColors.ink,
+      linkColor: jojoColors.magenta,
+      linkHoverColor: jojoColors.purpleHot,
+      separatorColor: jojoColors.ink,
+      separatorMargin: 10,
+      fontSize: 14,
+    },
+    Pagination: {
+      itemActiveBg: jojoColors.purple,
+      itemSize: 36,
+      itemSizeSM: 28,
+      borderRadius: 0,
+    },
+    Collapse: {
+      headerBg: jojoColors.gold,
+      contentBg: jojoColors.paper,
+      borderRadiusLG: 0,
+      headerPadding: "14px 18px",
+      contentPadding: "14px 18px",
+    },
+    Timeline: {
+      tailColor: jojoColors.ink,
+      dotBg: jojoColors.paper,
+      itemPaddingBottom: 24,
+    },
+    Spin: {
+      colorPrimary: jojoColors.magenta,
+      contentHeight: 440,
+      dotSize: 24,
+      dotSizeSM: 16,
+      dotSizeLG: 36,
+    },
+    Result: {
+      titleFontSize: 26,
+      subtitleFontSize: 15,
+      iconFontSize: 72,
+    },
+    Empty: {
+      colorTextDisabled: jojoColors.inkMuted,
+    },
+    Anchor: {
+      linkPaddingBlock: 6,
+      linkPaddingInlineStart: 18,
+    },
+    FloatButton: {
+      colorBgElevated: jojoColors.purple,
+    },
+    Tree: {
+      directoryNodeSelectedBg: jojoColors.standAura,
+      directoryNodeSelectedColor: jojoColors.ink,
+      nodeSelectedBg: jojoColors.standAura,
+      nodeHoverBg: jojoColors.paperDeep,
+      titleHeight: 28,
+    },
+    Transfer: {
+      listWidth: 220,
+      itemHeight: 36,
+    },
+    Upload: {
+      actionsColor: jojoColors.magenta,
+    },
+    Rate: {
+      starColor: jojoColors.gold,
+      starSize: 22,
+    },
+    Statistic: {
+      titleFontSize: 14,
+      contentFontSize: 28,
+    },
+    Typography: {
+      titleMarginTop: "0.8em",
+      titleMarginBottom: "0.4em",
+    },
+    Form: {
+      labelFontSize: 14,
+      labelColor: jojoColors.ink,
+      labelRequiredMarkColor: jojoColors.magenta,
+      itemMarginBottom: 22,
     },
   },
 };

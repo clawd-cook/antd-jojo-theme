@@ -9,6 +9,7 @@ import {
   XOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
+import { jojoRootClass } from "@clawd-cook/antd-jojo-theme";
 import type { StepItem } from "@rc-component/steps/es/Steps";
 import {
   App,
@@ -409,7 +410,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
 
   return (
     <ConfigProvider {...restConfig} theme={mergedTheme}>
-      <div className={clsx(containerClassName, styles.container)}>
+      <div className={clsx(containerClassName, styles.container, isJojo && jojoRootClass)}>
         <App style={{ width: "100%" }}>
           <BorderBeam lineWidth={2}>
             <Card

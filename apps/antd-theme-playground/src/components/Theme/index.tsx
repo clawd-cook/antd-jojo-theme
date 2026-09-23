@@ -40,6 +40,7 @@ import {
   theme,
   Typography,
 } from "antd";
+import { jojoRootClass } from "@clawd-cook/antd-jojo-theme";
 import { createStaticStyles } from "antd-style";
 import { generateColor } from "antd/es/color-picker/util";
 import { clsx } from "clsx";
@@ -587,15 +588,18 @@ export const ThemeDashboard: React.FC<ThemeDashboardProps> = (props) => {
     const algorithms = Array.isArray(algorithm) ? algorithm : algorithm ? [algorithm] : [];
     return algorithms.includes(theme.darkAlgorithm);
   }, [config]);
+  const isJojo = activeTheme?.key === "jojo";
 
   return (
     <ConfigProvider {...dashboardConfig}>
-      <ThemeDashboardLayout
-        className={className}
-        activeTheme={activeTheme}
-        isDarkTheme={isDarkTheme}
-        style={style}
-      />
+      <div className={isJojo ? jojoRootClass : undefined}>
+        <ThemeDashboardLayout
+          className={className}
+          activeTheme={activeTheme}
+          isDarkTheme={isDarkTheme}
+          style={style}
+        />
+      </div>
     </ConfigProvider>
   );
 };

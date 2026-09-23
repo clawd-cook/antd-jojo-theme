@@ -14,12 +14,14 @@
     "directory": "packages/antd-jojo-theme"
   },
   "files": [
-    "dist"
+    "dist",
+    "styles.css"
   ],
   "type": "module",
   "exports": {
     ".": "./dist/index.mjs",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./styles.css": "./styles.css"
   },
   "publishConfig": {
     "access": "public"

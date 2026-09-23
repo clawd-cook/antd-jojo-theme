@@ -1,0 +1,312 @@
+/**
+ * Optional JOJO chrome — pose skew, hatch volume, uppercase editorial type.
+ *
+ * Usage:
+ *   import '@clawd-cook/antd-jojo-theme/styles.css';
+ *   <div className={jojoRootClass}>…ConfigProvider theme={jojoTheme}…</div>
+ *
+ * Scoped under `.jojo-theme` so it never pollutes a non-JOJO tree.
+ */
+
+.jojo-theme {
+  --jojo-ink: #0d0d0d;
+  --jojo-ink-muted: #2b2140;
+  --jojo-shade: #1a0a2e;
+  --jojo-sky: #ffe566;
+  --jojo-sky-hot: #ffd400;
+  --jojo-paper: #fff8e7;
+  --jojo-paper-deep: #ffe08a;
+  --jojo-purple: #6b1fa0;
+  --jojo-purple-hot: #9b2bc7;
+  --jojo-magenta: #e6007a;
+  --jojo-gold: #f5c518;
+  --jojo-pose-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --jojo-ink-shadow: 5px 5px 0 #0d0d0d;
+  --jojo-ink-shadow-lg: 8px 8px 0 #0d0d0d;
+  --jojo-ink-shadow-sm: 3px 3px 0 #0d0d0d;
+  --jojo-magenta-shadow: 4px 4px 0 #e6007a;
+  --jojo-hatch:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 3px,
+      rgba(13, 13, 13, 0.14) 3px,
+      rgba(13, 13, 13, 0.14) 4px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 5px,
+      rgba(13, 13, 13, 0.08) 5px,
+      rgba(13, 13, 13, 0.08) 6px
+    );
+  --jojo-hatch-dense:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(13, 13, 13, 0.22) 2px,
+      rgba(13, 13, 13, 0.22) 3px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 3px,
+      rgba(26, 10, 46, 0.18) 3px,
+      rgba(26, 10, 46, 0.18) 4px
+    );
+
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background-color: var(--jojo-sky);
+}
+
+@keyframes jojo-pose-in {
+  0% {
+    transform: skewX(10deg) translate(6px, 10px);
+    opacity: 0.35;
+  }
+  55% {
+    transform: skewX(-6deg) translate(-2px, -3px);
+    opacity: 1;
+  }
+  100% {
+    transform: skewX(-3deg);
+    opacity: 1;
+  }
+}
+
+@keyframes jojo-menace-pulse {
+  0%,
+  100% {
+    box-shadow: var(--jojo-ink-shadow);
+  }
+  50% {
+    box-shadow: 6px 6px 0 var(--jojo-magenta);
+  }
+}
+
+/* —— Buttons: pointing-hand pose —— */
+.jojo-theme .ant-btn {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transform: skewX(-3deg);
+  animation: jojo-pose-in 0.32s var(--jojo-pose-ease) both;
+  transition:
+    transform 0.12s var(--jojo-pose-ease),
+    box-shadow 0.12s var(--jojo-pose-ease),
+    letter-spacing 0.12s var(--jojo-pose-ease);
+  border-radius: 0 !important;
+}
+
+.jojo-theme .ant-btn:not(:disabled):hover {
+  transform: skewX(-7deg) translate(-4px, -4px) scale(1.02);
+  box-shadow: var(--jojo-ink-shadow-lg) !important;
+  letter-spacing: 0.14em;
+}
+
+.jojo-theme .ant-btn:not(:disabled):active {
+  transform: skewX(2deg) translate(3px, 3px) scale(0.98);
+  box-shadow: var(--jojo-ink-shadow-sm) !important;
+  letter-spacing: 0.06em;
+  transition-duration: 0.06s;
+}
+
+/* —— Cards / elevated panels —— */
+.jojo-theme .ant-card,
+.jojo-theme .ant-modal-content,
+.jojo-theme .ant-notification-notice,
+.jojo-theme .ant-popover-inner,
+.jojo-theme .ant-dropdown-menu,
+.jojo-theme .ant-select-dropdown,
+.jojo-theme .ant-picker-dropdown .ant-picker-panel-container,
+.jojo-theme .ant-message-notice-content {
+  border: 4px solid var(--jojo-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--jojo-ink-shadow) !important;
+  background-image: var(--jojo-hatch);
+  background-color: var(--jojo-paper);
+}
+
+.jojo-theme .ant-card {
+  transition:
+    transform 0.14s var(--jojo-pose-ease),
+    box-shadow 0.14s var(--jojo-pose-ease);
+}
+
+.jojo-theme .ant-card:hover {
+  transform: skewX(-1.5deg) translate(-2px, -2px);
+  box-shadow: var(--jojo-ink-shadow-lg) !important;
+}
+
+.jojo-theme .ant-card-head {
+  border-bottom: 4px solid var(--jojo-ink) !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background-image: var(--jojo-hatch);
+}
+
+.jojo-theme .ant-modal-content {
+  animation: jojo-pose-in 0.28s var(--jojo-pose-ease) both;
+  overflow: hidden;
+}
+
+.jojo-theme .ant-modal-header {
+  border-bottom: 4px solid var(--jojo-ink) !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background-color: var(--jojo-gold) !important;
+  background-image: var(--jojo-hatch);
+}
+
+.jojo-theme .ant-modal-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* —— Alerts: menace pulse —— */
+.jojo-theme .ant-alert {
+  border: 4px solid var(--jojo-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--jojo-ink-shadow);
+  background-image: var(--jojo-hatch);
+  font-weight: 700;
+  animation: jojo-menace-pulse 1.8s var(--jojo-pose-ease) 2;
+}
+
+/* —— Inputs —— */
+.jojo-theme .ant-input,
+.jojo-theme .ant-input-affix-wrapper,
+.jojo-theme .ant-input-number,
+.jojo-theme .ant-select-selector,
+.jojo-theme .ant-picker {
+  border-radius: 0 !important;
+  border-width: 4px !important;
+  border-color: var(--jojo-ink) !important;
+  background-color: var(--jojo-paper) !important;
+  box-shadow: var(--jojo-ink-shadow-sm);
+  transition:
+    transform 0.12s var(--jojo-pose-ease),
+    box-shadow 0.12s var(--jojo-pose-ease);
+}
+
+.jojo-theme .ant-input:hover,
+.jojo-theme .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+.jojo-theme .ant-input-number:hover,
+.jojo-theme .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.jojo-theme .ant-picker:hover {
+  border-color: var(--jojo-magenta) !important;
+  transform: skewX(-1deg);
+}
+
+.jojo-theme .ant-input:focus,
+.jojo-theme .ant-input-focused,
+.jojo-theme .ant-input-affix-wrapper-focused,
+.jojo-theme .ant-input-number-focused,
+.jojo-theme .ant-select-focused .ant-select-selector,
+.jojo-theme .ant-picker-focused {
+  border-color: var(--jojo-ink) !important;
+  box-shadow: var(--jojo-ink-shadow-sm) !important;
+  transform: skewX(-1deg);
+}
+
+/* —— Tooltips: jewelry accent —— */
+.jojo-theme .ant-tooltip .ant-tooltip-inner {
+  border: 3px solid var(--jojo-ink);
+  border-radius: 0 !important;
+  background: var(--jojo-ink) !important;
+  color: var(--jojo-gold) !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: var(--jojo-magenta-shadow);
+  transform: skewX(-2deg);
+}
+
+.jojo-theme .ant-tooltip .ant-tooltip-arrow {
+  display: none;
+}
+
+/* —— Progress: carved shade rail —— */
+.jojo-theme .ant-progress-inner {
+  border: 4px solid var(--jojo-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--jojo-ink-shadow-sm);
+  background-color: var(--jojo-shade) !important;
+  background-image: var(--jojo-hatch-dense);
+}
+
+.jojo-theme .ant-progress-bg {
+  border-radius: 0 !important;
+}
+
+/* —— Segmented / tags / tabs —— */
+.jojo-theme .ant-segmented {
+  border: 3px solid var(--jojo-ink);
+  border-radius: 0 !important;
+  box-shadow: var(--jojo-ink-shadow-sm);
+}
+
+.jojo-theme .ant-segmented-item {
+  border-radius: 0 !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transform: skewX(-2deg);
+}
+
+.jojo-theme .ant-tag {
+  border-radius: 0 !important;
+  border-width: 2px !important;
+  border-color: var(--jojo-ink) !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.jojo-theme .ant-tabs-tab {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.jojo-theme .ant-tabs-ink-bar {
+  height: 4px !important;
+}
+
+/* —— Typography shout —— */
+.jojo-theme .ant-typography h1,
+.jojo-theme .ant-typography h2,
+.jojo-theme .ant-typography h3,
+.jojo-theme h1.ant-typography,
+.jojo-theme h2.ant-typography,
+.jojo-theme h3.ant-typography {
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* —— Table / collapse hard ink —— */
+.jojo-theme .ant-table,
+.jojo-theme .ant-collapse {
+  border: 4px solid var(--jojo-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--jojo-ink-shadow-sm);
+}
+
+.jojo-theme .ant-table-thead > tr > th {
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 4px solid var(--jojo-ink) !important;
+}
+
+.jojo-theme .ant-collapse-header {
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
