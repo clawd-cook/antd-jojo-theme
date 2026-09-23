@@ -167,7 +167,11 @@ function stringifyValue(value: unknown, depth = 0): string {
     return `{\n${items.join(",\n")},\n${closingIndent}}`;
   }
 
-  return String(value);
+  if (typeof value === "bigint" || typeof value === "symbol") {
+    return value.toString();
+  }
+
+  return "/* unsupported */";
 }
 
 export function generateThemeCode(themeConfig?: ThemeConfig): string {
