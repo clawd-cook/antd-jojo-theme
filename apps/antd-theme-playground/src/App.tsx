@@ -1,4 +1,4 @@
-import { jojoColors, jojoInkShadowSm } from "@clawd-cook/antd-jojo-theme";
+import { jojoColors, jojoInkFilterSvg, jojoInkShadowSm } from "@clawd-cook/antd-jojo-theme";
 import { ConfigProvider, Flex, Segmented, theme } from "antd";
 import enUS from "antd/locale/en_US";
 import zhCN from "antd/locale/zh_CN";
@@ -23,6 +23,7 @@ const App = () => {
         <LocaleContext value={localeType}>
           <DarkContext value={isDark}>
             <SiteContextProvider>
+              <div dangerouslySetInnerHTML={{ __html: jojoInkFilterSvg }} aria-hidden />
               <Flex vertical style={{ minHeight: "100vh", background: jojoColors.sky }}>
                 <Flex
                   justify="flex-end"
@@ -34,8 +35,10 @@ const App = () => {
                     zIndex: 10,
                     padding: "12px 24px",
                     background: jojoColors.gold,
-                    borderBottom: `4px solid ${jojoColors.ink}`,
+                    borderBottom: `3px solid ${jojoColors.ink}`,
                     boxShadow: jojoInkShadowSm,
+                    backgroundImage:
+                      "repeating-linear-gradient(110deg, transparent 0, transparent 2px, rgba(10,10,12,0.2) 2px, rgba(10,10,12,0.2) 3px)",
                   }}
                 >
                   <Segmented
@@ -47,8 +50,8 @@ const App = () => {
                       { label: "EN", value: "en" },
                     ]}
                     style={{
-                      borderRadius: 0,
-                      border: `2px solid ${jojoColors.ink}`,
+                      borderRadius: 2,
+                      border: `3px solid ${jojoColors.ink}`,
                       background: jojoColors.paper,
                     }}
                   />
@@ -61,8 +64,8 @@ const App = () => {
                       { label: "Dark", value: "dark" },
                     ]}
                     style={{
-                      borderRadius: 0,
-                      border: `2px solid ${jojoColors.ink}`,
+                      borderRadius: 2,
+                      border: `3px solid ${jojoColors.ink}`,
                       background: jojoColors.paper,
                     }}
                   />

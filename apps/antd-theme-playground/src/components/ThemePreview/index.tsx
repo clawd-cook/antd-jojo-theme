@@ -22,8 +22,8 @@ const JOJO_POSE_EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 const locales = {
   cn: {
-    themeTitle: "荒木流 · JOJO 主题",
-    themeDesc: "粗黑描边、雕塑解剖、夸张 pose、高饱和非写实配色 — 杂志封面张力，不是柔和 SaaS",
+    themeTitle: "黄金之风 · JOJO 主题",
+    themeDesc: "衬线舞台字：厚重 JOJO 标题 + 排线体积 + 凹姿势构图",
     aiGenerate: "AI 主题生成",
     aiGenerateDesc: "用一句话描述你想要的风格",
     copyTheme: "复制主题代码",
@@ -33,9 +33,8 @@ const locales = {
     contribution: "贡献",
   },
   en: {
-    themeTitle: "Araki · JOJO Theme",
-    themeDesc:
-      "Thick ink outlines, sculptural anatomy, exaggerated poses, saturated non-naturalistic color — magazine-cover tension, not soft SaaS",
+    themeTitle: "Golden Wind · JOJO Theme",
+    themeDesc: "Serif stage type: heavy JOJO lockup + hatch volume + soft pose composition",
     aiGenerate: "AI Theme Generator",
     aiGenerateDesc: "Describe your desired style",
     copyTheme: "Copy theme code",
@@ -96,16 +95,18 @@ const useStyles = createStyles(({ css, cssVar }) => ({
   }),
   previewTabsJojo: css({
     padding: 0,
-    borderRadius: 0,
+    borderRadius: 2,
     background: jojoColors.paper,
-    border: `3px solid ${jojoColors.ink}`,
+    border: `2.5px solid ${jojoColors.ink}`,
     boxShadow: jojoInkShadowSm,
+    backgroundImage: `repeating-linear-gradient(108deg, transparent 0, transparent 2.5px, rgba(10,10,12,0.14) 2.5px, rgba(10,10,12,0.14) 3.2px)`,
+    backgroundSize: "8px 10px",
     ".ant-segmented-group": {
       gap: 0,
     },
     ".ant-segmented-thumb": {
-      borderRadius: 0,
-      background: jojoColors.magenta,
+      borderRadius: 2,
+      background: jojoColors.purple,
       boxShadow: "none",
     },
   }),
@@ -133,19 +134,19 @@ const useStyles = createStyles(({ css, cssVar }) => ({
     },
   }),
   tabsItemJojo: css({
-    borderRadius: 0,
+    borderRadius: 2,
     fontWeight: 900,
     textTransform: "uppercase",
     letterSpacing: "0.08em",
     color: jojoColors.inkMuted,
-    transform: "skewX(-2deg)",
+    transform: "skewX(-3deg)",
     transition: `transform 0.12s ${JOJO_POSE_EASE}, color 0.12s ${JOJO_POSE_EASE}`,
     "&:hover": {
-      transform: "skewX(-4deg)",
+      transform: "skewX(-5deg)",
       color: jojoColors.ink,
     },
     "&.ant-segmented-item-selected": {
-      color: jojoColors.gold,
+      color: jojoColors.paper,
     },
   }),
   tabsItemDark: css({
@@ -190,25 +191,25 @@ const useStyles = createStyles(({ css, cssVar }) => ({
     },
   }),
   themeBlockJojo: css({
-    borderRadius: 0,
+    borderRadius: 2,
     boxShadow: jojoInkShadowSm,
-    outline: `2px solid ${jojoColors.ink}`,
+    outline: `3px solid ${jojoColors.ink}`,
     transition: `transform 0.12s ${JOJO_POSE_EASE}, box-shadow 0.12s ${JOJO_POSE_EASE}`,
     "&:hover, &:focus-within": {
-      outline: `2px solid ${jojoColors.ink}`,
-      transform: "skewX(-6deg) scale(1.12)",
+      outline: `3px solid ${jojoColors.ink}`,
+      transform: "skewX(-6deg) scale(1.12) rotate(-2deg)",
       boxShadow: jojoInkShadow,
     },
     "> img": {
-      borderRadius: 0,
+      borderRadius: 2,
     },
   }),
   active: css({
     outline: `2px solid ${cssVar.colorPrimaryBorder}`,
   }),
   activeJojo: css({
-    outline: `3px solid ${jojoColors.magenta}`,
-    boxShadow: `3px 3px 0 ${jojoColors.gold}`,
+    outline: `3px solid ${jojoColors.purple}`,
+    boxShadow: `4px 5px 0 ${jojoColors.ink}`,
     transform: "skewX(-4deg)",
   }),
   switch: css({
@@ -237,32 +238,39 @@ const useStyles = createStyles(({ css, cssVar }) => ({
     },
   }),
   buttonBlockJojo: css({
-    borderRadius: 0,
+    borderRadius: 2,
     color: jojoColors.ink,
-    border: `2px solid ${jojoColors.ink}`,
-    background: jojoColors.paper,
+    border: `3px solid ${jojoColors.ink}`,
+    background: jojoColors.gold,
     boxShadow: jojoInkShadowSm,
-    transform: "skewX(-2deg)",
+    transform: "skewX(-3deg)",
     transition: `transform 0.12s ${JOJO_POSE_EASE}, box-shadow 0.12s ${JOJO_POSE_EASE}`,
     "&:hover": {
-      backgroundColor: jojoColors.gold,
-      transform: "skewX(-5deg) translate(-2px, -2px)",
+      backgroundColor: jojoColors.purple,
+      color: jojoColors.paper,
+      transform: "skewX(-6deg) translate(-2px, -2px) rotate(-1deg)",
       boxShadow: jojoInkShadow,
     },
   }),
   groupTitleJojo: css({
-    fontFamily:
-      '"Arial Narrow", "Futura Condensed", "Helvetica Neue Condensed", Impact, "Gill Sans", sans-serif',
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    transform: "skewX(-3deg)",
+    fontFamily: 'Georgia, "Times New Roman", "Noto Serif SC", "Noto Serif", serif',
+    letterSpacing: "0.02em",
+    textTransform: "none",
+    transform: "skewX(-1.5deg)",
     display: "inline-block",
+    fontWeight: 900,
+    fontSize: "clamp(28px, 4.5vw, 48px)",
+    lineHeight: 1.1,
+    textShadow: "2px 3px 0 rgba(10, 10, 12, 0.2)",
   }),
   groupDescJojo: css({
-    fontWeight: 700,
-    letterSpacing: "0.03em",
-    maxWidth: 720,
+    fontFamily: 'Georgia, "Times New Roman", "Noto Serif SC", "Noto Serif", serif',
+    fontWeight: 500,
+    letterSpacing: "0.01em",
+    maxWidth: 780,
     marginInline: "auto",
+    fontSize: 16,
+    lineHeight: 1.55,
   }),
 }));
 

@@ -1,93 +1,163 @@
 /**
- * Hirohiko Araki / JoJo’s Bizarre Adventure palette.
- * Bold ink outlines, vibrant saturated non-naturalistic clash color,
- * metal gold / jewelry accents, pop flat fills. Sky can be yellow;
- * surfaces can run violet — never product-photo realism.
+ * JOJO tokens — line & volume first (荒木线), color second.
+ * Pose lives in motion.ts / playground; here we define ink that sculpts form.
  */
 export const jojoColors = {
-  /** Thick manga ink */
-  ink: "#0D0D0D",
-  inkMuted: "#2B2140",
-  /** Chiaroscuro block shade (carved, not soft) */
-  shade: "#1A0A2E",
-  /** Araki cover yellow sky / stage ground */
-  sky: "#FFE566",
-  skyHot: "#FFD400",
-  paper: "#FFF8E7",
-  paperDeep: "#FFE08A",
-  /** Fashion violet — primary brand force */
-  purple: "#6B1FA0",
-  purpleHot: "#9B2BC7",
-  purpleDeep: "#3B0A5C",
-  /** Haute-couture clash magenta */
-  magenta: "#E6007A",
-  /** Metal buckle / embroidery gold */
-  gold: "#F5C518",
-  goldDeep: "#D4A017",
+  /** Heavy manga ink */
+  ink: "#0A0A0C",
+  inkMuted: "#4A3A58",
+  /** Deep shade for rails (can sit under hatch) */
+  shade: "#2A1840",
+  /** Quiet stage — paper-adjacent, not a color stunt */
+  sky: "#E8E4EE",
+  skyHot: "#D4CEDD",
+  /** Couture white panel */
+  paper: "#FFFEF8",
+  paperDeep: "#F2EEF6",
+  /** Accent pink (secondary to line) */
+  purple: "#E8318A",
+  purpleHot: "#FF4AA3",
+  purpleDeep: "#9B1860",
+  magenta: "#FF2D9B",
+  gold: "#F0C14A",
+  goldDeep: "#C4921E",
   crimson: "#C41E3A",
-  /** Unrealistic complementary teal */
-  teal: "#00C9B1",
-  cyan: "#00B7E0",
-  standAura: "#B388FF",
+  teal: "#2BB5A0",
+  cyan: "#1E6BDB",
+  standAura: "#F5E8F0",
 } as const;
 
 export type JojoColorKey = keyof typeof jojoColors;
 
-/** Hard ink offset shadow — sculptural, not soft blur */
-export const jojoInkShadow = `5px 5px 0 ${jojoColors.ink}`;
-export const jojoInkShadowLg = `8px 8px 0 ${jojoColors.ink}`;
-export const jojoInkShadowSm = `3px 3px 0 ${jojoColors.ink}`;
+/** Cast shadow — ink stamp (volume cue, not neo-brutal brick fetish) */
+export const jojoInkShadow = `3px 4px 0 ${jojoColors.ink}`;
+export const jojoInkShadowLg = `5px 6px 0 ${jojoColors.ink}`;
+export const jojoInkShadowSm = `2px 2px 0 ${jojoColors.ink}`;
 
-/** Jewelry / menace accent shadow (magenta stamp) */
-export const jojoMagentaShadow = `4px 4px 0 ${jojoColors.magenta}`;
-export const jojoGoldShadow = `4px 4px 0 ${jojoColors.gold}`;
+export const jojoMagentaShadow = `2px 3px 0 ${jojoColors.magenta}`;
+export const jojoGoldShadow = `2px 3px 0 ${jojoColors.gold}`;
+
+/** Quiet paper tooth — support for line work, not the hero */
+export const jojoPaperGrain = `url("data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>
+    <filter id='g'>
+      <feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/>
+      <feColorMatrix values='0 0 0 0 0.04  0 0 0 0 0.04  0 0 0 0 0.05  0 0 0 0.35 0'/>
+    </filter>
+    <rect width='100%' height='100%' filter='url(#g)' opacity='0.28'/>
+  </svg>`,
+)}")`;
+export const jojoPaperGrainSize = "140px 140px";
 
 /**
- * Crosshatching / screentone as CSS background layers.
- * Mimics dense hatching volume without soft gradients.
+ * 荒木线 — parallel hatch that sculpts shade (faces / folds language).
+ * Ink-only. This is the default volume tool.
  */
 export const jojoHatch = [
   `repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 3px,
-    rgba(13, 13, 13, 0.14) 3px,
-    rgba(13, 13, 13, 0.14) 4px
-  )`,
-  `repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 5px,
-    rgba(13, 13, 13, 0.08) 5px,
-    rgba(13, 13, 13, 0.08) 6px
+    108deg,
+    transparent 0,
+    transparent 2.5px,
+    rgba(10, 10, 12, 0.28) 2.5px,
+    rgba(10, 10, 12, 0.28) 3.25px
   )`,
 ].join(", ");
+export const jojoHatchSize = "8px 10px";
 
+/** Dense cross-hatch for deep shade (jaw / under-fold) */
 export const jojoHatchDense = [
   `repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 2px,
-    rgba(13, 13, 13, 0.22) 2px,
-    rgba(13, 13, 13, 0.22) 3px
+    108deg,
+    transparent 0,
+    transparent 1.75px,
+    rgba(10, 10, 12, 0.42) 1.75px,
+    rgba(10, 10, 12, 0.42) 2.5px
   )`,
   `repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 3px,
-    rgba(26, 10, 46, 0.18) 3px,
-    rgba(26, 10, 46, 0.18) 4px
+    -18deg,
+    transparent 0,
+    transparent 3.5px,
+    rgba(10, 10, 12, 0.18) 3.5px,
+    rgba(10, 10, 12, 0.18) 4.25px
   )`,
 ].join(", ");
 
-/** Fashion-fabric pattern hatch (magenta + gold jewelry flecks) */
+/**
+ * Soft hatch wash for panels — light area clear, shade corner lined.
+ * Use as background-image with solid paper underneath.
+ */
+export const jojoHatchVolume = [
+  `linear-gradient(
+    145deg,
+    transparent 0 48%,
+    rgba(10, 10, 12, 0.04) 48% 100%
+  )`,
+  `repeating-linear-gradient(
+    108deg,
+    transparent 0,
+    transparent 3px,
+    rgba(10, 10, 12, 0.16) 3px,
+    rgba(10, 10, 12, 0.16) 3.6px
+  )`,
+].join(", ");
+export const jojoHatchVolumeSize = "auto, 9px 11px";
+
+/** Optional fashion motifs — accents only, never stage wallpaper */
+export const jojoDiamond = [
+  `repeating-linear-gradient(
+    60deg,
+    transparent 0,
+    transparent 10px,
+    rgba(10, 10, 12, 0.14) 10px,
+    rgba(10, 10, 12, 0.14) 11px
+  )`,
+  `repeating-linear-gradient(
+    -60deg,
+    transparent 0,
+    transparent 10px,
+    rgba(10, 10, 12, 0.1) 10px,
+    rgba(10, 10, 12, 0.1) 11px
+  )`,
+].join(", ");
+export const jojoDiamondSize = "24px 42px";
+
+export const jojoTeardrop = [
+  `radial-gradient(ellipse 2.5px 3.5px at 6px 8px, rgba(10, 10, 12, 0.55) 0 1.8px, transparent 2px)`,
+  `radial-gradient(ellipse 2px 3px at 18px 20px, rgba(10, 10, 12, 0.45) 0 1.4px, transparent 1.6px)`,
+].join(", ");
+export const jojoTeardropSize = "28px 26px";
+
+/** Fashion flecks — sparse, for headers only */
 export const jojoHatchFashion = [
   jojoHatch,
+  `radial-gradient(circle at 12px 10px, rgba(240, 193, 74, 0.35) 0 1.2px, transparent 1.4px)`,
+].join(", ");
+export const jojoHatchFashionSize = "14px 12px";
+
+/** Concentration lines — drama panels / alerts */
+export const jojoSpeedLines = `repeating-conic-gradient(
+  from 205deg at 100% 0%,
+  transparent 0deg,
+  transparent 7deg,
+  rgba(10, 10, 12, 0.1) 7deg,
+  rgba(10, 10, 12, 0.1) 8deg
+)`;
+
+/**
+ * Cell shade via line: clear → hatched (no pink slab).
+ * Mimics hard light edge + inked shadow.
+ */
+export const jojoCellShade = [
+  `linear-gradient(
+    145deg,
+    ${jojoColors.paper} 0 46%,
+    transparent 46% 100%
+  )`,
   `repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 7px,
-    rgba(230, 0, 122, 0.06) 7px,
-    rgba(230, 0, 122, 0.06) 8px
+    108deg,
+    transparent 0,
+    transparent 2.5px,
+    rgba(10, 10, 12, 0.2) 2.5px,
+    rgba(10, 10, 12, 0.2) 3.2px
   )`,
 ].join(", ");

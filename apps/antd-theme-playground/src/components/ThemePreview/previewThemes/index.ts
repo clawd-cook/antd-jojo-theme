@@ -24,11 +24,11 @@ export interface PreviewThemeConfig {
 const locales = {
   cn: {
     default: "Ant Design",
-    jojo: "JOJO · 荒木",
+    jojo: "JOJO · 黄金之风",
   },
   en: {
     default: "Ant Design",
-    jojo: "JOJO · Araki",
+    jojo: "JOJO · Golden Wind",
   },
 };
 
@@ -111,7 +111,7 @@ const usePreviewThemes = () => {
         icon: JojoIcon,
         key: "jojo",
         background: jojoColors.sky,
-        colors: ["#6B1FA0", "#FFE566", "#E6007A", "#F5C518", "#0D0D0D"],
+        colors: ["#0A0A0C", "#FFFEF8", "#E8E4EE", "#E8318A", "#F0C14A"],
         props: jojoTheme,
         copyCode: jojoThemeSource,
       },

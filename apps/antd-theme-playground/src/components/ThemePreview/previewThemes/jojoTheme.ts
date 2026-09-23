@@ -6,7 +6,7 @@ import { useMemo } from "react";
 
 /**
  * Playground wiring for the package theme + scoped JOJO chrome CSS.
- * Pose / hatch / uppercase live in `@clawd-cook/antd-jojo-theme/styles.css`.
+ * Manga ink SVG filters are injected once in App.tsx (`jojoInkFilterSvg`).
  */
 const useJojoTheme = () =>
   useMemo<ConfigProviderProps>(

@@ -1,77 +1,151 @@
 /**
- * Optional JOJO chrome — pose skew, hatch volume, uppercase editorial type.
+ * JOJO chrome — pose (playground) + line volume (荒木线).
+ * Stage is quiet paper; hatch sculpts shade; fashion motifs are accents only.
  *
- * Usage:
- *   import '@clawd-cook/antd-jojo-theme/styles.css';
- *   <div className={jojoRootClass}>…ConfigProvider theme={jojoTheme}…</div>
- *
- * Scoped under `.jojo-theme` so it never pollutes a non-JOJO tree.
+ * Inject `jojoInkFilterSvg` once under `.jojo-theme` for rough ink shells.
  */
 
 .jojo-theme {
-  --jojo-ink: #0d0d0d;
-  --jojo-ink-muted: #2b2140;
-  --jojo-shade: #1a0a2e;
-  --jojo-sky: #ffe566;
-  --jojo-sky-hot: #ffd400;
-  --jojo-paper: #fff8e7;
-  --jojo-paper-deep: #ffe08a;
-  --jojo-purple: #6b1fa0;
-  --jojo-purple-hot: #9b2bc7;
-  --jojo-magenta: #e6007a;
-  --jojo-gold: #f5c518;
-  --jojo-pose-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --jojo-ink-shadow: 5px 5px 0 #0d0d0d;
-  --jojo-ink-shadow-lg: 8px 8px 0 #0d0d0d;
-  --jojo-ink-shadow-sm: 3px 3px 0 #0d0d0d;
-  --jojo-magenta-shadow: 4px 4px 0 #e6007a;
-  --jojo-hatch:
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 3px,
-      rgba(13, 13, 13, 0.14) 3px,
-      rgba(13, 13, 13, 0.14) 4px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 5px,
-      rgba(13, 13, 13, 0.08) 5px,
-      rgba(13, 13, 13, 0.08) 6px
-    );
+  --jojo-ink: #0a0a0c;
+  --jojo-ink-muted: #4a3a58;
+  --jojo-shade: #2a1840;
+  --jojo-sky: #e8e4ee;
+  --jojo-sky-hot: #d4cedd;
+  --jojo-paper: #fffef8;
+  --jojo-paper-deep: #f2eef6;
+  --jojo-purple: #e8318a;
+  --jojo-purple-hot: #ff4aa3;
+  --jojo-magenta: #ff2d9b;
+  --jojo-gold: #f0c14a;
+  --jojo-gold-deep: #c4921e;
+  --jojo-blue: #1e6bdb;
+  --jojo-pose-ease: cubic-bezier(0.33, 1, 0.32, 1);
+  --jojo-font-display:
+    georgia, "times new roman", "noto serif sc", "noto serif", "songti sc", "hiragino mincho pron",
+    serif;
+  --jojo-font-ui:
+    "arial narrow", "futura condensed", "helvetica neue condensed", "gill sans", sans-serif;
+  --jojo-ink-shadow: 3px 4px 0 #0a0a0c;
+  --jojo-ink-shadow-lg: 5px 6px 0 #0a0a0c;
+  --jojo-ink-shadow-sm: 2px 2px 0 #0a0a0c;
+  --jojo-magenta-shadow: 2px 3px 0 #ff2d9b;
+  --jojo-gold-shadow: 2px 3px 0 #f0c14a;
+  --jojo-radius: 2px;
+  --jojo-radius-lg: 4px;
+  --jojo-line: 2.5px;
+  --jojo-ink-rough: url(#jojo-ink-rough);
+  --jojo-ink-rough-strong: url(#jojo-ink-rough-strong);
+
+  --jojo-paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.04 0 0 0 0 0.05 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.28'/%3E%3C/svg%3E");
+
+  /* 荒木线 — default volume */
+  --jojo-hatch: repeating-linear-gradient(
+    108deg,
+    transparent 0,
+    transparent 2.5px,
+    rgba(10, 10, 12, 0.28) 2.5px,
+    rgba(10, 10, 12, 0.28) 3.25px
+  );
+  --jojo-hatch-size: 8px 10px;
   --jojo-hatch-dense:
     repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 2px,
-      rgba(13, 13, 13, 0.22) 2px,
-      rgba(13, 13, 13, 0.22) 3px
+      108deg,
+      transparent 0,
+      transparent 1.75px,
+      rgba(10, 10, 12, 0.42) 1.75px,
+      rgba(10, 10, 12, 0.42) 2.5px
     ),
     repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 3px,
-      rgba(26, 10, 46, 0.18) 3px,
-      rgba(26, 10, 46, 0.18) 4px
+      -18deg,
+      transparent 0,
+      transparent 3.5px,
+      rgba(10, 10, 12, 0.18) 3.5px,
+      rgba(10, 10, 12, 0.18) 4.25px
     );
+  /* Clear → hatched cell (line volume, not color slab) */
+  --jojo-hatch-volume:
+    linear-gradient(145deg, transparent 0 48%, rgba(10, 10, 12, 0.04) 48% 100%),
+    repeating-linear-gradient(
+      108deg,
+      transparent 0,
+      transparent 3px,
+      rgba(10, 10, 12, 0.16) 3px,
+      rgba(10, 10, 12, 0.16) 3.6px
+    );
+  --jojo-hatch-volume-size: auto, 9px 11px;
+  --jojo-hatch-fashion:
+    var(--jojo-hatch),
+    radial-gradient(circle at 12px 10px, rgba(240, 193, 74, 0.35) 0 1.2px, transparent 1.4px);
+  --jojo-hatch-fashion-size: 14px 12px;
 
+  /* Optional accents — opt-in via class, not stage default */
+  --jojo-diamond:
+    repeating-linear-gradient(
+      60deg,
+      transparent 0,
+      transparent 10px,
+      rgba(10, 10, 12, 0.14) 10px,
+      rgba(10, 10, 12, 0.14) 11px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      transparent 0,
+      transparent 10px,
+      rgba(10, 10, 12, 0.1) 10px,
+      rgba(10, 10, 12, 0.1) 11px
+    );
+  --jojo-diamond-size: 24px 42px;
+  --jojo-teardrop:
+    radial-gradient(
+      ellipse 2.5px 3.5px at 6px 8px,
+      rgba(10, 10, 12, 0.55) 0 1.8px,
+      transparent 2px
+    ),
+    radial-gradient(ellipse 2px 3px at 18px 20px, rgba(10, 10, 12, 0.45) 0 1.4px, transparent 1.6px);
+  --jojo-teardrop-size: 28px 26px;
+
+  --jojo-cell-shade:
+    linear-gradient(145deg, #fffef8 0 46%, transparent 46% 100%),
+    repeating-linear-gradient(
+      108deg,
+      transparent 0,
+      transparent 2.5px,
+      rgba(10, 10, 12, 0.2) 2.5px,
+      rgba(10, 10, 12, 0.2) 3.2px
+    );
+  --jojo-speed-lines: repeating-conic-gradient(
+    from 205deg at 100% 0%,
+    transparent 0deg,
+    transparent 7deg,
+    rgba(10, 10, 12, 0.1) 7deg,
+    rgba(10, 10, 12, 0.1) 8deg
+  );
+
+  /* Fashion hardware — seam accents only */
+  --jojo-motif-ladybug: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cellipse cx='32' cy='36' rx='18' ry='20' fill='%23E8318A' stroke='%230A0A0C' stroke-width='3'/%3E%3Cellipse cx='32' cy='22' rx='10' ry='9' fill='%230A0A0C'/%3E%3Cline x1='32' y1='22' x2='32' y2='56' stroke='%230A0A0C' stroke-width='2.5'/%3E%3Ccircle cx='24' cy='34' r='3.5' fill='%230A0A0C'/%3E%3Ccircle cx='40' cy='34' r='3.5' fill='%230A0A0C'/%3E%3Ccircle cx='24' cy='46' r='3' fill='%230A0A0C'/%3E%3Ccircle cx='40' cy='46' r='3' fill='%230A0A0C'/%3E%3Ccircle cx='32' cy='52' r='2.5' fill='%230A0A0C'/%3E%3C/svg%3E");
+  --jojo-motif-zip-pull: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='26' y='6' width='12' height='22' rx='2' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='2.5'/%3E%3Cpath d='M20 28 H44 L38 58 H26 Z' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='2.5' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='16' r='3' fill='%230A0A0C'/%3E%3C/svg%3E");
+  --jojo-motif-zip-tape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16' viewBox='0 0 48 16'%3E%3Crect width='48' height='16' fill='%23FFFEF8'/%3E%3Crect x='0' y='6' width='48' height='4' fill='%230A0A0C'/%3E%3Crect x='2' y='2' width='8' height='5' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3Crect x='14' y='9' width='8' height='5' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3Crect x='26' y='2' width='8' height='5' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3Crect x='38' y='9' width='8' height='5' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3C/svg%3E");
+  --jojo-motif-zip-tape-y: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='48' viewBox='0 0 16 48'%3E%3Crect width='16' height='48' fill='%23FFFEF8'/%3E%3Crect x='6' y='0' width='4' height='48' fill='%230A0A0C'/%3E%3Crect x='2' y='2' width='5' height='8' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3Crect x='9' y='14' width='5' height='8' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3Crect x='2' y='26' width='5' height='8' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3Crect x='9' y='38' width='5' height='8' rx='1' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='1'/%3E%3C/svg%3E");
+  --jojo-motif-buckle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='8' y='18' width='48' height='28' rx='3' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='3'/%3E%3Crect x='16' y='24' width='32' height='16' rx='2' fill='none' stroke='%230A0A0C' stroke-width='2.5'/%3E%3Crect x='28' y='12' width='8' height='12' fill='%23F0C14A' stroke='%230A0A0C' stroke-width='2'/%3E%3C/svg%3E");
+  --jojo-motif-heart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cpath d='M32 54 C12 38 8 24 18 16 C24 11 30 14 32 20 C34 14 40 11 46 16 C56 24 52 38 32 54Z' fill='%23E8318A' stroke='%230A0A0C' stroke-width='3'/%3E%3C/svg%3E");
+
+  position: relative;
+  font-family: var(--jojo-font-ui), system-ui, sans-serif;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
+  color: var(--jojo-ink);
   background-color: var(--jojo-sky);
+  background-image: var(--jojo-paper-grain);
+  background-size: 140px 140px;
 }
 
 @keyframes jojo-pose-in {
   0% {
-    transform: skewX(10deg) translate(6px, 10px);
-    opacity: 0.35;
-  }
-  55% {
-    transform: skewX(-6deg) translate(-2px, -3px);
-    opacity: 1;
+    transform: translate(4px, 8px);
+    opacity: 0.25;
   }
   100% {
-    transform: skewX(-3deg);
+    transform: skewX(-1.5deg);
     opacity: 1;
   }
 }
@@ -82,38 +156,131 @@
     box-shadow: var(--jojo-ink-shadow);
   }
   50% {
-    box-shadow: 6px 6px 0 var(--jojo-magenta);
+    box-shadow: 5px 6px 0 var(--jojo-magenta);
   }
 }
 
-/* —— Buttons: pointing-hand pose —— */
+/* Floating ゴゴゴ watermark on stage */
+.jojo-theme::after {
+  content: "ゴゴゴゴゴ";
+  position: absolute;
+  right: 2%;
+  bottom: 4%;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--jojo-ink);
+  opacity: 0.045;
+  pointer-events: none;
+  z-index: 0;
+  transform: skewX(-4deg);
+  line-height: 1;
+}
+
+/* —— Rough ink shell —— */
+.jojo-theme .ant-btn,
+.jojo-theme .ant-card,
+.jojo-theme .ant-modal-content,
+.jojo-theme .ant-notification-notice,
+.jojo-theme .ant-popover-inner,
+.jojo-theme .ant-alert,
+.jojo-theme .ant-input-affix-wrapper,
+.jojo-theme .ant-input-number,
+.jojo-theme .ant-select-selector,
+.jojo-theme .ant-picker,
+.jojo-theme .ant-segmented,
+.jojo-theme .ant-table,
+.jojo-theme .ant-collapse,
+.jojo-theme .ant-message-notice-content {
+  position: relative;
+  isolation: isolate;
+  z-index: 1;
+}
+
+.jojo-theme .ant-btn::before,
+.jojo-theme .ant-card::before,
+.jojo-theme .ant-modal-content::before,
+.jojo-theme .ant-notification-notice::before,
+.jojo-theme .ant-popover-inner::before,
+.jojo-theme .ant-alert::before,
+.jojo-theme .ant-input-affix-wrapper::before,
+.jojo-theme .ant-input-number::before,
+.jojo-theme .ant-select-selector::before,
+.jojo-theme .ant-picker::before,
+.jojo-theme .ant-segmented::before,
+.jojo-theme .ant-table::before,
+.jojo-theme .ant-collapse::before,
+.jojo-theme .ant-message-notice-content::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 3px solid var(--jojo-ink);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  filter: var(--jojo-ink-rough);
+  opacity: 0.9;
+}
+
+/* —— Buttons: flat fill + hatched shade edge —— */
 .jojo-theme .ant-btn {
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transform: skewX(-3deg);
-  animation: jojo-pose-in 0.32s var(--jojo-pose-ease) both;
+  letter-spacing: 0.08em;
+  transform: skewX(-1.5deg);
+  animation: jojo-pose-in 0.36s var(--jojo-pose-ease) both;
   transition:
-    transform 0.12s var(--jojo-pose-ease),
-    box-shadow 0.12s var(--jojo-pose-ease),
-    letter-spacing 0.12s var(--jojo-pose-ease);
-  border-radius: 0 !important;
+    transform 0.16s var(--jojo-pose-ease),
+    box-shadow 0.16s var(--jojo-pose-ease);
+  border-radius: var(--jojo-radius) !important;
+  border-width: var(--jojo-line) !important;
+  border-color: var(--jojo-ink) !important;
+}
+
+.jojo-theme .ant-btn-primary {
+  background: var(--jojo-purple) !important;
+  /* Lit face + inked fold (hatch in the shade half) */
+  background-image:
+    linear-gradient(145deg, var(--jojo-purple-hot) 0 46%, transparent 46%),
+    repeating-linear-gradient(
+      108deg,
+      transparent 0,
+      transparent 2.5px,
+      rgba(10, 10, 12, 0.35) 2.5px,
+      rgba(10, 10, 12, 0.35) 3.2px
+    ) !important;
+  background-color: var(--jojo-purple) !important;
+  background-size:
+    auto,
+    8px 10px !important;
+  box-shadow: var(--jojo-ink-shadow) !important;
+  color: var(--jojo-paper) !important;
+  text-shadow: 1px 1px 0 rgba(10, 10, 12, 0.35);
+}
+
+.jojo-theme .ant-btn-default {
+  background: var(--jojo-paper) !important;
+  background-image: var(--jojo-hatch-volume) !important;
+  background-size: var(--jojo-hatch-volume-size) !important;
+  box-shadow: var(--jojo-ink-shadow) !important;
 }
 
 .jojo-theme .ant-btn:not(:disabled):hover {
-  transform: skewX(-7deg) translate(-4px, -4px) scale(1.02);
+  transform: skewX(-3deg) translate(-2px, -3px);
   box-shadow: var(--jojo-ink-shadow-lg) !important;
-  letter-spacing: 0.14em;
+}
+
+.jojo-theme .ant-btn:not(:disabled):hover::before {
+  filter: var(--jojo-ink-rough-strong);
 }
 
 .jojo-theme .ant-btn:not(:disabled):active {
-  transform: skewX(2deg) translate(3px, 3px) scale(0.98);
+  transform: skewX(0.5deg) translate(1px, 2px);
   box-shadow: var(--jojo-ink-shadow-sm) !important;
-  letter-spacing: 0.06em;
   transition-duration: 0.06s;
 }
 
-/* —— Cards / elevated panels —— */
+/* —— Cards: paper + hatch volume (not motif wallpaper) —— */
 .jojo-theme .ant-card,
 .jojo-theme .ant-modal-content,
 .jojo-theme .ant-notification-notice,
@@ -122,60 +289,106 @@
 .jojo-theme .ant-select-dropdown,
 .jojo-theme .ant-picker-dropdown .ant-picker-panel-container,
 .jojo-theme .ant-message-notice-content {
-  border: 4px solid var(--jojo-ink) !important;
-  border-radius: 0 !important;
+  border: var(--jojo-line) solid var(--jojo-ink) !important;
+  border-radius: var(--jojo-radius-lg) !important;
   box-shadow: var(--jojo-ink-shadow) !important;
-  background-image: var(--jojo-hatch);
   background-color: var(--jojo-paper);
+  background-image: var(--jojo-hatch-volume), var(--jojo-paper-grain);
+  background-size:
+    var(--jojo-hatch-volume-size),
+    140px 140px;
+  overflow: visible;
+  transform: none;
+}
+
+/* Opt-in fashion panels */
+.jojo-theme .ant-card.jojo-panel-diamond {
+  background-image: var(--jojo-diamond), var(--jojo-hatch-volume);
+  background-size: var(--jojo-diamond-size), var(--jojo-hatch-volume-size);
+}
+
+.jojo-theme .ant-card.jojo-panel-teardrop {
+  background-image: var(--jojo-teardrop), var(--jojo-hatch-volume);
+  background-size: var(--jojo-teardrop-size), var(--jojo-hatch-volume-size);
 }
 
 .jojo-theme .ant-card {
   transition:
-    transform 0.14s var(--jojo-pose-ease),
-    box-shadow 0.14s var(--jojo-pose-ease);
+    transform 0.2s var(--jojo-pose-ease),
+    box-shadow 0.2s var(--jojo-pose-ease);
 }
 
 .jojo-theme .ant-card:hover {
-  transform: skewX(-1.5deg) translate(-2px, -2px);
+  transform: translate(-1px, -2px);
   box-shadow: var(--jojo-ink-shadow-lg) !important;
+  z-index: 3;
 }
 
 .jojo-theme .ant-card-head {
-  border-bottom: 4px solid var(--jojo-ink) !important;
+  border-bottom: var(--jojo-line) solid var(--jojo-ink) !important;
+  font-family: var(--jojo-font-display) !important;
   font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background-image: var(--jojo-hatch);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  background: var(--jojo-gold) !important;
+  background-image: var(--jojo-hatch-dense) !important;
+  color: var(--jojo-ink);
+  text-shadow: 1px 1px 0 rgba(255, 254, 248, 0.35);
+  position: relative;
+}
+
+.jojo-theme .ant-card-head::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translateY(-50%);
+  background: var(--jojo-motif-ladybug) center / contain no-repeat;
+  border: none;
+  opacity: 0.95;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .jojo-theme .ant-modal-content {
-  animation: jojo-pose-in 0.28s var(--jojo-pose-ease) both;
-  overflow: hidden;
+  animation: jojo-pose-in 0.3s var(--jojo-pose-ease) both;
 }
 
 .jojo-theme .ant-modal-header {
-  border-bottom: 4px solid var(--jojo-ink) !important;
+  border-bottom: var(--jojo-line) solid var(--jojo-ink) !important;
+  font-family: var(--jojo-font-display) !important;
   font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background-color: var(--jojo-gold) !important;
-  background-image: var(--jojo-hatch);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  background: var(--jojo-gold) !important;
+  background-image: var(--jojo-hatch-dense) !important;
 }
 
 .jojo-theme .ant-modal-title {
+  font-family: var(--jojo-font-display) !important;
   font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 0 rgba(10, 10, 12, 0.2);
 }
 
-/* —— Alerts: menace pulse —— */
+/* —— Alerts —— */
 .jojo-theme .ant-alert {
-  border: 4px solid var(--jojo-ink) !important;
-  border-radius: 0 !important;
+  border: var(--jojo-line) solid var(--jojo-ink) !important;
+  border-radius: var(--jojo-radius-lg) !important;
   box-shadow: var(--jojo-ink-shadow);
-  background-image: var(--jojo-hatch);
-  font-weight: 700;
-  animation: jojo-menace-pulse 1.8s var(--jojo-pose-ease) 2;
+  background-image: var(--jojo-speed-lines), var(--jojo-hatch-volume);
+  background-size: auto, var(--jojo-hatch-volume-size);
+  font-weight: 800;
+  animation: jojo-menace-pulse 1.6s var(--jojo-pose-ease) 2;
+  overflow: visible;
+  transform: none;
+}
+
+.jojo-theme .ant-alert::before {
+  filter: var(--jojo-ink-rough-strong);
 }
 
 /* —— Inputs —— */
@@ -184,14 +397,14 @@
 .jojo-theme .ant-input-number,
 .jojo-theme .ant-select-selector,
 .jojo-theme .ant-picker {
-  border-radius: 0 !important;
-  border-width: 4px !important;
+  border-radius: var(--jojo-radius) !important;
+  border-width: var(--jojo-line) !important;
   border-color: var(--jojo-ink) !important;
   background-color: var(--jojo-paper) !important;
+  background-image: var(--jojo-paper-grain) !important;
+  background-size: 160px 160px !important;
   box-shadow: var(--jojo-ink-shadow-sm);
-  transition:
-    transform 0.12s var(--jojo-pose-ease),
-    box-shadow 0.12s var(--jojo-pose-ease);
+  font-weight: 700;
 }
 
 .jojo-theme .ant-input:hover,
@@ -203,6 +416,13 @@
   transform: skewX(-1deg);
 }
 
+.jojo-theme .ant-input-affix-wrapper:hover::before,
+.jojo-theme .ant-input-number:hover::before,
+.jojo-theme .ant-select:not(.ant-select-disabled):hover .ant-select-selector::before,
+.jojo-theme .ant-picker:hover::before {
+  border-color: var(--jojo-magenta);
+}
+
 .jojo-theme .ant-input:focus,
 .jojo-theme .ant-input-focused,
 .jojo-theme .ant-input-affix-wrapper-focused,
@@ -210,103 +430,314 @@
 .jojo-theme .ant-select-focused .ant-select-selector,
 .jojo-theme .ant-picker-focused {
   border-color: var(--jojo-ink) !important;
-  box-shadow: var(--jojo-ink-shadow-sm) !important;
-  transform: skewX(-1deg);
+  box-shadow: var(--jojo-gold-shadow) !important;
 }
 
-/* —— Tooltips: jewelry accent —— */
+/* —— Tooltips —— */
 .jojo-theme .ant-tooltip .ant-tooltip-inner {
-  border: 3px solid var(--jojo-ink);
-  border-radius: 0 !important;
-  background: var(--jojo-ink) !important;
+  border: var(--jojo-line) solid var(--jojo-gold);
+  border-radius: var(--jojo-radius) !important;
+  background: var(--jojo-shade) !important;
   color: var(--jojo-gold) !important;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   box-shadow: var(--jojo-magenta-shadow);
-  transform: skewX(-2deg);
+  transform: skewX(-1.5deg);
 }
 
 .jojo-theme .ant-tooltip .ant-tooltip-arrow {
   display: none;
 }
 
-/* —— Progress: carved shade rail —— */
+/* —— Progress —— */
 .jojo-theme .ant-progress-inner {
-  border: 4px solid var(--jojo-ink) !important;
+  position: relative;
+  border: var(--jojo-line) solid var(--jojo-ink) !important;
   border-radius: 0 !important;
   box-shadow: var(--jojo-ink-shadow-sm);
   background-color: var(--jojo-shade) !important;
   background-image: var(--jojo-hatch-dense);
 }
 
+.jojo-theme .ant-progress-inner::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 3px solid var(--jojo-ink);
+  pointer-events: none;
+  filter: var(--jojo-ink-rough);
+}
+
 .jojo-theme .ant-progress-bg {
   border-radius: 0 !important;
+  background: linear-gradient(
+    90deg,
+    var(--jojo-magenta) 0 50%,
+    var(--jojo-purple) 50% 100%
+  ) !important;
 }
 
 /* —— Segmented / tags / tabs —— */
 .jojo-theme .ant-segmented {
-  border: 3px solid var(--jojo-ink);
-  border-radius: 0 !important;
+  border: var(--jojo-line) solid var(--jojo-ink);
+  border-radius: var(--jojo-radius) !important;
   box-shadow: var(--jojo-ink-shadow-sm);
+  background: var(--jojo-paper);
+  background-image: var(--jojo-hatch-volume);
+  background-size: var(--jojo-hatch-volume-size);
 }
 
 .jojo-theme .ant-segmented-item {
-  border-radius: 0 !important;
+  border-radius: var(--jojo-radius) !important;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  transform: skewX(-2deg);
+  transform: skewX(-1deg);
+}
+
+.jojo-theme .ant-segmented-item-selected {
+  background: var(--jojo-purple) !important;
+  color: var(--jojo-paper) !important;
 }
 
 .jojo-theme .ant-tag {
-  border-radius: 0 !important;
-  border-width: 2px !important;
+  border-radius: var(--jojo-radius) !important;
+  border-width: var(--jojo-line) !important;
   border-color: var(--jojo-ink) !important;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
+  background: var(--jojo-gold);
+  box-shadow: 2px 2px 0 var(--jojo-ink);
 }
 
 .jojo-theme .ant-tabs-tab {
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  transform: skewX(-1deg);
 }
 
 .jojo-theme .ant-tabs-ink-bar {
   height: 4px !important;
+  background: var(--jojo-magenta) !important;
+  filter: var(--jojo-ink-rough);
 }
 
-/* —— Typography shout —— */
+/* —— Typography: fanbook serif stage type —— */
 .jojo-theme .ant-typography h1,
 .jojo-theme .ant-typography h2,
 .jojo-theme .ant-typography h3,
 .jojo-theme h1.ant-typography,
 .jojo-theme h2.ant-typography,
-.jojo-theme h3.ant-typography {
+.jojo-theme h3.ant-typography,
+.jojo-theme .ant-result-title,
+.jojo-theme .ant-collapse-header,
+.jojo-theme .ant-table-thead > tr > th {
+  font-family: var(--jojo-font-display) !important;
   font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-shadow: 2px 2px 0 rgba(10, 10, 12, 0.22);
 }
 
-/* —— Table / collapse hard ink —— */
+.jojo-theme .ant-typography h1,
+.jojo-theme h1.ant-typography {
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+/* UI chrome stays condensed sans + uppercase */
+.jojo-theme .ant-btn,
+.jojo-theme .ant-tag,
+.jojo-theme .ant-segmented-item,
+.jojo-theme .ant-tabs-tab {
+  font-family: var(--jojo-font-ui), system-ui, sans-serif !important;
+}
+
+/* —— Table / collapse —— */
 .jojo-theme .ant-table,
 .jojo-theme .ant-collapse {
-  border: 4px solid var(--jojo-ink) !important;
-  border-radius: 0 !important;
+  border: var(--jojo-line) solid var(--jojo-ink) !important;
+  border-radius: var(--jojo-radius-lg) !important;
   box-shadow: var(--jojo-ink-shadow-sm);
+  background: var(--jojo-paper);
+  background-image: var(--jojo-hatch-volume);
+  background-size: var(--jojo-hatch-volume-size);
+  overflow: visible;
 }
 
 .jojo-theme .ant-table-thead > tr > th {
   font-weight: 900 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-bottom: 4px solid var(--jojo-ink) !important;
+  letter-spacing: 0.02em;
+  border-bottom: var(--jojo-line) solid var(--jojo-ink) !important;
+  background: var(--jojo-gold) !important;
+  background-image: var(--jojo-hatch-dense) !important;
 }
 
 .jojo-theme .ant-collapse-header {
   font-weight: 900 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
+}
+
+/* Layout chrome inside jojo root */
+.jojo-theme .ant-layout-header {
+  background: var(--jojo-gold) !important;
+  background-image: var(--jojo-hatch-dense) !important;
+  border-bottom: var(--jojo-line) solid var(--jojo-ink);
+  box-shadow: var(--jojo-ink-shadow-sm);
+}
+
+.jojo-theme .ant-layout-sider {
+  background: var(--jojo-shade) !important;
+  background-image: var(--jojo-hatch-dense) !important;
+  border-right: var(--jojo-line) solid var(--jojo-ink);
+}
+
+.jojo-theme .ant-layout-sider .ant-menu-item-selected {
+  background: var(--jojo-magenta) !important;
+  color: var(--jojo-gold) !important;
+}
+
+.jojo-theme .ant-empty-description::before,
+.jojo-theme .ant-result-title::before {
+  content: "ゴゴゴ ";
+  opacity: 0.45;
+  letter-spacing: 0.14em;
+  font-weight: 900;
+  color: var(--jojo-ink);
+  text-shadow: 2px 2px 0 var(--jojo-gold);
+}
+
+/* —— Fashion hardware (seams & badges only) —— */
+
+/* Divider → Bucciarati zipper seam */
+.jojo-theme .ant-divider-horizontal {
+  border-block-start: none !important;
+  height: 16px !important;
+  margin: 20px 0 !important;
+  background-image: var(--jojo-motif-zip-tape) !important;
+  background-repeat: repeat-x !important;
+  background-size: 48px 16px !important;
+  background-position: center !important;
+  position: relative;
+}
+
+.jojo-theme .ant-divider-horizontal.ant-divider-with-text {
+  height: auto !important;
+  background-image: none !important;
+  border-block-start: none !important;
+}
+
+.jojo-theme .ant-divider-horizontal.ant-divider-with-text::before,
+.jojo-theme .ant-divider-horizontal.ant-divider-with-text::after {
+  border-block-start: none !important;
+  height: 16px !important;
+  background-image: var(--jojo-motif-zip-tape) !important;
+  background-repeat: repeat-x !important;
+  background-size: 48px 16px !important;
+  transform: none !important;
+  top: 50% !important;
+  margin-top: -8px !important;
+}
+
+.jojo-theme .ant-divider-inner-text {
+  font-family: var(--jojo-font-display) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em !important;
+  padding-inline: 14px !important;
+}
+
+/* Collapse → zipper pull on the expand affordance */
+.jojo-theme .ant-collapse-expand-icon {
+  position: relative;
+}
+
+.jojo-theme .ant-collapse .ant-collapse-expand-icon .anticon {
+  opacity: 0;
+}
+
+.jojo-theme .ant-collapse-expand-icon::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: var(--jojo-motif-zip-pull) center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* Primary button → tiny ladybug stamp on the trailing edge */
+.jojo-theme .ant-btn-primary::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  background: var(--jojo-motif-ladybug) center / contain no-repeat;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.jojo-theme .ant-btn-primary {
+  padding-inline-end: 28px !important;
+}
+
+/* Tag default → buckle chip */
+.jojo-theme .ant-tag:not(.ant-tag-has-color)::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  background: var(--jojo-motif-buckle) center / contain no-repeat;
+}
+
+/* Opt-in utility classes */
+.jojo-theme .jojo-zip {
+  background-image: var(--jojo-motif-zip-tape) !important;
+  background-repeat: repeat-x !important;
+  background-size: 48px 16px !important;
+  min-height: 16px;
+}
+
+.jojo-theme .jojo-zip-y {
+  background-image: var(--jojo-motif-zip-tape-y) !important;
+  background-repeat: repeat-y !important;
+  background-size: 16px 48px !important;
+  min-width: 16px;
+}
+
+.jojo-theme .jojo-ladybug::after,
+.jojo-theme .jojo-buckle::after,
+.jojo-theme .jojo-heart::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.jojo-theme .jojo-ladybug,
+.jojo-theme .jojo-buckle,
+.jojo-theme .jojo-heart {
+  position: relative;
+}
+
+.jojo-theme .jojo-ladybug::after {
+  background: var(--jojo-motif-ladybug) center / contain no-repeat;
+}
+
+.jojo-theme .jojo-buckle::after {
+  background: var(--jojo-motif-buckle) center / contain no-repeat;
+}
+
+.jojo-theme .jojo-heart::after {
+  background: var(--jojo-motif-heart) center / contain no-repeat;
 }

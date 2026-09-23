@@ -9,7 +9,7 @@ import {
   XOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
-import { jojoRootClass } from "@clawd-cook/antd-jojo-theme";
+import { jojoPoseEase, jojoPoseFigure, jojoRootClass } from "@clawd-cook/antd-jojo-theme";
 import type { StepItem } from "@rc-component/steps/es/Steps";
 import {
   App,
@@ -19,6 +19,7 @@ import {
   Button,
   Card,
   Checkbox,
+  Collapse,
   ColorPicker,
   ConfigProvider,
   DatePicker,
@@ -93,6 +94,36 @@ const useStyle = createStyles(({ css, token }) => {
       justifyContent: "center",
       margin: "0 auto",
     }),
+    /**
+     * Soft group portrait — lean + overlap, not spinning rectangles.
+     * Grayscale must still read as interlocking figures.
+     */
+    layoutRowJojo: css({
+      gap: 8,
+      alignItems: "flex-start",
+      position: "relative",
+      minHeight: 620,
+      padding: "40px 20px 64px",
+      overflow: "visible",
+      perspective: 1400,
+      "&::before": {
+        content: '"JOJO"',
+        position: "absolute",
+        left: "50%",
+        top: "6%",
+        transform: "translateX(-50%)",
+        fontFamily: 'Georgia, "Times New Roman", "Noto Serif", serif',
+        fontSize: "clamp(96px, 22vw, 210px)",
+        fontWeight: 900,
+        letterSpacing: "0.04em",
+        lineHeight: 0.85,
+        color: "rgba(10, 10, 12, 0.07)",
+        pointerEvents: "none",
+        zIndex: 0,
+        userSelect: "none",
+        whiteSpace: "nowrap",
+      },
+    }),
     colLeft: css({
       flex: 1,
       display: "flex",
@@ -102,11 +133,38 @@ const useStyle = createStyles(({ css, token }) => {
         display: "none",
       },
     }),
+    /* Rear-left — soft settle, overlaps center shoulder */
+    colLeftJojo: css({
+      flex: "0.95 1 0",
+      transform: jojoPoseFigure.left,
+      transformOrigin: "70% 20%",
+      marginRight: -36,
+      zIndex: 2,
+      gap: 22,
+      position: "relative",
+      transition: `transform 0.35s ${jojoPoseEase}`,
+      "& > *:nth-child(even)": {
+        transform: jojoPoseFigure.childEven,
+      },
+    }),
     colCenter: css({
       flex: 1,
       display: "flex",
       flexDirection: "column",
       gap: token.paddingLG,
+    }),
+    /* Protagonist — quiet presence, sits in front */
+    colCenterJojo: css({
+      flex: "1.18 1 0",
+      transform: jojoPoseFigure.center,
+      transformOrigin: "50% 0%",
+      zIndex: 5,
+      marginTop: 0,
+      gap: 26,
+      position: "relative",
+      "& > *:nth-child(even)": {
+        transform: jojoPoseFigure.childEven,
+      },
     }),
     colRight: css({
       width: 320,
@@ -117,6 +175,21 @@ const useStyle = createStyles(({ css, token }) => {
         display: "none",
       },
     }),
+    /* Right — lean-in via shift more than spin */
+    colRightJojo: css({
+      flex: "0.98 1 0",
+      width: "auto",
+      transform: jojoPoseFigure.right,
+      transformOrigin: "15% 30%",
+      marginLeft: -44,
+      marginTop: 18,
+      zIndex: 3,
+      gap: 22,
+      position: "relative",
+      "& > *:nth-child(even)": {
+        transform: jojoPoseFigure.childEven,
+      },
+    }),
     mainCard: css({
       justifyContent: "center",
       padding: 32,
@@ -125,7 +198,12 @@ const useStyle = createStyles(({ css, token }) => {
       backgroundPosition: "center",
     }),
     mainCardJojo: css({
-      borderRadius: 0,
+      borderRadius: 2,
+      padding: "12px 8px 48px",
+      overflow: "visible",
+      background: "transparent",
+      border: "none",
+      boxShadow: "none",
     }),
     avatarGroup: css({
       marginBlockEnd: 16,
@@ -274,6 +352,12 @@ const tagList: TagProps[] = [
   { icon: <FacebookOutlined />, color: "#3b5999", content: "Facebook" },
 ];
 
+const jojoTagList: TagProps[] = [
+  { content: "Passione" },
+  { content: "Gold Exp" },
+  { content: "Zipper Man" },
+];
+
 const buttonList: ButtonProps[] = [
   { type: "primary", children: "Primary button" },
   { danger: true, children: "Danger button" },
@@ -357,6 +441,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
   const isJojo = copyFlavor === "jojo";
   const demoButtons = isJojo ? jojoButtonList : buttonList;
   const demoSteps = isJojo ? jojoStepsItems : stepsItems;
+  const demoTags = isJojo ? jojoTagList : tagList;
 
   const {
     data: contributors,
@@ -408,273 +493,291 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
     <ConfigProvider {...restConfig} theme={mergedTheme}>
       <div className={clsx(containerClassName, styles.container, isJojo && jojoRootClass)}>
         <App style={{ width: "100%" }}>
-          <BorderBeam lineWidth={2}>
-            <Card
-              styles={{
-                root: {
-                  backgroundColor: genBackgroundColor,
-                  backdropFilter: isJojo ? "none" : "blur(12px)",
-                  boxShadow: isJojo
-                    ? "5px 5px 0 #0D0D0D"
-                    : "0 4px 12px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.08)",
-                  borderRadius: isJojo ? 0 : undefined,
-                  border: isJojo ? "4px solid #0D0D0D" : undefined,
-                },
-                body: {
-                  padding: 0,
-                },
-              }}
-              className={clsx(className, styles.mainCard, { [styles.mainCardJojo]: isJojo })}
-            >
-              <div className={styles.layoutRow}>
-                {/* ================= LEFT COLUMN ================= */}
-                <div className={styles.colLeft}>
-                  <div>
-                    <Flex vertical gap="middle">
-                      <Flex gap="middle">
-                        <Input placeholder="hi@example.com" />
-                        <Select
-                          placeholder="Select one"
-                          className={styles.selectInput}
-                          mode="multiple"
-                          maxTagCount="responsive"
-                          defaultValue={["apple", "banana"]}
-                          options={selectOptions}
-                        />
+          {(() => {
+            const gallery = (
+              <Card
+                styles={{
+                  root: {
+                    backgroundColor: isJojo ? "transparent" : genBackgroundColor,
+                    backdropFilter: isJojo ? "none" : "blur(12px)",
+                    boxShadow: isJojo
+                      ? "none"
+                      : "0 4px 12px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.08)",
+                    borderRadius: isJojo ? 0 : undefined,
+                    border: isJojo ? "none" : undefined,
+                  },
+                  body: {
+                    padding: 0,
+                  },
+                }}
+                className={clsx(className, styles.mainCard, { [styles.mainCardJojo]: isJojo })}
+              >
+                <div className={clsx(styles.layoutRow, isJojo && styles.layoutRowJojo)}>
+                  {/* ================= LEFT COLUMN ================= */}
+                  <div className={clsx(styles.colLeft, isJojo && styles.colLeftJojo)}>
+                    <div>
+                      <Flex vertical gap="middle">
+                        <Flex gap="middle">
+                          <Input placeholder="hi@example.com" />
+                          <Select
+                            placeholder="Select one"
+                            className={styles.selectInput}
+                            mode="multiple"
+                            maxTagCount="responsive"
+                            defaultValue={["apple", "banana"]}
+                            options={selectOptions}
+                          />
+                        </Flex>
+                        <Flex gap="middle">
+                          <ColorPicker
+                            showText
+                            defaultValue="#1677ff"
+                            className={styles.colorPickerFixed}
+                          />
+                          <Space.Compact>
+                            <Button>Dropdown</Button>
+                            <Dropdown menu={{ items: dropdownMenuItems }}>
+                              <Button icon={<DownOutlined />} />
+                            </Dropdown>
+                          </Space.Compact>
+                          <DatePicker className={styles.datePickerGrow} placeholder="Select Date" />
+                        </Flex>
+                        <Flex align="center" justify="space-between" className={styles.controlsRow}>
+                          <Checkbox.Group options={checkboxOptions} defaultValue={["Apple"]} />
+                          <Radio.Group block options={radioOptions} defaultValue="Apple" />
+                          <Switch defaultChecked />
+                          <Progress type="circle" percent={25} size={20} showInfo={false} />
+                        </Flex>
+                        <div className={styles.stepsWrapper}>
+                          <Steps current={1} status="error" items={demoSteps} />
+                        </div>
                       </Flex>
-                      <Flex gap="middle">
-                        <ColorPicker
-                          showText
-                          defaultValue="#1677ff"
-                          className={styles.colorPickerFixed}
-                        />
-                        <Space.Compact>
-                          <Button>Dropdown</Button>
-                          <Dropdown menu={{ items: dropdownMenuItems }}>
-                            <Button icon={<DownOutlined />} />
-                          </Dropdown>
-                        </Space.Compact>
-                        <DatePicker className={styles.datePickerGrow} placeholder="Select Date" />
+                    </div>
+                    <div className={styles.progressWrapper}>
+                      <Flex gap="middle" vertical>
+                        <Progress percent={50} status="active" />
+                        <Progress percent={70} status="exception" />
                       </Flex>
-                      <Flex align="center" justify="space-between" className={styles.controlsRow}>
-                        <Checkbox.Group options={checkboxOptions} defaultValue={["Apple"]} />
-                        <Radio.Group block options={radioOptions} defaultValue="Apple" />
-                        <Switch defaultChecked />
-                        <Progress type="circle" percent={25} size={20} showInfo={false} />
+                    </div>
+                    <div>
+                      <Flex justify="space-between" align="center" gap="small">
+                        {badgeList.map((badge, index) => (
+                          <Badge key={`item-${index}`} {...badge} />
+                        ))}
                       </Flex>
-                      <div className={styles.stepsWrapper}>
-                        <Steps current={1} status="error" items={demoSteps} />
-                      </div>
-                    </Flex>
-                  </div>
-                  <div className={styles.progressWrapper}>
-                    <Flex gap="middle" vertical>
-                      <Progress percent={50} status="active" />
-                      <Progress percent={70} status="exception" />
-                    </Flex>
-                  </div>
-                  <div>
-                    <Flex justify="space-between" align="center" gap="small">
-                      {badgeList.map((badge, index) => (
-                        <Badge key={`item-${index}`} {...badge} />
-                      ))}
-                    </Flex>
-                  </div>
-                  <div className={styles.flexRow12}>
-                    <Card
-                      variant="borderless"
-                      className={styles.blockCardQr}
-                      classNames={{ body: styles.blockCardQrBody }}
-                    >
-                      <QRCode
-                        errorLevel="H"
-                        value="https://ant.design/"
-                        icon="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-                      />
-                    </Card>
-                    <div className={styles.flexCol1}>
-                      <Flex justify="space-around">
-                        <Spin indicator={<LoadingOutlined spin />} size="middle" />
-                        <Spin size="middle" />
-                        <Rate size="middle" value={3} className={styles.rateStyle} />
-                      </Flex>
+                    </div>
+                    <div className={styles.flexRow12}>
                       <Card
                         variant="borderless"
-                        className={styles.blockCardExtraPad}
-                        classNames={{ body: styles.blockCardExtraPadBody }}
+                        title={isJojo ? "Stand ID" : undefined}
+                        className={styles.blockCardQr}
+                        classNames={{ body: styles.blockCardQrBody }}
                       >
-                        <Flex gap="small" align="center">
-                          {tagList.map((tag) => {
-                            const { content, ...restProps } = tag;
-                            return (
-                              <Tag key={`item-${content}`} {...restProps}>
-                                {content}
-                              </Tag>
-                            );
-                          })}
-                        </Flex>
+                        <QRCode
+                          errorLevel="H"
+                          value="https://ant.design/"
+                          icon="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                        />
                       </Card>
-                      <InternalPopconfirm
-                        title={isJojo ? "Is that a Stand?!" : "Are you OK?"}
-                        placement="topRight"
-                        className={styles.popconfirmFull}
+                      <div className={styles.flexCol1}>
+                        <Flex justify="space-around">
+                          <Spin indicator={<LoadingOutlined spin />} size="middle" />
+                          <Spin size="middle" />
+                          <Rate size="middle" value={3} className={styles.rateStyle} />
+                        </Flex>
+                        <Card
+                          variant="borderless"
+                          className={styles.blockCardExtraPad}
+                          classNames={{ body: styles.blockCardExtraPadBody }}
+                        >
+                          <Flex gap="small" align="center">
+                            {demoTags.map((tag) => {
+                              const { content, ...restProps } = tag;
+                              return (
+                                <Tag key={`item-${content}`} {...restProps}>
+                                  {content}
+                                </Tag>
+                              );
+                            })}
+                          </Flex>
+                        </Card>
+                        <InternalPopconfirm
+                          title={isJojo ? "Is that a Stand?!" : "Are you OK?"}
+                          placement="topRight"
+                          className={styles.popconfirmFull}
+                        />
+                      </div>
+                    </div>
+
+                    <Card variant="borderless" classNames={{ body: styles.blockCardSegmentedBody }}>
+                      <Segmented block options={["1D", "7D", "1M", "1Y", "All"]} />
+                      <Segmented
+                        styles={{
+                          root: {
+                            marginBlockStart: 8,
+                          },
+                        }}
+                        block
+                        options={[
+                          { label: "Chats", value: "Chats", icon: <MessageOutlined /> },
+                          { label: "Emails", value: "Emails", icon: <MailOutlined /> },
+                        ]}
                       />
-                    </div>
+                    </Card>
                   </div>
 
-                  <Card variant="borderless" classNames={{ body: styles.blockCardSegmentedBody }}>
-                    <Segmented block options={["1D", "7D", "1M", "1Y", "All"]} />
-                    <Segmented
-                      styles={{
-                        root: {
-                          marginBlockStart: 8,
-                        },
-                      }}
-                      block
-                      options={[
-                        { label: "Chats", value: "Chats", icon: <MessageOutlined /> },
-                        { label: "Emails", value: "Emails", icon: <MailOutlined /> },
-                      ]}
+                  {/* ================= CENTER COLUMN ================= */}
+                  <div className={clsx(styles.colCenter, isJojo && styles.colCenterJojo)}>
+                    <div className={styles.avatarSection}>
+                      <Avatar.Group className={styles.avatarGroup}>
+                        {isLoading && !error
+                          ? Array.from({ length: 6 }, (_, index) => (
+                              <Skeleton.Avatar key={`skeleton-${index}`} active size={46} />
+                            ))
+                          : avatarGroupList.map(({ src, name }) => (
+                              <Avatar
+                                key={src}
+                                size={46}
+                                src={src}
+                                draggable={false}
+                                alt={`Contributor: ${name}`}
+                                aria-label={`Contributor: ${name}`}
+                              />
+                            ))}
+                        <Avatar size={46} draggable={false} className={styles.avatarExtra}>
+                          +5
+                        </Avatar>
+                      </Avatar.Group>
+                      <Title level={5}>{isJojo ? "Verify your Stand" : "Verify account"}</Title>
+                      <Text type="secondary">
+                        {isJojo
+                          ? "We've sent a code to a****@passione.mail"
+                          : "We've sent a code to a****@gmail.com"}
+                      </Text>
+                      <div className={styles.otpWrapper}>
+                        <Input.OTP size="large" length={6} defaultValue="4320" variant="filled" />
+                      </div>
+                      <Text type="secondary">
+                        Didn't receive a code? <a>Resend</a>
+                      </Text>
+                    </div>
+                    <Flex gap="large" vertical>
+                      <Flex gap="middle" justify="center">
+                        {demoButtons.slice(0, 2).map((props, idx) => {
+                          const { children, ...restProps } = props;
+                          return (
+                            <Button key={`item-${idx}`} {...restProps}>
+                              {children}
+                            </Button>
+                          );
+                        })}
+                      </Flex>
+                      <Flex gap="middle" justify="center">
+                        {demoButtons.slice(-2).map((props, idx) => {
+                          const { children, ...restProps } = props;
+                          return (
+                            <Button key={`item-${idx}`} {...restProps}>
+                              {children}
+                            </Button>
+                          );
+                        })}
+                      </Flex>
+                    </Flex>
+                    <Card variant="borderless">
+                      <Flex align="flex-start" gap="middle">
+                        <Avatar
+                          shape="square"
+                          size={60}
+                          src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                          draggable={false}
+                        />
+                        <div className={styles.profileInfo}>
+                          <Title level={5} className={styles.profileTitle}>
+                            {isJojo ? "Golden Wind" : "Ant Design"}
+                          </Title>
+                          <Text type="secondary" className={styles.profileHandle}>
+                            {isJojo ? "@araki.jojo" : "@ant-design"}
+                          </Text>
+                          <p className={styles.profileDesc}>
+                            {isJojo
+                              ? "Thick ink. Fashion clash. Pose snap — not soft anime."
+                              : "Building the future of UI for web & mobile."}
+                          </p>
+                        </div>
+                      </Flex>
+                    </Card>
+                    <InternalPanel
+                      styles={{ root: { width: "100%" } }}
+                      title={isJojo ? "Stand Manifested" : "Ant Design"}
+                      description={
+                        isJojo
+                          ? "Sculptural hard edges, solid-black shading, and haute-couture clash color."
+                          : "An enterprise-class design system for building modern, intelligent, and delightful user experiences."
+                      }
+                      type="success"
                     />
-                  </Card>
-                </div>
-
-                {/* ================= CENTER COLUMN ================= */}
-                <div className={styles.colCenter}>
-                  <div className={styles.avatarSection}>
-                    <Avatar.Group className={styles.avatarGroup}>
-                      {isLoading && !error
-                        ? Array.from({ length: 6 }, (_, index) => (
-                            <Skeleton.Avatar key={`skeleton-${index}`} active size={46} />
-                          ))
-                        : avatarGroupList.map(({ src, name }) => (
-                            <Avatar
-                              key={src}
-                              size={46}
-                              src={src}
-                              draggable={false}
-                              alt={`Contributor: ${name}`}
-                              aria-label={`Contributor: ${name}`}
-                            />
-                          ))}
-                      <Avatar size={46} draggable={false} className={styles.avatarExtra}>
-                        +5
-                      </Avatar>
-                    </Avatar.Group>
-                    <Title level={5}>{isJojo ? "Verify your Stand" : "Verify account"}</Title>
-                    <Text type="secondary">
-                      {isJojo
-                        ? "We've sent a code to a****@passione.mail"
-                        : "We've sent a code to a****@gmail.com"}
-                    </Text>
-                    <div className={styles.otpWrapper}>
-                      <Input.OTP size="large" length={6} defaultValue="4320" variant="filled" />
-                    </div>
-                    <Text type="secondary">
-                      Didn't receive a code? <a>Resend</a>
-                    </Text>
                   </div>
-                  <Flex gap="large" vertical>
-                    <Flex gap="middle" justify="center">
-                      {demoButtons.slice(0, 2).map((props, idx) => {
-                        const { children, ...restProps } = props;
-                        return (
-                          <Button key={`item-${idx}`} {...restProps}>
-                            {children}
-                          </Button>
-                        );
-                      })}
-                    </Flex>
-                    <Flex gap="middle" justify="center">
-                      {demoButtons.slice(-2).map((props, idx) => {
-                        const { children, ...restProps } = props;
-                        return (
-                          <Button key={`item-${idx}`} {...restProps}>
-                            {children}
-                          </Button>
-                        );
-                      })}
-                    </Flex>
-                  </Flex>
-                  <Card variant="borderless">
-                    <Flex align="flex-start" gap="middle">
+
+                  {/* ================= RIGHT COLUMN ================= */}
+                  <div className={clsx(styles.colRight, isJojo && styles.colRightJojo)}>
+                    <Card
+                      variant="borderless"
+                      title={isJojo ? "Passione" : undefined}
+                      className={styles.signupCard}
+                      classNames={{ body: styles.signupCardBody }}
+                    >
                       <Avatar
-                        shape="square"
-                        size={60}
-                        src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                        size={50}
+                        src="https://github.com/ant-design.png?size=50"
+                        className={styles.signupAvatar}
                         draggable={false}
                       />
-                      <div className={styles.profileInfo}>
-                        <Title level={5} className={styles.profileTitle}>
-                          {isJojo ? "Golden Wind" : "Ant Design"}
-                        </Title>
-                        <Text type="secondary" className={styles.profileHandle}>
-                          {isJojo ? "@araki.jojo" : "@ant-design"}
-                        </Text>
-                        <p className={styles.profileDesc}>
-                          {isJojo
-                            ? "Thick ink. Fashion clash. Pose snap — not soft anime."
-                            : "Building the future of UI for web & mobile."}
-                        </p>
+                      <Title level={4}>{isJojo ? "Awaken your Stand" : "Create an account"}</Title>
+                      <Text type="secondary" className={styles.signupText}>
+                        {isJojo
+                          ? "Seven days of Naples haze. No soft SaaS required."
+                          : "Start your free 7-day trial. No credit card required."}
+                      </Text>
+                      <Button type="primary" block size="large" className={styles.signupBtn}>
+                        {isJojo ? "やれやれだぜ" : "Get Started"}
+                      </Button>
+                      <Divider className={styles.signupDivider}>{isJojo ? "ZIP" : "OR"}</Divider>
+                      {isJojo && (
+                        <Collapse
+                          size="small"
+                          style={{ marginBottom: 12, width: "100%" }}
+                          items={[
+                            {
+                              key: "1",
+                              label: "Suit seams",
+                              children: "Zipper pull on expand — fashion hardware, not wallpaper.",
+                            },
+                          ]}
+                        />
+                      )}
+                      <Flex vertical gap="small">
+                        <Button block size="large" icon={<GoogleOutlined />}>
+                          {isJojo ? "Continue with Pose" : "Continue with Google"}
+                        </Button>
+                        <Button block size="large" icon={<AppleFilled />}>
+                          {isJojo ? "Continue with Gold" : "Continue with Apple"}
+                        </Button>
+                      </Flex>
+                    </Card>
+
+                    <ModalInternalPanel title={isJojo ? "JOJO Theme" : "Ant Design"}>
+                      <div>
+                        {isJojo
+                          ? "Pose first: interlocking figures, different axes, protagonist forward — drop into ConfigProvider."
+                          : "Ant Design use CSS-in-JS technology to provide dynamic & mix theme ability."}
                       </div>
-                    </Flex>
-                  </Card>
-                  <InternalPanel
-                    styles={{ root: { width: "100%" } }}
-                    title={isJojo ? "Stand Manifested" : "Ant Design"}
-                    description={
-                      isJojo
-                        ? "Sculptural hard edges, solid-black shading, and haute-couture clash color."
-                        : "An enterprise-class design system for building modern, intelligent, and delightful user experiences."
-                    }
-                    type="success"
-                  />
+                    </ModalInternalPanel>
+                  </div>
                 </div>
-
-                {/* ================= RIGHT COLUMN ================= */}
-                <div className={styles.colRight}>
-                  <Card
-                    variant="borderless"
-                    className={styles.signupCard}
-                    classNames={{ body: styles.signupCardBody }}
-                  >
-                    <Avatar
-                      size={50}
-                      src="https://github.com/ant-design.png?size=50"
-                      className={styles.signupAvatar}
-                      draggable={false}
-                    />
-                    <Title level={4}>{isJojo ? "Awaken your Stand" : "Create an account"}</Title>
-                    <Text type="secondary" className={styles.signupText}>
-                      {isJojo
-                        ? "Seven days of yellow sky. No soft SaaS required."
-                        : "Start your free 7-day trial. No credit card required."}
-                    </Text>
-                    <Button type="primary" block size="large" className={styles.signupBtn}>
-                      {isJojo ? "やれやれだぜ" : "Get Started"}
-                    </Button>
-                    <Divider className={styles.signupDivider}>OR</Divider>
-                    <Flex vertical gap="small">
-                      <Button block size="large" icon={<GoogleOutlined />}>
-                        {isJojo ? "Continue with Pose" : "Continue with Google"}
-                      </Button>
-                      <Button block size="large" icon={<AppleFilled />}>
-                        {isJojo ? "Continue with Gold" : "Continue with Apple"}
-                      </Button>
-                    </Flex>
-                  </Card>
-
-                  <ModalInternalPanel title={isJojo ? "JOJO Theme" : "Ant Design"}>
-                    <div>
-                      {isJojo
-                        ? "Bold thick black outlines, exaggerated dynamic poses, and vibrant non-naturalistic color — drop into ConfigProvider."
-                        : "Ant Design use CSS-in-JS technology to provide dynamic & mix theme ability."}
-                    </div>
-                  </ModalInternalPanel>
-                </div>
-              </div>
-            </Card>
-          </BorderBeam>
+              </Card>
+            );
+            return isJojo ? gallery : <BorderBeam lineWidth={2}>{gallery}</BorderBeam>;
+          })()}
         </App>
       </div>
     </ConfigProvider>
