@@ -209,14 +209,10 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
 
   const previewThemes = usePreviewThemes();
 
-  const [activeThemeKey, setActiveThemeKey] = React.useState("light");
+  const [activeThemeKey, setActiveThemeKey] = React.useState("jojo");
   const [activePane, setActivePane] = React.useState<PreviewPane>("components");
 
   const copyTimerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
-
-  React.useEffect(() => {
-    setActiveThemeKey(isDark ? "dark" : "light");
-  }, [isDark]);
 
   const backgroundPrefetchList = React.useMemo(
     () => previewThemes.map((t) => t.bgImg).filter((img): img is string => !!img),

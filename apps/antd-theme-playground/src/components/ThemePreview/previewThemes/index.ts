@@ -3,31 +3,9 @@ import { theme } from "antd";
 import React from "react";
 
 import useLocale from "../../../adapters/useLocale";
-import { JojoIcon, SereneIcon } from "../svg-component";
-import useBlossomTheme from "./blossomTheme";
-import blossomThemeSource from "./blossomTheme.ts?raw";
-import useBootstrapTheme from "./bootstrapTheme";
-import bootstrapThemeSource from "./bootstrapTheme.ts?raw";
-import useCartoonTheme from "./cartoonTheme";
-import cartoonThemeSource from "./cartoonTheme.ts?raw";
-import useGeekTheme from "./geekTheme";
-import geekThemeSource from "./geekTheme.ts?raw";
-import useGlassTheme from "./glassTheme";
-import glassThemeSource from "./glassTheme.ts?raw";
-import useIllustrationTheme from "./illustrationTheme";
-import illustrationThemeSource from "./illustrationTheme.ts?raw";
+import { JojoIcon } from "../svg-component";
 import useJojoTheme from "./jojoTheme";
 import jojoThemeSource from "./jojoTheme.ts?raw";
-import useLarkTheme from "./larkTheme";
-import larkThemeSource from "./larkTheme.ts?raw";
-import useMuiTheme from "./muiTheme";
-import muiThemeSource from "./muiTheme.ts?raw";
-import useSereneTheme from "./sereneTheme";
-import sereneThemeSource from "./sereneTheme.ts?raw";
-import useShadcnTheme from "./shadcnTheme";
-import shadcnThemeSource from "./shadcnTheme.ts?raw";
-import useV4Theme from "./v4Theme";
-import v4ThemeSource from "./v4Theme.ts?raw";
 
 export interface PreviewThemeConfig {
   icon: string | React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -43,35 +21,11 @@ export interface PreviewThemeConfig {
 const locales = {
   cn: {
     default: "Ant Design",
-    dark: "暗黑",
-    geek: "极客",
-    glass: "玻璃",
-    mui: "MUI",
-    shadcn: "shadcn",
-    bootstrap: "Bootstrap",
-    cartoon: "卡通",
-    illustration: "插画",
     jojo: "JOJO",
-    lark: "知识协作",
-    blossom: "桃花缘",
-    v4: "Ant Design V4",
-    serene: "静谧",
   },
   en: {
     default: "Ant Design",
-    dark: "Dark",
-    geek: "Geek",
-    glass: "Glass",
-    mui: "MUI",
-    shadcn: "shadcn",
-    bootstrap: "Bootstrap",
-    cartoon: "Cartoon",
-    illustration: "Illustration",
     jojo: "JOJO",
-    lark: "Document",
-    blossom: "Blossom",
-    v4: "Ant Design V4",
-    serene: "Serene",
   },
 };
 
@@ -116,49 +70,10 @@ const previewThemeComponents: NonNullable<ThemeConfig["components"]> = {
   Notification: {},
 };
 
-const darkPreviewLayoutToken: NonNullable<ThemeConfig["components"]>["Layout"] = {
-  bodyBg: "#050505",
-  footerBg: "#050505",
-  headerBg: "#111111",
-  headerColor: "rgba(255, 255, 255, 0.88)",
-  siderBg: "#050505",
-  triggerBg: "#111111",
-  triggerColor: "rgba(255, 255, 255, 0.88)",
-};
-
-const darkPreviewMenuToken: NonNullable<ThemeConfig["components"]>["Menu"] = {
-  darkItemBg: "transparent",
-  darkItemColor: "rgba(255, 255, 255, 0.68)",
-  darkItemHoverBg: "rgba(255, 255, 255, 0.08)",
-  darkItemHoverColor: "#fff",
-  darkItemSelectedBg: "rgba(22, 119, 255, 0.28)",
-  darkItemSelectedColor: "#fff",
-  darkSubMenuItemBg: "transparent",
-};
-
-const darkPreviewProgressToken: NonNullable<ThemeConfig["components"]>["Progress"] = {
-  circleTextColor: "rgba(255, 255, 255, 0.88)",
-  defaultColor: DEFAULT_COLOR,
-  remainingColor: "rgba(255, 255, 255, 0.12)",
-};
-
-const isDarkAlgorithm = (algorithm: ThemeConfig["algorithm"]) => {
-  const algorithms = Array.isArray(algorithm) ? algorithm : algorithm ? [algorithm] : [];
-
-  return algorithms.includes(theme.darkAlgorithm);
-};
-
 const getBasePreviewThemeProps = (algorithm: ThemeConfig["algorithm"]): ConfigProviderProps => ({
   theme: {
     algorithm,
-    components: isDarkAlgorithm(algorithm)
-      ? {
-          ...previewThemeComponents,
-          Layout: darkPreviewLayoutToken,
-          Menu: darkPreviewMenuToken,
-          Progress: darkPreviewProgressToken,
-        }
-      : previewThemeComponents,
+    components: previewThemeComponents,
   },
   wave: {},
   app: {},
@@ -184,19 +99,7 @@ const getBasePreviewThemeProps = (algorithm: ThemeConfig["algorithm"]): ConfigPr
 
 const usePreviewThemes = () => {
   const [locale] = useLocale(locales);
-
-  const larkTheme = useLarkTheme();
-  const blossomTheme = useBlossomTheme();
-  const v4Theme = useV4Theme();
-  const cartoonTheme = useCartoonTheme();
-  const illustrationTheme = useIllustrationTheme();
   const jojoTheme = useJojoTheme();
-  const geekTheme = useGeekTheme();
-  const glassTheme = useGlassTheme();
-  const muiTheme = useMuiTheme();
-  const shadcnTheme = useShadcnTheme();
-  const bootstrapTheme = useBootstrapTheme();
-  const sereneTheme = useSereneTheme();
 
   return React.useMemo<PreviewThemeConfig[]>(() => {
     return [
@@ -216,127 +119,8 @@ const usePreviewThemes = () => {
           "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*T8IlRaNez08AAAAARwAAAAgAegCCAQ/original",
         props: getBasePreviewThemeProps(theme.defaultAlgorithm),
       },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*LuUWTKWMy34AAAAAFvAAAAgAegCCAQ/original",
-        name: locale.mui,
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*IFkZRpIKEEkAAAAAQzAAAAgAegCCAQ/original",
-        props: muiTheme,
-        copyCode: muiThemeSource,
-      },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*X-rDQY7JQ-oAAAAAFVAAAAgAegCCAQ/original",
-        name: locale.shadcn,
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*56tPQbwgFyEAAAAARuAAAAgAegCCAQ/original",
-        props: shadcnTheme,
-        copyCode: shadcnThemeSource,
-      },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*V0RKS7vJxqEAAAAAQBAAAAgAegCCAQ/original",
-        name: locale.bootstrap,
-        props: bootstrapTheme,
-        copyCode: bootstrapThemeSource,
-      },
-      {
-        name: locale.cartoon,
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*fLjhR5tqNIwAAAAAN9AAAAgAegCCAQ/original",
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*tgpBT7vYIUsAAAAAQ-AAAAgAegCCAQ/original",
-        props: cartoonTheme,
-        copyCode: cartoonThemeSource,
-      },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*rjPZR5DHPO0AAAAAQBAAAAgAegCCAQ/original",
-        name: locale.dark,
-        key: "dark",
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*ETkNSJ-oUGwAAAAAQ_AAAAgAegCCAQ/original",
-        bgImgDark: true,
-        props: getBasePreviewThemeProps(theme.darkAlgorithm),
-      },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*Tm6ESY5h6ZgAAAAAQBAAAAgAegCCAQ/original",
-        name: locale.illustration,
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*HuVGQKqOER0AAAAARsAAAAgAegCCAQ/original",
-        props: illustrationTheme,
-        copyCode: illustrationThemeSource,
-      },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*GF9US7qG8tAAAAAAQCAAAAgAegCCAQ/original",
-        name: locale.glass,
-        // bgImg:
-        //   'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*PbKXQLie7OAAAAAARTAAAAgAegCCAQ/original',
-        props: glassTheme,
-        copyCode: glassThemeSource,
-      },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*MsjGSYbZ6xkAAAAAQCAAAAgAegCCAQ/original",
-        name: locale.geek,
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*fzA2T4ms154AAAAARtAAAAgAegCCAQ/original",
-        bgImgDark: true,
-        props: geekTheme,
-        copyCode: geekThemeSource,
-      },
-      {
-        icon: "https://gw.alipayobjects.com/zos/bmw-prod/3e899b2b-4eb4-4771-a7fc-14c7ff078aed.svg",
-        name: locale.lark,
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*iM6CQ496P3oAAAAAAAAAAAAADrJ8AQ/fmt.webp",
-        props: larkTheme,
-        copyCode: larkThemeSource,
-      },
-      {
-        icon: "https://gw.alipayobjects.com/zos/bmw-prod/ed9b04e8-9b8d-4945-8f8a-c8fc025e846f.svg",
-        name: locale.blossom,
-        bgImg:
-          "https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*s5OdR6wZZIkAAAAAAAAAAAAADrJ8AQ/fmt.webp",
-        props: blossomTheme,
-        copyCode: blossomThemeSource,
-      },
-      {
-        icon: "https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*bOiWT4-34jkAAAAAAAAAAAAADrJ8AQ/original",
-        name: locale.v4,
-        props: v4Theme,
-        copyCode: v4ThemeSource,
-      },
-      {
-        name: locale.serene,
-        icon: SereneIcon,
-        props: sereneTheme,
-        copyCode: sereneThemeSource,
-      },
     ];
-  }, [
-    blossomTheme,
-    bootstrapTheme,
-    cartoonTheme,
-    geekTheme,
-    glassTheme,
-    illustrationTheme,
-    jojoTheme,
-    larkTheme,
-    locale.blossom,
-    locale.bootstrap,
-    locale.cartoon,
-    locale.dark,
-    locale.default,
-    locale.geek,
-    locale.glass,
-    locale.illustration,
-    locale.jojo,
-    locale.lark,
-    locale.mui,
-    locale.serene,
-    locale.shadcn,
-    locale.v4,
-    muiTheme,
-    sereneTheme,
-    shadcnTheme,
-    v4Theme,
-  ]);
+  }, [jojoTheme, locale.default, locale.jojo]);
 };
 
 export default usePreviewThemes;
