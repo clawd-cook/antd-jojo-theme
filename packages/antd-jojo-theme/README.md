@@ -1,8 +1,13 @@
 # @clawd-cook/antd-jojo-theme
 
-Ant Design theme tokens inspired by Hirohiko Araki's _JoJo's Bizarre Adventure_:
-bold ink outlines, saturated high-contrast color, sharp angular geometry, hard
-dramatic shadows, and a marble/paper ground.
+Ant Design theme after **Hirohiko Araki / JoJo's Bizarre Adventure** —
+especially _Golden Wind_ cover art: sculptural hard edges, thick ink,
+crosshatching volume, chiaroscuro block shadows, haute-couture clash color.
+
+## Design keywords
+
+> 雕塑感硬边 · JOJO立张力 · 粗轮廓 + 交叉排线 · 硬阴影明暗对比 ·
+> 先锋时装撞色 · 巴洛克金属感 · 平涂波普 · 不要萌系柔阴影
 
 ## Install
 
@@ -14,21 +19,26 @@ pnpm add @clawd-cook/antd-jojo-theme antd
 
 ```tsx
 import { ConfigProvider } from "antd";
-import { jojoTheme, jojoColors } from "@clawd-cook/antd-jojo-theme";
+import { jojoTheme, jojoColors, jojoHatch, jojoInkShadow } from "@clawd-cook/antd-jojo-theme";
 
 export function App() {
-  return <ConfigProvider theme={jojoTheme}>{/* your UI */}</ConfigProvider>;
+  return (
+    <ConfigProvider theme={jojoTheme}>
+      {/* Optional: hatch a surface */}
+      <div style={{ backgroundImage: jojoHatch, boxShadow: jojoInkShadow }}>…</div>
+    </ConfigProvider>
+  );
 }
 ```
 
-## Palette
+## Palette (cover clash)
 
-| Token                | Color     | Role                   |
-| -------------------- | --------- | ---------------------- |
-| `jojoColors.ink`     | `#0A0A0A` | Thick outlines / text  |
-| `jojoColors.marble`  | `#FFF3E6` | Classical paper ground |
-| `jojoColors.purple`  | `#7B1FA2` | Primary stand energy   |
-| `jojoColors.gold`    | `#FFC107` | Accent / headers       |
-| `jojoColors.crimson` | `#D50000` | Danger                 |
-| `jojoColors.teal`    | `#00BFA5` | Success                |
-| `jojoColors.cyan`    | `#00BCD4` | Info                   |
+| Token           | Hex       | Role                     |
+| --------------- | --------- | ------------------------ |
+| `ink`           | `#0D0D0D` | Thick contour            |
+| `sky`           | `#FFE566` | Yellow stage / Araki sky |
+| `purple`        | `#6B1FA0` | Fashion primary          |
+| `magenta`       | `#E6007A` | Clash accent             |
+| `gold`          | `#F5C518` | Metal / embroidery       |
+| `shade`         | `#1A0A2E` | Hard chiaroscuro block   |
+| `teal` / `cyan` | …         | Unrealistic complements  |

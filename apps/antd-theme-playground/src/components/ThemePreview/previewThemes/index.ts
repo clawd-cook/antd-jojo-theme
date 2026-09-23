@@ -204,7 +204,7 @@ const usePreviewThemes = () => {
         name: locale.jojo,
         icon: JojoIcon,
         key: "jojo",
-        colors: ["#7B1FA2", "#FFC107", "#E91E63", "#0A0A0A", "#FFF3E6"],
+        colors: ["#6B1FA0", "#FFE566", "#E6007A", "#F5C518", "#0D0D0D"],
         props: jojoTheme,
         copyCode: jojoThemeSource,
       },

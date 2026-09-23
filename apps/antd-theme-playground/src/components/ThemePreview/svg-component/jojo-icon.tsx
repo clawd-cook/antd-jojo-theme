@@ -5,7 +5,7 @@ interface JojoIconProps {
   style?: React.CSSProperties;
 }
 
-/** Star + ink outline mark echoing JoJo stand energy. */
+/** Gold star on yellow sky + ink contour — Araki cover mark. */
 export const JojoIcon: React.FC<JojoIconProps> = (props) => {
   return (
     <svg
@@ -19,15 +19,16 @@ export const JojoIcon: React.FC<JojoIconProps> = (props) => {
       {...props}
     >
       <title>JoJo Theme Icon</title>
-      <rect x="1.5" y="1.5" width="61" height="61" fill="#FFF3E6" stroke="#0A0A0A" strokeWidth="3" />
+      <rect x="2" y="2" width="60" height="60" fill="#FFE566" stroke="#0D0D0D" strokeWidth="4" />
       <path
-        d="M32 10 L37.5 24.5 L53 26 L41.5 36.5 L45 52 L32 43.5 L19 52 L22.5 36.5 L11 26 L26.5 24.5 Z"
-        fill="#FFC107"
-        stroke="#0A0A0A"
-        strokeWidth="3"
+        d="M32 8 L38.2 24.2 L55 26 L42 37.5 L45.8 54 L32 44.8 L18.2 54 L22 37.5 L9 26 L25.8 24.2 Z"
+        fill="#F5C518"
+        stroke="#0D0D0D"
+        strokeWidth="3.5"
         strokeLinejoin="miter"
       />
-      <circle cx="32" cy="32" r="6" fill="#7B1FA2" stroke="#0A0A0A" strokeWidth="2.5" />
+      <circle cx="32" cy="32" r="7" fill="#6B1FA0" stroke="#0D0D0D" strokeWidth="3" />
+      <circle cx="32" cy="32" r="3" fill="#E6007A" stroke="#0D0D0D" strokeWidth="2" />
     </svg>
   );
 };

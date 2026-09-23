@@ -1,23 +1,76 @@
 /**
- * Hirohiko Araki / JoJo palette:
- * ink outlines, marble paper, stand-energy purple, gold, crimson, cyan.
+ * Hirohiko Araki / JoJo — Golden Wind cover palette.
+ * Surreal clash colors, ink outlines, metal gold, pop flat fills.
+ * Not realistic local color: sky can be yellow, surfaces can run violet.
  */
 export const jojoColors = {
-  ink: "#0A0A0A",
-  inkMuted: "#2A2A2A",
-  marble: "#FFF3E6",
-  marbleBright: "#FFFBF5",
-  marbleDeep: "#FFE4C4",
-  purple: "#7B1FA2",
-  purpleHot: "#9C27B0",
-  purpleDeep: "#4A148C",
-  magenta: "#E91E63",
-  gold: "#FFC107",
-  goldDeep: "#FF8F00",
-  crimson: "#D50000",
-  teal: "#00BFA5",
-  cyan: "#00BCD4",
-  standPink: "#FF4081",
+  /** Thick manga ink */
+  ink: "#0D0D0D",
+  inkMuted: "#2B2140",
+  /** Chiaroscuro block shade (carved, not soft) */
+  shade: "#1A0A2E",
+  /** Araki cover yellow sky / stage ground */
+  sky: "#FFE566",
+  skyHot: "#FFD400",
+  paper: "#FFF8E7",
+  paperDeep: "#FFE08A",
+  /** Part 5 fashion violet */
+  purple: "#6B1FA0",
+  purpleHot: "#9B2BC7",
+  purpleDeep: "#3B0A5C",
+  /** Haute-couture clash magenta */
+  magenta: "#E6007A",
+  /** Metal buckle / embroidery gold */
+  gold: "#F5C518",
+  goldDeep: "#D4A017",
+  crimson: "#C41E3A",
+  /** Unrealistic complementary teal */
+  teal: "#00C9B1",
+  cyan: "#00B7E0",
+  standAura: "#B388FF",
 } as const;
 
 export type JojoColorKey = keyof typeof jojoColors;
+
+/** Hard ink offset shadow — sculptural, not soft blur */
+export const jojoInkShadow = `5px 5px 0 ${jojoColors.ink}`;
+export const jojoInkShadowLg = `8px 8px 0 ${jojoColors.ink}`;
+export const jojoInkShadowSm = `3px 3px 0 ${jojoColors.ink}`;
+
+/**
+ * Crosshatching / screentone as CSS background layers.
+ * Mimics dense hatching volume without soft gradients.
+ */
+export const jojoHatch = [
+  `repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 3px,
+    rgba(13, 13, 13, 0.14) 3px,
+    rgba(13, 13, 13, 0.14) 4px
+  )`,
+  `repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 5px,
+    rgba(13, 13, 13, 0.08) 5px,
+    rgba(13, 13, 13, 0.08) 6px
+  )`,
+].join(", ");
+
+export const jojoHatchDense = [
+  `repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(13, 13, 13, 0.22) 2px,
+    rgba(13, 13, 13, 0.22) 3px
+  )`,
+  `repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 3px,
+    rgba(26, 10, 46, 0.18) 3px,
+    rgba(26, 10, 46, 0.18) 4px
+  )`,
+].join(", ");
