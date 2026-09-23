@@ -9,9 +9,14 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@ant-design/icons": "catalog:",
+    "@rc-component/steps": "catalog:",
     "antd": "catalog:",
+    "antd-style": "catalog:",
+    "clsx": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "swr": "catalog:"
   },
   "devDependencies": {
     "@rsbuild/core": "catalog:",
