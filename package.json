@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "ready": "vp check && vp run -r test && vp run -r build",
-    "dev": "vp run website#dev"
+    "playground:dev": "vp run antd-theme-playground#dev",
+    "playground:build": "vp run antd-theme-playground#build"
   },
   "devDependencies": {
     "antd": "catalog:",
