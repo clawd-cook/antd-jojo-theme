@@ -1,0 +1,85 @@
+name: Deploy Playground to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - apps/antd-theme-playground/**
+      - packages/antd-jojo-theme/**
+      - pnpm-lock.yaml
+      - package.json
+      - pnpm-workspace.yaml
+      - .github/workflows/deploy-playground-pages.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - apps/antd-theme-playground/**
+      - packages/antd-jojo-theme/**
+      - pnpm-lock.yaml
+      - package.json
+      - pnpm-workspace.yaml
+      - .github/workflows/deploy-playground-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.5.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build theme package
+        run: pnpm --filter @clawd-cook/antd-jojo-theme run build
+
+      - name: Build playground
+        env:
+          BASE_PATH: /antd-jojo-theme
+        run: pnpm --filter antd-theme-playground run build
+
+      - name: Setup Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/antd-theme-playground/dist
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
