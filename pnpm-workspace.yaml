@@ -6,8 +6,11 @@ packages:
 catalogMode: prefer
 
 catalog:
+  '@ant-design/compatible': 5.1.5
+  '@ant-design/fast-color': 3.0.1
   '@ant-design/icons': 6.3.4
   '@rc-component/steps': 1.2.3
+  '@rc-component/util': 1.13.0
   '@rsbuild/core': 2.2.8
   '@rsbuild/plugin-react': 2.1.0
   "@types/node": 24.1.0
@@ -40,3 +43,5 @@ minimumReleaseAgeExclude:
   - "@voidzero-dev/vite-plus-win32-arm64-msvc@1.0.0-rc.0"
   - "@voidzero-dev/vite-plus-win32-x64-msvc@1.0.0-rc.0"
   - vite-plus@1.0.0-rc.0
+allowBuilds:
+  core-js: set this to true or false

@@ -9,8 +9,11 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@ant-design/compatible": "catalog:",
+    "@ant-design/fast-color": "catalog:",
     "@ant-design/icons": "catalog:",
     "@rc-component/steps": "catalog:",
+    "@rc-component/util": "catalog:",
     "antd": "catalog:",
     "antd-style": "catalog:",
     "clsx": "catalog:",
