@@ -9,7 +9,6 @@
     "playground:build": "vp run antd-theme-playground#build"
   },
   "devDependencies": {
-    "antd": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
