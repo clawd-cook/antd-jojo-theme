@@ -36,27 +36,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
         with:
-          version: 12.5.1
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          node-version-file: .node-version
+          cache: true
+          run-install: |
+            - args: ["--frozen-lockfile"]
 
       - name: Build theme package
-        run: pnpm --filter @clawd-cook/antd-jojo-theme run build
+        run: vp run --filter @clawd-cook/antd-jojo-theme build
 
       - name: Build playground
         env:
           BASE_PATH: /antd-jojo-theme
-        run: pnpm --filter antd-theme-playground run build
+        # --no-cache: task cache must not replay a build without BASE_PATH
+        run: vp run --no-cache playground:build
 
       - name: Setup Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
