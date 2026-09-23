@@ -1,5 +1,5 @@
-import React from 'react';
-import Icon from '@ant-design/icons';
+import Icon from "@ant-design/icons";
+import React from "react";
 
 const SVGIcon: React.FC = (props) => (
   <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor" {...props}>

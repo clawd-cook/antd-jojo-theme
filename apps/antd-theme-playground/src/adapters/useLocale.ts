@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 export interface LocaleMap<
   K extends PropertyKey = PropertyKey,
@@ -8,9 +8,9 @@ export interface LocaleMap<
   en: Record<K, V>;
 }
 
-export type LocaleType = 'cn' | 'en';
+export type LocaleType = "cn" | "en";
 
-export const LocaleContext = React.createContext<LocaleType>('cn');
+export const LocaleContext = React.createContext<LocaleType>("cn");
 
 const useLocale = <
   K extends PropertyKey = PropertyKey,

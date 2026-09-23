@@ -1,5 +1,5 @@
-import { theme as antdTheme } from 'antd';
-import type { ThemeConfig } from 'antd';
+import { theme as antdTheme } from "antd";
+import type { ThemeConfig } from "antd";
 
 /** 仅 theme 时（默认/暗黑）复制用的最小 import */
 const MINIMAL_THEME_IMPORTS = `import React from 'react';
@@ -8,7 +8,7 @@ import { ConfigProvider, theme } from 'antd';`;
 /** 从 hook 源码中解析 hook 名，并保留 export default 作为单独的主题文件 */
 function getThemeFileContent(source: string): { content: string; hookName: string } {
   const hookNameMatch = source.match(/export\s+default\s+(\w+)/);
-  const hookName = hookNameMatch?.[1] ?? 'useTheme';
+  const hookName = hookNameMatch?.[1] ?? "useTheme";
   const content = source.trim();
   return { content, hookName };
 }
@@ -51,17 +51,17 @@ export function generateFullCopyFile(params: {
     const configContent = getConfigFileContent(hookName, fileName);
     return [
       `// ========== ${fileName}.ts ==========`,
-      '',
+      "",
       themeFileContent,
-      '',
-      '// ========== App.tsx ==========',
-      '',
+      "",
+      "// ========== App.tsx ==========",
+      "",
       configContent,
-    ].join('\n');
+    ].join("\n");
   }
 
   const configPropsStr = !themeConfig
-    ? '{ theme: { algorithm: theme.defaultAlgorithm } }'
+    ? "{ theme: { algorithm: theme.defaultAlgorithm } }"
     : (() => {
         const themeProps: string[] = [];
         const algorithmStr = getAlgorithmStr(themeConfig.algorithm);
@@ -73,28 +73,28 @@ export function generateFullCopyFile(params: {
           themeProps.push(`components: ${stringifyValue(themeConfig.components, 1)}`);
         }
         if (themeProps.length === 0) {
-          themeProps.push('algorithm: theme.defaultAlgorithm');
+          themeProps.push("algorithm: theme.defaultAlgorithm");
         }
-        return `{ theme: { ${themeProps.join(', ')} } }`;
+        return `{ theme: { ${themeProps.join(", ")} } }`;
       })();
 
   return [
-    '// ========== App.tsx ==========',
-    '',
+    "// ========== App.tsx ==========",
+    "",
     MINIMAL_THEME_IMPORTS,
-    '',
-    'export default () => {',
+    "",
+    "export default () => {",
     `  const configProps = ${configPropsStr};`,
-    '  return (',
-    '    <ConfigProvider {...configProps}>',
-    '      {/* Your App */}',
-    '    </ConfigProvider>',
-    '  );',
-    '};',
-  ].join('\n');
+    "  return (",
+    "    <ConfigProvider {...configProps}>",
+    "      {/* Your App */}",
+    "    </ConfigProvider>",
+    "  );",
+    "};",
+  ].join("\n");
 }
 
-function getAlgorithmStr(algorithm: ThemeConfig['algorithm']): string | null {
+function getAlgorithmStr(algorithm: ThemeConfig["algorithm"]): string | null {
   if (!algorithm) {
     return null;
   }
@@ -107,64 +107,64 @@ function getAlgorithmStr(algorithm: ThemeConfig['algorithm']): string | null {
     if (algoStrs.length === 1) {
       return algoStrs[0];
     }
-    return `[${algoStrs.join(', ')}]`;
+    return `[${algoStrs.join(", ")}]`;
   }
 
   if (algorithm === antdTheme.defaultAlgorithm) {
-    return 'theme.defaultAlgorithm';
+    return "theme.defaultAlgorithm";
   }
   if (algorithm === antdTheme.darkAlgorithm) {
-    return 'theme.darkAlgorithm';
+    return "theme.darkAlgorithm";
   }
   if (algorithm === antdTheme.compactAlgorithm) {
-    return 'theme.compactAlgorithm';
+    return "theme.compactAlgorithm";
   }
 
   return null;
 }
 
 function stringifyValue(value: unknown, depth = 0): string {
-  const indent = '  '.repeat(depth + 1);
-  const closingIndent = '  '.repeat(depth);
+  const indent = "  ".repeat(depth + 1);
+  const closingIndent = "  ".repeat(depth);
 
   if (value === undefined) {
-    return 'undefined';
+    return "undefined";
   }
   if (value === null) {
-    return 'null';
+    return "null";
   }
-  if (typeof value === 'boolean') {
+  if (typeof value === "boolean") {
     return String(value);
   }
-  if (typeof value === 'number') {
+  if (typeof value === "number") {
     return String(value);
   }
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     return `'${value}'`;
   }
 
-  if (typeof value === 'function') {
-    const algoStr = getAlgorithmStr(value as ThemeConfig['algorithm']);
-    return algoStr ?? '/* function */';
+  if (typeof value === "function") {
+    const algoStr = getAlgorithmStr(value as ThemeConfig["algorithm"]);
+    return algoStr ?? "/* function */";
   }
 
   if (Array.isArray(value)) {
     if (value.length === 0) {
-      return '[]';
+      return "[]";
     }
     const items = value.map((item) => `${indent}${stringifyValue(item, depth + 1)}`);
-    return `[\n${items.join(',\n')},\n${closingIndent}]`;
+    return `[\n${items.join(",\n")},\n${closingIndent}]`;
   }
 
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     const entries = Object.entries(value as Record<string, unknown>).filter(
-      ([, v]) => v !== undefined && typeof v !== 'function',
+      ([, v]) => v !== undefined && typeof v !== "function",
     );
     if (entries.length === 0) {
-      return '{}';
+      return "{}";
     }
     const items = entries.map(([k, v]) => `${indent}${k}: ${stringifyValue(v, depth + 1)}`);
-    return `{\n${items.join(',\n')},\n${closingIndent}}`;
+    return `{\n${items.join(",\n")},\n${closingIndent}}`;
   }
 
   return String(value);
@@ -176,11 +176,11 @@ export function generateThemeCode(themeConfig?: ThemeConfig): string {
   if (!themeConfig) {
     return [
       ...importLines,
-      '',
-      '<ConfigProvider theme={{ algorithm: theme.defaultAlgorithm }}>',
-      '  {/* Your App */}',
-      '</ConfigProvider>',
-    ].join('\n');
+      "",
+      "<ConfigProvider theme={{ algorithm: theme.defaultAlgorithm }}>",
+      "  {/* Your App */}",
+      "</ConfigProvider>",
+    ].join("\n");
   }
 
   const { algorithm, token, components } = themeConfig;
@@ -204,13 +204,13 @@ export function generateThemeCode(themeConfig?: ThemeConfig): string {
 
   return [
     ...importLines,
-    '',
-    '<ConfigProvider',
-    '  theme={{',
+    "",
+    "<ConfigProvider",
+    "  theme={{",
     ...themeProps,
-    '  }}',
-    '>',
-    '  {/* Your App */}',
-    '</ConfigProvider>',
-  ].join('\n');
+    "  }}",
+    ">",
+    "  {/* Your App */}",
+    "</ConfigProvider>",
+  ].join("\n");
 }

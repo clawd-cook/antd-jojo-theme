@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
-import { theme } from 'antd';
-import type { ConfigProviderProps } from 'antd';
-import { createStyles } from 'antd-style';
-import { clsx } from 'clsx';
+import { theme } from "antd";
+import type { ConfigProviderProps } from "antd";
+import { createStyles } from "antd-style";
+import { clsx } from "clsx";
+import { useMemo } from "react";
 
-import type { UseTheme } from '.';
+import type { UseTheme } from ".";
 
 const useStyles = createStyles((props) => {
   const { css, cssVar } = props;
@@ -38,22 +38,22 @@ const useStyles = createStyles((props) => {
     buttonRoot: css({
       backgroundImage: `linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2))`,
       boxShadow: `inset 0 1px 0 rgba(255, 255, 255, 0.15)`,
-      transition: 'none',
+      transition: "none",
       borderColor: `rgba(0, 0, 0, 0.3)`,
       textShadow: `0 -1px 0 rgba(0, 0, 0, 0.2)`,
 
-      '&:hover, &:active': {
+      "&:hover, &:active": {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.15) 100%)`,
       },
 
-      '&:active': {
+      "&:active": {
         boxShadow: `inset 0 1px 3px rgba(0, 0, 0, 0.15)`,
       },
     }),
     buttonColorDefault: css({
-      textShadow: 'none',
+      textShadow: "none",
       color: cssVar.colorText,
-      borderBottomColor: 'rgba(0, 0, 0, 0.5)',
+      borderBottomColor: "rgba(0, 0, 0, 0.5)",
     }),
     popupBox: css({
       borderRadius: cssVar.borderRadiusLG,
@@ -65,11 +65,11 @@ const useStyles = createStyles((props) => {
     }),
     dropdownItem: css({
       borderRadius: 0,
-      transition: 'none',
+      transition: "none",
       paddingBlock: cssVar.paddingXXS,
       paddingInline: cssVar.padding,
 
-      '&:hover, &:active, &:focus': {
+      "&:hover, &:active, &:focus": {
         backgroundImage: `linear-gradient(to bottom, ${cssVar.colorPrimaryHover}, ${cssVar.colorPrimary})`,
         color: cssVar.colorTextLightSolid,
       },
@@ -78,11 +78,11 @@ const useStyles = createStyles((props) => {
       paddingInline: 0,
     }),
     notificationRoot: css({
-      '&.ant-notification-notice, & .ant-notification-notice': {
+      "&.ant-notification-notice, & .ant-notification-notice": {
         border: `${cssVar.lineWidth} ${cssVar.lineType} color-mix(in srgb,${cssVar.colorBorder} 80%, #000)`,
         borderRadius: cssVar.borderRadiusLG,
         boxShadow: [`inset 0 1px 0 rgba(255, 255, 255, 0.6)`, `0 2px 4px rgba(0, 0, 0, 0.16)`].join(
-          ',',
+          ",",
         ),
       },
     }),
@@ -109,41 +109,41 @@ const useBootstrapTheme: UseTheme = () => {
         token: {
           borderRadius: 4,
           borderRadiusLG: 6,
-          colorInfo: '#3a87ad',
+          colorInfo: "#3a87ad",
         },
         components: {
           Tooltip: {
             fontSize: 12,
           },
           Checkbox: {
-            colorBorder: '#666',
+            colorBorder: "#666",
             borderRadius: 2,
             algorithm: true,
           },
           Radio: {
-            colorBorder: '#666',
+            colorBorder: "#666",
             borderRadius: 2,
             algorithm: true,
           },
           Notification: {
-            colorSuccessBg: '#dff0d8',
-            colorErrorBg: '#f2dede',
-            colorInfoBg: '#d9edf7',
-            colorWarningBg: '#fcf8e3',
+            colorSuccessBg: "#dff0d8",
+            colorErrorBg: "#f2dede",
+            colorInfoBg: "#d9edf7",
+            colorWarningBg: "#fcf8e3",
           },
           Layout: {
-            bodyBg: '#f8f9fa',
-            footerBg: '#f8f9fa',
-            headerBg: '#ffffff',
-            headerColor: '#212529',
-            siderBg: '#ffffff',
-            triggerBg: '#e9ecef',
-            triggerColor: '#212529',
+            bodyBg: "#f8f9fa",
+            footerBg: "#f8f9fa",
+            headerBg: "#ffffff",
+            headerColor: "#212529",
+            siderBg: "#ffffff",
+            triggerBg: "#e9ecef",
+            triggerColor: "#212529",
           },
           Menu: {
             activeBarBorderWidth: 0,
-            itemBg: 'transparent',
-            subMenuItemBg: 'transparent',
+            itemBg: "transparent",
+            subMenuItemBg: "transparent",
           },
           Button: {},
           Alert: {},
@@ -153,9 +153,9 @@ const useBootstrapTheme: UseTheme = () => {
           Input: {},
           Switch: {},
           Progress: {
-            circleTextColor: '#212529',
-            defaultColor: '#337ab7',
-            remainingColor: '#f5f5f5',
+            circleTextColor: "#212529",
+            defaultColor: "#337ab7",
+            remainingColor: "#f5f5f5",
           },
           Steps: {},
           Slider: {},
@@ -176,7 +176,7 @@ const useBootstrapTheme: UseTheme = () => {
       },
       button: {
         classNames: ({ props }) => ({
-          root: clsx(styles.buttonRoot, props.color === 'default' && styles.buttonColorDefault),
+          root: clsx(styles.buttonRoot, props.color === "default" && styles.buttonColorDefault),
         }),
       },
 

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { FastColor } from '@ant-design/fast-color';
+import { FastColor } from "@ant-design/fast-color";
 import {
   ArrowDownOutlined,
   ArrowUpOutlined,
@@ -17,8 +16,8 @@ import {
   ReloadOutlined,
   SearchOutlined,
   SortAscendingOutlined,
-} from '@ant-design/icons';
-import type { ConfigProviderProps, MenuProps, TableProps } from 'antd';
+} from "@ant-design/icons";
+import type { ConfigProviderProps, MenuProps, TableProps } from "antd";
 import {
   App,
   Avatar,
@@ -40,13 +39,14 @@ import {
   Tag,
   theme,
   Typography,
-} from 'antd';
-import { createStaticStyles } from 'antd-style';
-import { generateColor } from 'antd/es/color-picker/util';
-import { clsx } from 'clsx';
+} from "antd";
+import { createStaticStyles } from "antd-style";
+import { generateColor } from "antd/es/color-picker/util";
+import { clsx } from "clsx";
+import * as React from "react";
 
-import type { PreviewThemeConfig } from '../ThemePreview/previewThemes';
-import { DEFAULT_COLOR } from '../ThemePreview/previewThemes';
+import type { PreviewThemeConfig } from "../ThemePreview/previewThemes";
+import { DEFAULT_COLOR } from "../ThemePreview/previewThemes";
 
 const { Header, Content, Sider } = Layout;
 
@@ -218,7 +218,7 @@ const subMenuItems = [
   },
 ];
 
-const sideMenuItems: MenuProps['items'] = [
+const sideMenuItems: MenuProps["items"] = [
   {
     key: `Design`,
     label: `Design`,
@@ -262,10 +262,10 @@ export interface ThemeDashboardProps {
 }
 
 const dashboardKpis = [
-  { title: 'Revenue', value: 228441, prefix: 'US$', trend: 3.3, status: 'success' },
-  { title: 'Expenses', value: 25108, prefix: 'US$', trend: 3.3, status: 'error' },
-  { title: 'Sales', value: 458, prefix: '', trend: 3.3, status: 'success' },
-  { title: 'Profit', value: 203133, prefix: 'US$', trend: 4.1, status: 'success' },
+  { title: "Revenue", value: 228441, prefix: "US$", trend: 3.3, status: "success" },
+  { title: "Expenses", value: 25108, prefix: "US$", trend: 3.3, status: "error" },
+  { title: "Sales", value: 458, prefix: "", trend: 3.3, status: "success" },
+  { title: "Profit", value: 203133, prefix: "US$", trend: 4.1, status: "success" },
 ] as const;
 
 interface EmployeeRecord {
@@ -280,53 +280,53 @@ interface EmployeeRecord {
 
 const employeeData: EmployeeRecord[] = [
   {
-    key: '1',
-    id: '#4586936',
-    avatar: 'linear-gradient(135deg, #69c0ff, #9254de)',
-    email: 'alex@acme.com',
-    member: 'Alex Turner',
-    role: 'Product Manager',
-    type: 'Employee',
+    key: "1",
+    id: "#4586936",
+    avatar: "linear-gradient(135deg, #69c0ff, #9254de)",
+    email: "alex@acme.com",
+    member: "Alex Turner",
+    role: "Product Manager",
+    type: "Employee",
   },
   {
-    key: '2',
-    id: '#4586937',
-    avatar: 'linear-gradient(135deg, #ffadd2, #eb2f96)',
-    email: 'emma@acme.com',
-    member: 'Emma Davis',
-    role: 'Senior Designer',
-    type: 'Employee',
+    key: "2",
+    id: "#4586937",
+    avatar: "linear-gradient(135deg, #ffadd2, #eb2f96)",
+    email: "emma@acme.com",
+    member: "Emma Davis",
+    role: "Senior Designer",
+    type: "Employee",
   },
   {
-    key: '3',
-    id: '#4586933',
-    avatar: 'linear-gradient(135deg, #b5f5ec, #1677ff)',
-    email: 'john@acme.com',
-    member: 'John Smith',
-    role: 'Chief Technology Officer',
-    type: 'Employee',
+    key: "3",
+    id: "#4586933",
+    avatar: "linear-gradient(135deg, #b5f5ec, #1677ff)",
+    email: "john@acme.com",
+    member: "John Smith",
+    role: "Chief Technology Officer",
+    type: "Employee",
   },
   {
-    key: '4',
-    id: '#4586932',
-    avatar: 'linear-gradient(135deg, #d3f261, #5cdbd3)',
-    email: 'kate@acme.com',
-    member: 'Kate Moore',
-    role: 'Chief Executive Officer',
-    type: 'Employee',
+    key: "4",
+    id: "#4586932",
+    avatar: "linear-gradient(135deg, #d3f261, #5cdbd3)",
+    email: "kate@acme.com",
+    member: "Kate Moore",
+    role: "Chief Executive Officer",
+    type: "Employee",
   },
 ];
 
-const employeeColumns: TableProps<EmployeeRecord>['columns'] = [
+const employeeColumns: TableProps<EmployeeRecord>["columns"] = [
   {
-    title: 'Worker ID',
-    dataIndex: 'id',
+    title: "Worker ID",
+    dataIndex: "id",
     width: 150,
     render: (id: string) => <Typography.Text strong>{id}</Typography.Text>,
   },
   {
-    title: 'Member',
-    dataIndex: 'member',
+    title: "Member",
+    dataIndex: "member",
     render: (_: string, record) => (
       <Flex align="center" gap="middle" className={styles.dashboardEmployee}>
         <Avatar size={40} style={{ background: record.avatar }} />
@@ -339,19 +339,19 @@ const employeeColumns: TableProps<EmployeeRecord>['columns'] = [
     ),
   },
   {
-    title: 'Role',
-    dataIndex: 'role',
+    title: "Role",
+    dataIndex: "role",
   },
   {
-    title: 'Worker Type',
-    dataIndex: 'type',
+    title: "Worker Type",
+    dataIndex: "type",
     width: 160,
   },
   {
-    title: 'Actions',
-    key: 'actions',
+    title: "Actions",
+    key: "actions",
     width: 148,
-    align: 'right',
+    align: "right",
     render: () => (
       <Space size="small">
         <Button shape="circle" icon={<EyeOutlined />} />
@@ -393,12 +393,12 @@ interface ThemeDashboardLayoutProps {
 const ThemeDashboardLayout: React.FC<ThemeDashboardLayoutProps> = (props) => {
   const { className, isDarkTheme, style, activeTheme } = props;
 
-  const { bgImgDark, icon: Icon = '', name } = activeTheme || {};
+  const { bgImgDark, icon: Icon = "", name } = activeTheme || {};
 
   const { token } = theme.useToken();
   const closestColor = DEFAULT_COLOR;
   const hasDarkBackground = isDarkTheme || bgImgDark;
-  const menuTheme = hasDarkBackground ? 'dark' : 'light';
+  const menuTheme = hasDarkBackground ? "dark" : "light";
   const logoColor = React.useMemo(() => {
     const hsb = generateColor(token.colorPrimary).toHsb();
     hsb.b = Math.min(hsb.b, 0.7);
@@ -406,7 +406,7 @@ const ThemeDashboardLayout: React.FC<ThemeDashboardLayoutProps> = (props) => {
   }, [token.colorPrimary]);
 
   return (
-    <App style={{ width: '100%' }}>
+    <App style={{ width: "100%" }}>
       <div
         className={clsx(styles.demo, className, {
           [styles.otherDemo]:
@@ -434,7 +434,7 @@ const ThemeDashboardLayout: React.FC<ThemeDashboardLayoutProps> = (props) => {
             <Flex className={styles.menu} gap="middle">
               <BellOutlined />
               <QuestionCircleOutlined />
-              {typeof Icon === 'string' ? (
+              {typeof Icon === "string" ? (
                 <img
                   className={styles.avatar}
                   src={Icon}
@@ -452,20 +452,20 @@ const ThemeDashboardLayout: React.FC<ThemeDashboardLayoutProps> = (props) => {
               <Menu
                 mode="inline"
                 theme={menuTheme}
-                selectedKeys={['Themes']}
-                openKeys={['Design']}
-                style={{ height: '100%', borderInlineEnd: 0 }}
+                selectedKeys={["Themes"]}
+                openKeys={["Design"]}
+                style={{ height: "100%", borderInlineEnd: 0 }}
                 items={sideMenuItems}
                 expandIcon={false}
               />
             </Sider>
-            <Layout style={{ padding: '0 24px 24px' }}>
+            <Layout style={{ padding: "0 24px 24px" }}>
               <Breadcrumb
-                style={{ margin: '16px 0' }}
+                style={{ margin: "16px 0" }}
                 items={[
                   { title: <HomeOutlined /> },
-                  { title: 'Design', menu: { items: subMenuItems } },
-                  { title: 'Themes' },
+                  { title: "Design", menu: { items: subMenuItems } },
+                  { title: "Themes" },
                 ]}
               />
               <Content>
@@ -480,7 +480,7 @@ const ThemeDashboardLayout: React.FC<ThemeDashboardLayoutProps> = (props) => {
                     <Segmented
                       className={styles.dashboardTabs}
                       defaultValue="Overview"
-                      options={['Overview', 'Sales', 'Expenses']}
+                      options={["Overview", "Sales", "Expenses"]}
                     />
                     <Space>
                       <Button shape="circle" icon={<ReloadOutlined />} />
@@ -489,7 +489,7 @@ const ThemeDashboardLayout: React.FC<ThemeDashboardLayoutProps> = (props) => {
                         style={{ width: 144 }}
                         options={[
                           {
-                            value: 'monthly',
+                            value: "monthly",
                             label: (
                               <Space size={6}>
                                 <CalendarOutlined />
@@ -514,14 +514,14 @@ const ThemeDashboardLayout: React.FC<ThemeDashboardLayoutProps> = (props) => {
                             <Statistic
                               value={item.value}
                               formatter={(value) =>
-                                `${item.prefix ?? ''}${Number(value).toLocaleString('en-US')}`
+                                `${item.prefix ?? ""}${Number(value).toLocaleString("en-US")}`
                               }
                             />
                             <Tag
                               className={styles.dashboardStatTrend}
                               color={item.status}
                               icon={
-                                item.status === 'success' ? (
+                                item.status === "success" ? (
                                   <ArrowUpOutlined />
                                 ) : (
                                   <ArrowDownOutlined />

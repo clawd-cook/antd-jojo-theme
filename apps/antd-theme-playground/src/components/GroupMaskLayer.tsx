@@ -1,6 +1,6 @@
-import React from 'react';
-import { createStaticStyles } from 'antd-style';
-import { clsx } from 'clsx';
+import { createStaticStyles } from "antd-style";
+import { clsx } from "clsx";
+import React from "react";
 
 const classNames = createStaticStyles(({ css }) => ({
   siteMask: css`

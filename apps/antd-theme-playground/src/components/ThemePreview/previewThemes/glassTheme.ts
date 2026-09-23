@@ -1,15 +1,15 @@
-import { useMemo } from 'react';
-import { theme } from 'antd';
-import type { ConfigProviderProps } from 'antd';
-import { createStyles } from 'antd-style';
-import { clsx } from 'clsx';
+import { theme } from "antd";
+import type { ConfigProviderProps } from "antd";
+import { createStyles } from "antd-style";
+import { clsx } from "clsx";
+import { useMemo } from "react";
 
 const glassBorder = {
   boxShadow: [
     `0 8px 24px rgba(85, 85,85, 0.1)`,
     `inset 0 0 5px 2px rgba(255, 255, 255, 0.3)`,
     `inset 0 5px 2px rgba(255, 255, 255, 0.2)`,
-  ].join(','),
+  ].join(","),
 };
 
 const useStyles = createStyles((props) => {
@@ -18,17 +18,17 @@ const useStyles = createStyles((props) => {
   const glassBox = {
     ...glassBorder,
     background: `color-mix(in srgb, ${cssVar.colorBgContainer} 15%, transparent)`,
-    backdropFilter: 'blur(12px)',
+    backdropFilter: "blur(12px)",
   };
 
   return {
     glassBorder,
     glassBox,
     notBackdropFilter: css({
-      backdropFilter: 'none',
+      backdropFilter: "none",
     }),
     app: css({
-      textShadow: '0 1px rgba(0,0,0,0.1)',
+      textShadow: "0 1px rgba(0,0,0,0.1)",
     }),
     cardRoot: css({
       ...glassBox,
@@ -36,39 +36,39 @@ const useStyles = createStyles((props) => {
     }),
     modalContainer: css({
       ...glassBox,
-      backdropFilter: 'none',
+      backdropFilter: "none",
     }),
     buttonRoot: css({
       ...glassBorder,
     }),
     buttonRootDefaultColor: css({
-      background: 'transparent',
+      background: "transparent",
       color: cssVar.colorText,
 
-      '&:hover': {
-        background: 'rgba(255,255,255,0.2)',
+      "&:hover": {
+        background: "rgba(255,255,255,0.2)",
         color: `color-mix(in srgb, ${cssVar.colorText} 90%, transparent)`,
       },
 
-      '&:active': {
-        background: 'rgba(255,255,255,0.1)',
+      "&:active": {
+        background: "rgba(255,255,255,0.1)",
         color: `color-mix(in srgb, ${cssVar.colorText} 80%, transparent)`,
       },
     }),
     buttonRootDangerColor: css({
-      background: 'rgba(255, 120, 117, 0.1)',
-      borderColor: 'rgba(255, 120, 117, 0.24)',
+      background: "rgba(255, 120, 117, 0.1)",
+      borderColor: "rgba(255, 120, 117, 0.24)",
       color: cssVar.colorError,
 
-      '&:hover': {
-        background: 'rgba(255, 120, 117, 0.16)',
-        borderColor: 'rgba(255, 120, 117, 0.32)',
+      "&:hover": {
+        background: "rgba(255, 120, 117, 0.16)",
+        borderColor: "rgba(255, 120, 117, 0.32)",
         color: cssVar.colorErrorHover,
       },
 
-      '&:active': {
-        background: 'rgba(255, 120, 117, 0.12)',
-        borderColor: 'rgba(255, 120, 117, 0.28)',
+      "&:active": {
+        background: "rgba(255, 120, 117, 0.12)",
+        borderColor: "rgba(255, 120, 117, 0.28)",
         color: cssVar.colorErrorActive,
       },
     }),
@@ -78,51 +78,51 @@ const useStyles = createStyles((props) => {
       borderRadius: cssVar.borderRadiusLG,
 
       ul: {
-        background: 'transparent',
+        background: "transparent",
       },
     }),
     notificationRoot: css({
-      '&.ant-notification-notice, & .ant-notification-notice': {
+      "&.ant-notification-notice, & .ant-notification-notice": {
         ...glassBox,
         background: `color-mix(in srgb, ${cssVar.colorBgContainer} 25%, transparent)`,
       },
     }),
-    switchRoot: css({ ...glassBorder, border: 'none' }),
+    switchRoot: css({ ...glassBorder, border: "none" }),
     segmentedRoot: css({
       ...glassBorder,
-      background: 'transparent',
-      backdropFilter: 'none',
+      background: "transparent",
+      backdropFilter: "none",
 
-      '& .ant-segmented-thumb': {
+      "& .ant-segmented-thumb": {
         ...glassBox,
       },
 
-      '& .ant-segmented-item-selected': {
+      "& .ant-segmented-item-selected": {
         ...glassBox,
       },
     }),
     radioButtonRoot: css({
-      '&.ant-radio-button-wrapper': {
+      "&.ant-radio-button-wrapper": {
         ...glassBorder,
-        background: 'transparent',
-        borderColor: 'rgba(255, 255, 255, 0.2)',
+        background: "transparent",
+        borderColor: "rgba(255, 255, 255, 0.2)",
         color: cssVar.colorText,
 
-        '&:hover': {
-          borderColor: 'rgba(255, 255, 255, 0.24)',
+        "&:hover": {
+          borderColor: "rgba(255, 255, 255, 0.24)",
           color: cssVar.colorText,
         },
 
-        '&.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)': {
+        "&.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)": {
           ...glassBox,
-          borderColor: 'rgba(255, 255, 255, 0.28)',
+          borderColor: "rgba(255, 255, 255, 0.28)",
           color: cssVar.colorText,
 
-          '&::before': {
-            backgroundColor: 'rgba(255, 255, 255, 0.18)',
+          "&::before": {
+            backgroundColor: "rgba(255, 255, 255, 0.18)",
           },
 
-          '&:hover': {
+          "&:hover": {
             color: cssVar.colorText,
           },
         },
@@ -143,60 +143,60 @@ const useGlassTheme = () => {
           borderRadiusLG: 12,
           borderRadiusSM: 12,
           borderRadiusXS: 12,
-          motionDurationSlow: '0.2s',
-          motionDurationMid: '0.1s',
-          motionDurationFast: '0.05s',
+          motionDurationSlow: "0.2s",
+          motionDurationMid: "0.1s",
+          motionDurationFast: "0.05s",
         },
         components: {
           Button: {
-            primaryShadow: 'none',
-            dangerShadow: 'none',
-            defaultShadow: 'none',
-            colorError: '#ff7875',
-            colorErrorHover: '#ffa39e',
-            colorErrorActive: '#ff4d4f',
-            colorErrorBg: 'rgba(255, 120, 117, 0.1)',
-            colorErrorBgFilledHover: 'rgba(255, 120, 117, 0.16)',
-            colorErrorBgActive: 'rgba(255, 120, 117, 0.12)',
-            colorErrorBorder: 'rgba(255, 120, 117, 0.24)',
-            colorErrorBorderHover: 'rgba(255, 120, 117, 0.32)',
-            colorErrorText: '#ff7875',
-            colorErrorTextHover: '#ffa39e',
-            colorErrorTextActive: '#ff4d4f',
-            defaultBg: 'rgba(255, 255, 255, 0.1)',
-            defaultBorderColor: 'rgba(255, 255, 255, 0.1)',
-            defaultHoverBg: 'rgba(255, 255, 255, 0.2)',
-            defaultHoverBorderColor: 'rgba(255, 255, 255, 0.1)',
-            defaultActiveBg: 'rgba(255, 255, 255, 0.1)',
-            defaultActiveBorderColor: 'rgba(255, 255, 255, 0.18)',
+            primaryShadow: "none",
+            dangerShadow: "none",
+            defaultShadow: "none",
+            colorError: "#ff7875",
+            colorErrorHover: "#ffa39e",
+            colorErrorActive: "#ff4d4f",
+            colorErrorBg: "rgba(255, 120, 117, 0.1)",
+            colorErrorBgFilledHover: "rgba(255, 120, 117, 0.16)",
+            colorErrorBgActive: "rgba(255, 120, 117, 0.12)",
+            colorErrorBorder: "rgba(255, 120, 117, 0.24)",
+            colorErrorBorderHover: "rgba(255, 120, 117, 0.32)",
+            colorErrorText: "#ff7875",
+            colorErrorTextHover: "#ffa39e",
+            colorErrorTextActive: "#ff4d4f",
+            defaultBg: "rgba(255, 255, 255, 0.1)",
+            defaultBorderColor: "rgba(255, 255, 255, 0.1)",
+            defaultHoverBg: "rgba(255, 255, 255, 0.2)",
+            defaultHoverBorderColor: "rgba(255, 255, 255, 0.1)",
+            defaultActiveBg: "rgba(255, 255, 255, 0.1)",
+            defaultActiveBorderColor: "rgba(255, 255, 255, 0.18)",
           },
           Notification: {
-            colorSuccessBg: 'rgba(183, 235, 143, 0.18)',
-            colorErrorBg: 'rgba(255, 120, 117, 0.16)',
-            colorInfoBg: 'rgba(145, 202, 255, 0.18)',
-            colorWarningBg: 'rgba(255, 229, 143, 0.18)',
+            colorSuccessBg: "rgba(183, 235, 143, 0.18)",
+            colorErrorBg: "rgba(255, 120, 117, 0.16)",
+            colorInfoBg: "rgba(145, 202, 255, 0.18)",
+            colorWarningBg: "rgba(255, 229, 143, 0.18)",
           },
           Layout: {
-            bodyBg: 'rgba(255, 255, 255, 0.12)',
-            footerBg: 'rgba(255, 255, 255, 0.12)',
-            headerBg: 'rgba(255, 255, 255, 0.32)',
-            headerColor: 'rgba(0, 0, 0, 0.88)',
-            siderBg: 'rgba(255, 255, 255, 0.18)',
-            triggerBg: 'rgba(255, 255, 255, 0.28)',
-            triggerColor: 'rgba(0, 0, 0, 0.88)',
+            bodyBg: "rgba(255, 255, 255, 0.12)",
+            footerBg: "rgba(255, 255, 255, 0.12)",
+            headerBg: "rgba(255, 255, 255, 0.32)",
+            headerColor: "rgba(0, 0, 0, 0.88)",
+            siderBg: "rgba(255, 255, 255, 0.18)",
+            triggerBg: "rgba(255, 255, 255, 0.28)",
+            triggerColor: "rgba(0, 0, 0, 0.88)",
           },
           Menu: {
             activeBarBorderWidth: 0,
-            groupTitleColor: 'rgba(0, 0, 0, 0.55)',
-            itemActiveBg: 'rgba(255, 255, 255, 0.24)',
-            itemBg: 'transparent',
-            itemColor: 'rgba(0, 0, 0, 0.78)',
-            itemHoverBg: 'rgba(255, 255, 255, 0.28)',
-            itemHoverColor: 'rgba(0, 0, 0, 0.88)',
-            itemSelectedBg: 'rgba(255, 255, 255, 0.36)',
-            itemSelectedColor: 'rgba(0, 0, 0, 0.88)',
-            subMenuItemBg: 'transparent',
-            subMenuItemSelectedColor: 'rgba(0, 0, 0, 0.88)',
+            groupTitleColor: "rgba(0, 0, 0, 0.55)",
+            itemActiveBg: "rgba(255, 255, 255, 0.24)",
+            itemBg: "transparent",
+            itemColor: "rgba(0, 0, 0, 0.78)",
+            itemHoverBg: "rgba(255, 255, 255, 0.28)",
+            itemHoverColor: "rgba(0, 0, 0, 0.88)",
+            itemSelectedBg: "rgba(255, 255, 255, 0.36)",
+            itemSelectedColor: "rgba(0, 0, 0, 0.88)",
+            subMenuItemBg: "transparent",
+            subMenuItemSelectedColor: "rgba(0, 0, 0, 0.88)",
           },
           Alert: {},
           Modal: {},
@@ -208,9 +208,9 @@ const useGlassTheme = () => {
           Input: {},
           Switch: {},
           Progress: {
-            circleTextColor: 'rgba(0, 0, 0, 0.88)',
-            defaultColor: '#1677ff',
-            remainingColor: 'rgba(255, 255, 255, 0.28)',
+            circleTextColor: "rgba(0, 0, 0, 0.88)",
+            defaultColor: "#1677ff",
+            remainingColor: "rgba(255, 255, 255, 0.28)",
           },
           Steps: {},
           Slider: {},
@@ -234,8 +234,8 @@ const useGlassTheme = () => {
         classNames: ({ props }) => ({
           root: clsx(
             styles.buttonRoot,
-            props.color === 'default' && styles.buttonRootDefaultColor,
-            props.color === 'danger' && styles.buttonRootDangerColor,
+            props.color === "default" && styles.buttonRootDefaultColor,
+            props.color === "danger" && styles.buttonRootDangerColor,
           ),
         }),
       },

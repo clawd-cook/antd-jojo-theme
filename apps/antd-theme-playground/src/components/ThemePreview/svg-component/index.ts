@@ -1,1 +1,1 @@
-export * from './serene-icon';
+export * from "./serene-icon";

@@ -1,4 +1,3 @@
-import React, { useMemo } from 'react';
 import {
   AppleFilled,
   DownOutlined,
@@ -9,8 +8,8 @@ import {
   MessageOutlined,
   XOutlined,
   YoutubeOutlined,
-} from '@ant-design/icons';
-import type { StepItem } from '@rc-component/steps/es/Steps';
+} from "@ant-design/icons";
+import type { StepItem } from "@rc-component/steps/es/Steps";
 import {
   App,
   Avatar,
@@ -42,7 +41,7 @@ import {
   Switch,
   Tag,
   Typography,
-} from 'antd';
+} from "antd";
 import type {
   BadgeProps,
   ButtonProps,
@@ -51,13 +50,14 @@ import type {
   SelectProps,
   TagProps,
   ThemeConfig,
-} from 'antd';
-import { createStyles } from 'antd-style';
-import type { CheckboxGroupProps } from 'antd/es/checkbox';
-import type { ItemType } from 'antd/es/menu/interface';
-import { clsx } from 'clsx';
-import useSWR from 'swr';
-import type { SWRConfiguration } from 'swr';
+} from "antd";
+import { createStyles } from "antd-style";
+import type { CheckboxGroupProps } from "antd/es/checkbox";
+import type { ItemType } from "antd/es/menu/interface";
+import { clsx } from "clsx";
+import React, { useMemo } from "react";
+import useSWR from "swr";
+import type { SWRConfiguration } from "swr";
 
 const { Title, Text } = Typography;
 const { _InternalPanelDoNotUseOrYouWillBeFired: InternalPopconfirm } = Popconfirm;
@@ -77,59 +77,59 @@ interface ComponentsBlockProps {
 const useStyle = createStyles(({ css, token }) => {
   return {
     container: css({
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
       padding: 0,
-      border: 'none',
-      boxShadow: 'none',
-      width: '100%',
+      border: "none",
+      boxShadow: "none",
+      width: "100%",
     }),
     layoutRow: css({
-      display: 'flex',
+      display: "flex",
       gap: 12,
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      margin: '0 auto',
+      alignItems: "flex-start",
+      justifyContent: "center",
+      margin: "0 auto",
     }),
     colLeft: css({
       flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
       gap: token.paddingLG,
-      '@media (max-width: 768px)': {
-        display: 'none',
+      "@media (max-width: 768px)": {
+        display: "none",
       },
     }),
     colCenter: css({
       flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
       gap: token.paddingLG,
     }),
     colRight: css({
       width: 320,
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
       gap: token.paddingLG,
-      '@media (max-width: 1200px)': {
-        display: 'none',
+      "@media (max-width: 1200px)": {
+        display: "none",
       },
     }),
     mainCard: css({
-      justifyContent: 'center',
+      justifyContent: "center",
       padding: 32,
       borderRadius: 16,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundSize: "cover",
+      backgroundPosition: "center",
     }),
     avatarGroup: css({
       marginBlockEnd: 16,
     }),
     // ---- Migrated inline styles ----
     selectInput: css({
-      flex: '0 0 300px',
+      flex: "0 0 300px",
     }),
     colorPickerFixed: css({
-      flex: 'none',
+      flex: "none",
     }),
     datePickerGrow: css({
       flex: 1,
@@ -146,17 +146,17 @@ const useStyle = createStyles(({ css, token }) => {
     }),
     flexRow12: css({
       padding: 0,
-      display: 'flex',
+      display: "flex",
       gap: 12,
     }),
     blockCardQr: css({
-      flex: '0 0 auto',
+      flex: "0 0 auto",
     }),
     blockCardQrBody: css({
       padding: 6,
     }),
     blockCardExtraPad: css({
-      justifyContent: 'center',
+      justifyContent: "center",
       marginBlockEnd: 8,
     }),
     blockCardExtraPadBody: css({
@@ -169,27 +169,27 @@ const useStyle = createStyles(({ css, token }) => {
       marginBlockEnd: 20,
     }),
     popconfirmFull: css({
-      width: '100%',
+      width: "100%",
       margin: 0,
     }),
     blockCardSegmentedBody: css({
       padding: 8,
     }),
     avatarSection: css({
-      textAlign: 'center',
-      position: 'relative',
+      textAlign: "center",
+      position: "relative",
     }),
     avatarExtra: css({
-      backgroundColor: '#fff',
-      color: '#666',
+      backgroundColor: "#fff",
+      color: "#666",
     }),
     otpWrapper: css({
       marginBlock: 16,
     }),
     dangerBtn: css({
-      '.ant-btn': {
-        background: '#fff2f0',
-        border: 'none',
+      ".ant-btn": {
+        background: "#fff2f0",
+        border: "none",
       },
     }),
     profileInfo: css({
@@ -209,16 +209,16 @@ const useStyle = createStyles(({ css, token }) => {
       fontSize: 13,
     }),
     signupCard: css({
-      textAlign: 'center',
+      textAlign: "center",
     }),
     signupCardBody: css({
-      padding: '32px 24px',
+      padding: "32px 24px",
     }),
     signupAvatar: css({
       marginBlockEnd: 16,
     }),
     signupText: css({
-      display: 'block',
+      display: "block",
       marginBlockEnd: 24,
       fontSize: 14,
     }),
@@ -232,11 +232,11 @@ const useStyle = createStyles(({ css, token }) => {
   };
 });
 
-const selectOptions: SelectProps<string>['options'] = [
-  { value: 'apple', label: 'Apple' },
-  { value: 'banana', label: 'Banana' },
-  { value: 'orange', label: 'Orange' },
-  { value: 'watermelon', label: 'Watermelon' },
+const selectOptions: SelectProps<string>["options"] = [
+  { value: "apple", label: "Apple" },
+  { value: "banana", label: "Banana" },
+  { value: "orange", label: "Orange" },
+  { value: "watermelon", label: "Watermelon" },
 ];
 
 const dropdownMenuItems = Array.from({ length: 5 }).map<ItemType>((_, index) => ({
@@ -244,72 +244,72 @@ const dropdownMenuItems = Array.from({ length: 5 }).map<ItemType>((_, index) => 
   label: `Option ${index}`,
 }));
 
-const checkboxOptions: CheckboxGroupProps<string>['options'] = [
-  { label: 'Apple', value: 'Apple' },
-  { label: 'Pear', value: 'Pear' },
+const checkboxOptions: CheckboxGroupProps<string>["options"] = [
+  { label: "Apple", value: "Apple" },
+  { label: "Pear", value: "Pear" },
 ];
 
-const radioOptions: RadioGroupProps['options'] = [
-  { label: 'Apple', value: 'Apple' },
-  { label: 'Pear', value: 'Pear' },
+const radioOptions: RadioGroupProps["options"] = [
+  { label: "Apple", value: "Apple" },
+  { label: "Pear", value: "Pear" },
 ];
 
 const badgeList: BadgeProps[] = [
-  { status: 'success', text: 'Success' },
-  { status: 'error', text: 'Error' },
-  { status: 'default', text: 'Default' },
-  { status: 'processing', text: 'Processing' },
-  { status: 'warning', text: 'Warning' },
+  { status: "success", text: "Success" },
+  { status: "error", text: "Error" },
+  { status: "default", text: "Default" },
+  { status: "processing", text: "Processing" },
+  { status: "warning", text: "Warning" },
 ];
 
 const tagList: TagProps[] = [
-  { icon: <XOutlined />, color: '#55acee', content: 'Twitter' },
-  { icon: <YoutubeOutlined />, color: '#cd201f', content: 'Youtube' },
-  { icon: <FacebookOutlined />, color: '#3b5999', content: 'Facebook' },
+  { icon: <XOutlined />, color: "#55acee", content: "Twitter" },
+  { icon: <YoutubeOutlined />, color: "#cd201f", content: "Youtube" },
+  { icon: <FacebookOutlined />, color: "#3b5999", content: "Facebook" },
 ];
 
 const buttonList: ButtonProps[] = [
-  { type: 'primary', children: 'Primary button' },
-  { danger: true, children: 'Danger button' },
-  { type: 'dashed', variant: 'outlined', shape: 'round', children: 'Outlined button' },
-  { danger: true, shape: 'round', children: 'Round button' },
+  { type: "primary", children: "Primary button" },
+  { danger: true, children: "Danger button" },
+  { type: "dashed", variant: "outlined", shape: "round", children: "Outlined button" },
+  { danger: true, shape: "round", children: "Round button" },
 ];
 
 const stepsItems: StepItem[] = [
-  { title: 'Finished' },
-  { title: 'In Process' },
-  { title: 'Waiting' },
+  { title: "Finished" },
+  { title: "In Process" },
+  { title: "Waiting" },
 ];
 
 const botExcludes = [
-  'ant-design-bot',
-  'github-actions',
-  'github-actions[bot]',
-  'copilot',
-  'renovate',
-  'renovate[bot]',
-  'dependabot',
-  'dependabot[bot]',
-  'gemini-code-assist[bot]',
-  'dependabot-preview',
-  'dependabot-preview[bot]',
-  'depfu[bot]',
+  "ant-design-bot",
+  "github-actions",
+  "github-actions[bot]",
+  "copilot",
+  "renovate",
+  "renovate[bot]",
+  "dependabot",
+  "dependabot[bot]",
+  "gemini-code-assist[bot]",
+  "dependabot-preview",
+  "dependabot-preview[bot]",
+  "depfu[bot]",
 ];
 
 const fallbackAvatarGroupList = [
-  'https://avatars.githubusercontent.com/u/507615?v=4',
-  'https://avatars.githubusercontent.com/u/5378891?v=4',
-  'https://avatars.githubusercontent.com/u/49217418?v=4',
-  'https://avatars.githubusercontent.com/u/117748716?v=4',
-  'https://avatars.githubusercontent.com/u/59312002?v=4',
-  'https://avatars.githubusercontent.com/u/82765353?v=4',
+  "https://avatars.githubusercontent.com/u/507615?v=4",
+  "https://avatars.githubusercontent.com/u/5378891?v=4",
+  "https://avatars.githubusercontent.com/u/49217418?v=4",
+  "https://avatars.githubusercontent.com/u/117748716?v=4",
+  "https://avatars.githubusercontent.com/u/59312002?v=4",
+  "https://avatars.githubusercontent.com/u/82765353?v=4",
 ];
 
 interface Contributor {
   avatar_url: string;
   login: string;
   html_url: string;
-  type: 'User' | 'Organization' | 'Bot';
+  type: "User" | "Organization" | "Bot";
 }
 
 const fetcher = async (...args: Parameters<typeof fetch>) => {
@@ -344,14 +344,14 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
     error,
     isLoading,
   } = useSWR<Contributor[], Error>(
-    'https://api.github.com/repos/ant-design/ant-design/contributors?per_page=100',
+    "https://api.github.com/repos/ant-design/ant-design/contributors?per_page=100",
     fetcher,
     swrConfig,
   );
 
   const avatarGroupList = useMemo(() => {
     if (error) {
-      return fallbackAvatarGroupList.map((src) => ({ src, name: 'Ant Design contributor' }));
+      return fallbackAvatarGroupList.map((src) => ({ src, name: "Ant Design contributor" }));
     }
     if (isLoading) {
       return [];
@@ -362,7 +362,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
     const filtered = contributors.filter((contributor) => {
       const { login, type } = contributor;
       const name = login.toLowerCase();
-      if (type === 'Bot') {
+      if (type === "Bot") {
         return false;
       }
       return !botExcludes.some((item) => name.includes(item));
@@ -377,25 +377,25 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
 
   const genBackgroundColor = useMemo(() => {
     if (isDarkTheme) {
-      return 'lab(14% 0 0)';
+      return "lab(14% 0 0)";
     }
     if (isDark && !isDarkTheme) {
-      return '#f5f5f5';
+      return "#f5f5f5";
     }
-    return 'transparent';
+    return "transparent";
   }, [isDark, isDarkTheme]);
 
   return (
     <ConfigProvider {...restConfig} theme={mergedTheme}>
       <div className={clsx(containerClassName, styles.container)}>
-        <App style={{ width: '100%' }}>
+        <App style={{ width: "100%" }}>
           <BorderBeam lineWidth={2}>
             <Card
               styles={{
                 root: {
                   backgroundColor: genBackgroundColor,
-                  backdropFilter: 'blur(12px)',
-                  boxShadow: '0 4px 12px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.08)',
+                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 4px 12px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.08)",
                 },
                 body: {
                   padding: 0,
@@ -415,7 +415,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                           className={styles.selectInput}
                           mode="multiple"
                           maxTagCount="responsive"
-                          defaultValue={['apple', 'banana']}
+                          defaultValue={["apple", "banana"]}
                           options={selectOptions}
                         />
                       </Flex>
@@ -434,7 +434,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                         <DatePicker className={styles.datePickerGrow} placeholder="Select Date" />
                       </Flex>
                       <Flex align="center" justify="space-between" className={styles.controlsRow}>
-                        <Checkbox.Group options={checkboxOptions} defaultValue={['Apple']} />
+                        <Checkbox.Group options={checkboxOptions} defaultValue={["Apple"]} />
                         <Radio.Group block options={radioOptions} defaultValue="Apple" />
                         <Switch defaultChecked />
                         <Progress type="circle" percent={25} size={20} showInfo={false} />
@@ -500,7 +500,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                   </div>
 
                   <Card variant="borderless" classNames={{ body: styles.blockCardSegmentedBody }}>
-                    <Segmented block options={['1D', '7D', '1M', '1Y', 'All']} />
+                    <Segmented block options={["1D", "7D", "1M", "1Y", "All"]} />
                     <Segmented
                       styles={{
                         root: {
@@ -509,8 +509,8 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                       }}
                       block
                       options={[
-                        { label: 'Chats', value: 'Chats', icon: <MessageOutlined /> },
-                        { label: 'Emails', value: 'Emails', icon: <MailOutlined /> },
+                        { label: "Chats", value: "Chats", icon: <MessageOutlined /> },
+                        { label: "Emails", value: "Emails", icon: <MailOutlined /> },
                       ]}
                     />
                   </Card>
@@ -591,7 +591,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                     </Flex>
                   </Card>
                   <InternalPanel
-                    styles={{ root: { width: '100%' } }}
+                    styles={{ root: { width: "100%" } }}
                     title="Ant Design"
                     description="An enterprise-class design system for building modern, intelligent, and delightful user experiences."
                     type="success"

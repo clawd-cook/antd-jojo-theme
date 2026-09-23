@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
-import { theme } from 'antd';
-import type { ConfigProviderProps } from 'antd';
+import { theme } from "antd";
+import type { ConfigProviderProps } from "antd";
+import { useMemo } from "react";
 
 const useLarkTheme = () => {
   return useMemo<ConfigProviderProps>(
@@ -8,23 +8,23 @@ const useLarkTheme = () => {
       theme: {
         algorithm: theme.defaultAlgorithm,
         token: {
-          colorPrimary: '#00B96B',
+          colorPrimary: "#00B96B",
           borderRadius: 4,
         },
         components: {
           Layout: {
-            bodyBg: '#f7fbf8',
-            footerBg: '#f7fbf8',
-            headerBg: '#ffffff',
-            headerColor: '#1f2329',
-            siderBg: '#ffffff',
-            triggerBg: '#eff7f2',
-            triggerColor: '#1f2329',
+            bodyBg: "#f7fbf8",
+            footerBg: "#f7fbf8",
+            headerBg: "#ffffff",
+            headerColor: "#1f2329",
+            siderBg: "#ffffff",
+            triggerBg: "#eff7f2",
+            triggerColor: "#1f2329",
           },
           Menu: {
             activeBarBorderWidth: 0,
-            itemBg: 'transparent',
-            subMenuItemBg: 'transparent',
+            itemBg: "transparent",
+            subMenuItemBg: "transparent",
           },
           Button: {},
           Alert: {},
@@ -37,9 +37,9 @@ const useLarkTheme = () => {
           Input: {},
           Switch: {},
           Progress: {
-            circleTextColor: '#1f2329',
-            defaultColor: '#00B96B',
-            remainingColor: 'rgba(0, 185, 107, 0.12)',
+            circleTextColor: "#1f2329",
+            defaultColor: "#00B96B",
+            remainingColor: "rgba(0, 185, 107, 0.12)",
           },
           Steps: {},
           Slider: {},

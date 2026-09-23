@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
-import { theme } from 'antd';
-import type { ConfigProviderProps } from 'antd';
+import { theme } from "antd";
+import type { ConfigProviderProps } from "antd";
+import { useMemo } from "react";
 
 const useBlossomTheme = () => {
   return useMemo<ConfigProviderProps>(
@@ -8,23 +8,23 @@ const useBlossomTheme = () => {
       theme: {
         algorithm: theme.defaultAlgorithm,
         token: {
-          colorPrimary: '#ED4192',
+          colorPrimary: "#ED4192",
           borderRadius: 16,
         },
         components: {
           Layout: {
-            bodyBg: '#fff4fa',
-            footerBg: '#fff4fa',
-            headerBg: '#ffffff',
-            headerColor: '#3f2330',
-            siderBg: '#fff7fb',
-            triggerBg: '#ffe4f0',
-            triggerColor: '#ED4192',
+            bodyBg: "#fff4fa",
+            footerBg: "#fff4fa",
+            headerBg: "#ffffff",
+            headerColor: "#3f2330",
+            siderBg: "#fff7fb",
+            triggerBg: "#ffe4f0",
+            triggerColor: "#ED4192",
           },
           Menu: {
             activeBarBorderWidth: 0,
-            itemBg: 'transparent',
-            subMenuItemBg: 'transparent',
+            itemBg: "transparent",
+            subMenuItemBg: "transparent",
           },
           Button: {},
           Alert: {},
@@ -37,9 +37,9 @@ const useBlossomTheme = () => {
           Input: {},
           Switch: {},
           Progress: {
-            circleTextColor: '#3f2330',
-            defaultColor: '#ED4192',
-            remainingColor: 'rgba(237, 65, 146, 0.14)',
+            circleTextColor: "#3f2330",
+            defaultColor: "#ED4192",
+            remainingColor: "rgba(237, 65, 146, 0.14)",
           },
           Steps: {},
           Slider: {},

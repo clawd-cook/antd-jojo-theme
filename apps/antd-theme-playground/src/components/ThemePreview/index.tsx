@@ -1,114 +1,114 @@
-import * as React from 'react';
-import { BgColorsOutlined, CopyOutlined } from '@ant-design/icons';
-import { App, ConfigProvider, Flex, Segmented, theme, Tooltip } from 'antd';
-import type { ThemeConfig } from 'antd';
-import { createStyles } from 'antd-style';
-import copy from 'antd/lib/_util/copy';
-import { clsx } from 'clsx';
+import { BgColorsOutlined, CopyOutlined } from "@ant-design/icons";
+import { App, ConfigProvider, Flex, Segmented, theme, Tooltip } from "antd";
+import type { ThemeConfig } from "antd";
+import { createStyles } from "antd-style";
+import copy from "antd/lib/_util/copy";
+import { clsx } from "clsx";
+import * as React from "react";
 
-import { DarkContext } from '../../adapters/DarkContext';
-import useLocale from '../../adapters/useLocale';
-import Group from '../Group';
-import ComponentsBlock from '../PreviewPane/Components';
-import { ThemeDashboard } from '../Theme';
-import type { PreviewThemeConfig } from './previewThemes';
-import usePreviewThemes from './previewThemes';
-import { generateFullCopyFile } from './themeCodeUtils';
-import ThemeIcon from './ThemeIcon';
+import { DarkContext } from "../../adapters/DarkContext";
+import useLocale from "../../adapters/useLocale";
+import Group from "../Group";
+import ComponentsBlock from "../PreviewPane/Components";
+import { ThemeDashboard } from "../Theme";
+import type { PreviewThemeConfig } from "./previewThemes";
+import usePreviewThemes from "./previewThemes";
+import { generateFullCopyFile } from "./themeCodeUtils";
+import ThemeIcon from "./ThemeIcon";
 
 const PREVIEW_CARD_RADIUS = 16;
 
 const locales = {
   cn: {
-    themeTitle: '定制主题，随心所欲',
-    themeDesc: '开放样式算法与语义化结构，让你与 AI 一起轻松定制主题',
-    aiGenerate: 'AI 主题生成',
-    aiGenerateDesc: '用一句话描述你想要的风格',
-    copyTheme: '复制主题代码',
-    copySuccess: '已复制',
-    exploreThemes: '探索主题',
-    editTheme: '主题编辑',
-    contribution: '贡献',
+    themeTitle: "定制主题，随心所欲",
+    themeDesc: "开放样式算法与语义化结构，让你与 AI 一起轻松定制主题",
+    aiGenerate: "AI 主题生成",
+    aiGenerateDesc: "用一句话描述你想要的风格",
+    copyTheme: "复制主题代码",
+    copySuccess: "已复制",
+    exploreThemes: "探索主题",
+    editTheme: "主题编辑",
+    contribution: "贡献",
   },
   en: {
-    themeTitle: 'Flexible theme customization',
+    themeTitle: "Flexible theme customization",
     themeDesc:
-      'Open style algorithms and semantic structures make it easy for you and AI to customize themes',
-    aiGenerate: 'AI Theme Generator',
-    aiGenerateDesc: 'Describe your desired style',
-    copyTheme: 'Copy theme code',
-    copySuccess: 'Copied',
-    exploreThemes: 'Explore Themes',
-    editTheme: 'Theme Editor',
-    contribution: 'Contribution',
+      "Open style algorithms and semantic structures make it easy for you and AI to customize themes",
+    aiGenerate: "AI Theme Generator",
+    aiGenerateDesc: "Describe your desired style",
+    copyTheme: "Copy theme code",
+    copySuccess: "Copied",
+    exploreThemes: "Explore Themes",
+    editTheme: "Theme Editor",
+    contribution: "Contribution",
   },
 };
 
 const useStyles = createStyles(({ css, cssVar }) => ({
   container: css({
-    width: '100%',
-    flexDirection: 'column',
-    alignItems: 'center',
+    width: "100%",
+    flexDirection: "column",
+    alignItems: "center",
   }),
 
   wrapper: css({
-    width: '100%',
+    width: "100%",
     maxWidth: 1320,
-    flexDirection: 'column',
-    alignItems: 'stretch',
+    flexDirection: "column",
+    alignItems: "stretch",
   }),
 
   // ======= 组件预览区域 =======
   componentsBlockContainer: css({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
   }),
 
   componentsBlock: css({
-    width: '100%',
+    width: "100%",
     maxWidth: 1320,
-    margin: '0 auto',
+    margin: "0 auto",
   }),
   dashboardBlock: css({
-    width: '100%',
+    width: "100%",
     maxWidth: 1320,
-    margin: '0 auto',
+    margin: "0 auto",
   }),
   previewTabs: css({
     padding: 3,
     borderRadius: 100,
     background: cssVar.colorFillQuaternary,
-    '.ant-segmented-group': {
+    ".ant-segmented-group": {
       gap: 2,
     },
-    '.ant-segmented-thumb': {
+    ".ant-segmented-thumb": {
       borderRadius: 100,
       background: cssVar.colorBgElevated,
-      boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+      boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
     },
-    '@media (max-width: 768px)': {
-      width: '60%',
+    "@media (max-width: 768px)": {
+      width: "60%",
     },
   }),
   tabsDark: css({
-    backgroundColor: 'rgba(255, 255, 255, 0.14)',
-    backdropFilter: 'blur(18px)',
-    boxShadow: 'inset 0 0 0 1px rgba(255, 255, 255, 0.16)',
-    '.ant-segmented-thumb': {
-      backgroundColor: 'rgba(255, 255, 255, 0.96)',
-      boxShadow: '0 8px 18px rgba(0,0,0,0.24)',
+    backgroundColor: "rgba(255, 255, 255, 0.14)",
+    backdropFilter: "blur(18px)",
+    boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.16)",
+    ".ant-segmented-thumb": {
+      backgroundColor: "rgba(255, 255, 255, 0.96)",
+      boxShadow: "0 8px 18px rgba(0,0,0,0.24)",
     },
   }),
   tabsItem: css({
     minWidth: 112,
     borderRadius: 100,
     color: cssVar.colorTextTertiary,
-    '&.ant-segmented-item-selected': {
+    "&.ant-segmented-item-selected": {
       color: cssVar.colorText,
     },
-    '@media (max-width: 768px)': {
+    "@media (max-width: 768px)": {
       flex: 1,
       minWidth: 0,
       paddingInline: 12,
@@ -116,81 +116,81 @@ const useStyles = createStyles(({ css, cssVar }) => ({
     },
   }),
   tabsItemDark: css({
-    color: 'rgba(255, 255, 255, 0.78)',
-    '&:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled):hover': {
-      color: '#fff',
-      background: 'rgba(255, 255, 255, 0.08)',
+    color: "rgba(255, 255, 255, 0.78)",
+    "&:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled):hover": {
+      color: "#fff",
+      background: "rgba(255, 255, 255, 0.08)",
     },
-    '&.ant-segmented-item-selected': {
+    "&.ant-segmented-item-selected": {
       color: cssVar.colorText,
     },
   }),
   previewTabsLabel: css({
     minHeight: 30,
-    lineHeight: '30px',
+    lineHeight: "30px",
   }),
   themeBlock: css({
     height: 20,
     width: 20,
     fontSize: 20,
-    borderRadius: '100%',
-    overflow: 'hidden',
-    cursor: 'pointer',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
+    borderRadius: "100%",
+    overflow: "hidden",
+    cursor: "pointer",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.15)",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
     outline: `2px solid ${cssVar.colorBgLayout}`,
     backgroundColor: cssVar.colorBgLayout,
-    transition: ['background-color', 'transform', 'opacity']
+    transition: ["background-color", "transform", "opacity"]
       .map((prop) => `${prop} ${cssVar.motionDurationFast}`)
-      .join(', '),
-    '&:hover, &:focus-within': {
+      .join(", "),
+    "&:hover, &:focus-within": {
       outline: `2px solid ${cssVar.colorPrimaryBorder}`,
-      transform: 'scale(1.1)',
+      transform: "scale(1.1)",
     },
-    '> img': {
+    "> img": {
       fontSize: 0,
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      borderRadius: '100%',
+      display: "block",
+      width: "100%",
+      height: "100%",
+      borderRadius: "100%",
     },
   }),
   active: css({
     outline: `2px solid ${cssVar.colorPrimaryBorder}`,
   }),
   switch: css({
-    alignItems: 'center',
+    alignItems: "center",
     gap: 16,
-    '@media (max-width: 1200px)': {
-      justifyContent: 'center',
-      flexDirection: 'column',
+    "@media (max-width: 1200px)": {
+      justifyContent: "center",
+      flexDirection: "column",
     },
   }),
   buttonBlock: css({
     height: 28,
     width: 28,
-    borderRadius: '50%',
+    borderRadius: "50%",
     fontSize: 15,
     color: cssVar.colorPrimaryBorder,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    '&:hover': {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    "&:hover": {
       backgroundColor: cssVar.colorBgLayout,
     },
-    '@media (max-width: 1200px)': {
-      display: 'none',
+    "@media (max-width: 1200px)": {
+      display: "none",
     },
   }),
 }));
 
-type PreviewPane = 'components' | 'dashboard';
+type PreviewPane = "components" | "dashboard";
 
 const previewPaneOptions: { label: string; value: PreviewPane }[] = [
-  { label: 'Components', value: 'components' },
-  { label: 'Dashboard', value: 'dashboard' },
+  { label: "Components", value: "components" },
+  { label: "Dashboard", value: "dashboard" },
 ];
 
 const getPreviewThemeKey = (previewTheme: PreviewThemeConfig) =>
@@ -209,13 +209,13 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
 
   const previewThemes = usePreviewThemes();
 
-  const [activeThemeKey, setActiveThemeKey] = React.useState('light');
-  const [activePane, setActivePane] = React.useState<PreviewPane>('components');
+  const [activeThemeKey, setActiveThemeKey] = React.useState("light");
+  const [activePane, setActivePane] = React.useState<PreviewPane>("components");
 
   const copyTimerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 
   React.useEffect(() => {
-    setActiveThemeKey(isDark ? 'dark' : 'light');
+    setActiveThemeKey(isDark ? "dark" : "light");
   }, [isDark]);
 
   const backgroundPrefetchList = React.useMemo(
@@ -231,7 +231,7 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
     if (!(event.target instanceof HTMLElement)) {
       return;
     }
-    if (!event.target.hasAttribute('data-theme-key')) {
+    if (!event.target.hasAttribute("data-theme-key")) {
       return;
     }
     const keys = previewThemes.map<string>(getPreviewThemeKey);
@@ -241,10 +241,10 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
     }
 
     let nextIndex: number;
-    if (event.key === 'ArrowRight') {
+    if (event.key === "ArrowRight") {
       event.preventDefault();
       nextIndex = (currentIndex + 1) % keys.length;
-    } else if (event.key === 'ArrowLeft') {
+    } else if (event.key === "ArrowLeft") {
       event.preventDefault();
       nextIndex = (currentIndex - 1 + keys.length) % keys.length;
     } else {
@@ -288,13 +288,11 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
   );
 
   const editPath =
-    localeType === 'cn'
-      ? 'https://ant.design/theme-editor-cn'
-      : 'https://ant.design/theme-editor';
+    localeType === "cn" ? "https://ant.design/theme-editor-cn" : "https://ant.design/theme-editor";
 
   const background = activeTheme?.bgImg
     ? activeTheme.bgImg
-    : 'linear-gradient(180deg, #ffffff 0%, #F5F8FF 100%)';
+    : "linear-gradient(180deg, #ffffff 0%, #F5F8FF 100%)";
 
   const hasDarkBackground = !!activeTheme?.bgImgDark;
 
@@ -303,7 +301,7 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
       title={locale.themeTitle}
       description={locale.themeDesc}
       collapse
-      titleColor={hasDarkBackground ? '#fff' : undefined}
+      titleColor={hasDarkBackground ? "#fff" : undefined}
       background={background}
       backgroundPrefetchList={backgroundPrefetchList}
     >
@@ -335,7 +333,7 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
                       data-theme-key={themeKey}
                       onClick={() => handleThemeClick(themeKey)}
                     >
-                      {typeof Icon === 'string' ? (
+                      {typeof Icon === "string" ? (
                         <img src={Icon} alt={name} title={name} draggable={false} />
                       ) : (
                         <Icon />
@@ -366,7 +364,7 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
             </Flex>
           </Flex>
           {/* ===== 组件预览区域 ===== */}
-          {activePane === 'components' ? (
+          {activePane === "components" ? (
             <ComponentsBlock
               isDark={isDark}
               isDarkTheme={hasDarkBackground}

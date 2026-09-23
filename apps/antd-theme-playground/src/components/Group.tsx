@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Typography } from 'antd';
-import { createStaticStyles, useTheme } from 'antd-style';
-import { clsx } from 'clsx';
+import { Typography } from "antd";
+import { createStaticStyles, useTheme } from "antd-style";
+import { clsx } from "clsx";
+import * as React from "react";
 
-import SiteContext from '../adapters/SiteContext';
-import GroupMaskLayer from './GroupMaskLayer';
+import SiteContext from "../adapters/SiteContext";
+import GroupMaskLayer from "./GroupMaskLayer";
 
 const styles = createStaticStyles(({ css, cssVar }) => ({
   box: css`
@@ -31,7 +31,7 @@ const styles = createStaticStyles(({ css, cssVar }) => ({
   withoutChildren: css`
     min-height: 300px;
     border-radius: ${cssVar.borderRadiusLG};
-    background-color: '#e9e9e9';
+    background-color: "#e9e9e9";
   `,
 }));
 
@@ -68,7 +68,7 @@ const Group: React.FC<React.PropsWithChildren<GroupProps>> = (props) => {
   React.useEffect(() => {
     if (backgroundPrefetchList && backgroundPrefetchList.length > 0) {
       backgroundPrefetchList.forEach((url) => {
-        if (url && url.startsWith('https')) {
+        if (url && url.startsWith("https")) {
           const img = new Image();
           img.src = url;
         }
@@ -81,9 +81,9 @@ const Group: React.FC<React.PropsWithChildren<GroupProps>> = (props) => {
   return (
     <div
       style={
-        background?.startsWith('https') || background?.startsWith('linear-gradient')
+        background?.startsWith("https") || background?.startsWith("linear-gradient")
           ? {
-              backgroundImage: background?.startsWith('linear-gradient')
+              backgroundImage: background?.startsWith("linear-gradient")
                 ? background
                 : `url(${background})`,
             }
@@ -96,9 +96,9 @@ const Group: React.FC<React.PropsWithChildren<GroupProps>> = (props) => {
         <div className={styles.typographyWrapper}>
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               gap: token.paddingXS,
             }}
           >

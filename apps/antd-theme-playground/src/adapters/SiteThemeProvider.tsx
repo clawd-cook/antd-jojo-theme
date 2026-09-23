@@ -1,8 +1,8 @@
-import React from 'react';
-import { theme as antdTheme, ConfigProvider } from 'antd';
-import type { ThemeConfig } from 'antd';
-import type { ThemeProviderProps } from 'antd-style';
-import { ThemeProvider } from 'antd-style';
+import { theme as antdTheme, ConfigProvider } from "antd";
+import type { ThemeConfig } from "antd";
+import type { ThemeProviderProps } from "antd-style";
+import { ThemeProvider } from "antd-style";
+import React from "react";
 
 interface NewToken {
   marginFarXS: number;
@@ -10,7 +10,7 @@ interface NewToken {
   marginFar: number;
 }
 
-declare module 'antd-style' {
+declare module "antd-style" {
   export interface CustomToken extends NewToken {}
 }
 
