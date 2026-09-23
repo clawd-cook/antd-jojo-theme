@@ -3,7 +3,7 @@ import { theme } from "antd";
 import React from "react";
 
 import useLocale from "../../../adapters/useLocale";
-import { SereneIcon } from "../svg-component";
+import { JojoIcon, SereneIcon } from "../svg-component";
 import useBlossomTheme from "./blossomTheme";
 import blossomThemeSource from "./blossomTheme.ts?raw";
 import useBootstrapTheme from "./bootstrapTheme";
@@ -16,6 +16,8 @@ import useGlassTheme from "./glassTheme";
 import glassThemeSource from "./glassTheme.ts?raw";
 import useIllustrationTheme from "./illustrationTheme";
 import illustrationThemeSource from "./illustrationTheme.ts?raw";
+import useJojoTheme from "./jojoTheme";
+import jojoThemeSource from "./jojoTheme.ts?raw";
 import useLarkTheme from "./larkTheme";
 import larkThemeSource from "./larkTheme.ts?raw";
 import useMuiTheme from "./muiTheme";
@@ -49,6 +51,7 @@ const locales = {
     bootstrap: "Bootstrap",
     cartoon: "卡通",
     illustration: "插画",
+    jojo: "JOJO",
     lark: "知识协作",
     blossom: "桃花缘",
     v4: "Ant Design V4",
@@ -64,6 +67,7 @@ const locales = {
     bootstrap: "Bootstrap",
     cartoon: "Cartoon",
     illustration: "Illustration",
+    jojo: "JOJO",
     lark: "Document",
     blossom: "Blossom",
     v4: "Ant Design V4",
@@ -186,6 +190,7 @@ const usePreviewThemes = () => {
   const v4Theme = useV4Theme();
   const cartoonTheme = useCartoonTheme();
   const illustrationTheme = useIllustrationTheme();
+  const jojoTheme = useJojoTheme();
   const geekTheme = useGeekTheme();
   const glassTheme = useGlassTheme();
   const muiTheme = useMuiTheme();
@@ -195,6 +200,14 @@ const usePreviewThemes = () => {
 
   return React.useMemo<PreviewThemeConfig[]>(() => {
     return [
+      {
+        name: locale.jojo,
+        icon: JojoIcon,
+        key: "jojo",
+        colors: ["#7B1FA2", "#FFC107", "#E91E63", "#0A0A0A", "#FFF3E6"],
+        props: jojoTheme,
+        copyCode: jojoThemeSource,
+      },
       {
         icon: "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
         name: locale.default,
@@ -303,6 +316,7 @@ const usePreviewThemes = () => {
     geekTheme,
     glassTheme,
     illustrationTheme,
+    jojoTheme,
     larkTheme,
     locale.blossom,
     locale.bootstrap,
@@ -312,6 +326,7 @@ const usePreviewThemes = () => {
     locale.geek,
     locale.glass,
     locale.illustration,
+    locale.jojo,
     locale.lark,
     locale.mui,
     locale.serene,

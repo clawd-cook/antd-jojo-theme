@@ -247,6 +247,9 @@ importers:
       '@ant-design/icons':
         specifier: 'catalog:'
         version: 6.3.4(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@clawd-cook/antd-jojo-theme':
+        specifier: workspace:*
+        version: link:../../packages/antd-jojo-theme
       '@rc-component/steps':
         specifier: 'catalog:'
         version: 1.2.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -296,6 +299,9 @@ importers:
       '@types/node':
         specifier: ^26.1.1
         version: 26.6.2
+      antd:
+        specifier: 'catalog:'
+        version: 6.6.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       bumpp:
         specifier: ^11.1.0
         version: 11.1.0

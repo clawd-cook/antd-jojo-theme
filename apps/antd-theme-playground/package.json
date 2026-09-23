@@ -12,6 +12,7 @@
     "@ant-design/compatible": "catalog:",
     "@ant-design/fast-color": "catalog:",
     "@ant-design/icons": "catalog:",
+    "@clawd-cook/antd-jojo-theme": "workspace:*",
     "@rc-component/steps": "catalog:",
     "@rc-component/util": "catalog:",
     "antd": "catalog:",

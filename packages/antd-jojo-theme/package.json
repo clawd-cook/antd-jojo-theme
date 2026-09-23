@@ -1,16 +1,17 @@
 {
   "name": "@clawd-cook/antd-jojo-theme",
-  "version": "0.0.0",
-  "description": "A starter for creating a TypeScript package.",
-  "homepage": "https://github.com/author/library#readme",
+  "version": "0.1.0",
+  "description": "Ant Design theme inspired by Hirohiko Araki's JoJo's Bizarre Adventure.",
+  "homepage": "https://github.com/clawd-cook/antd-jojo-theme#readme",
   "bugs": {
-    "url": "https://github.com/author/library/issues"
+    "url": "https://github.com/clawd-cook/antd-jojo-theme/issues"
   },
   "license": "MIT",
-  "author": "Author Name <author.name@mail.com>",
+  "author": "clawd-cook",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/library.git"
+    "url": "git+https://github.com/clawd-cook/antd-jojo-theme.git",
+    "directory": "packages/antd-jojo-theme"
   },
   "files": [
     "dist"
@@ -32,9 +33,13 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
+    "antd": "catalog:",
     "bumpp": "^11.1.0",
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "antd": ">=5.0.0"
   }
 }
