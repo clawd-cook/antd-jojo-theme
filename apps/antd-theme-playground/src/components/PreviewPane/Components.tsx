@@ -294,11 +294,7 @@ const stepsItems: StepItem[] = [
   { title: "Waiting" },
 ];
 
-const jojoStepsItems: StepItem[] = [
-  { title: "Stand" },
-  { title: "Pose" },
-  { title: "Clash" },
-];
+const jojoStepsItems: StepItem[] = [{ title: "Stand" }, { title: "Pose" }, { title: "Clash" }];
 
 const botExcludes = [
   "ant-design-bot",

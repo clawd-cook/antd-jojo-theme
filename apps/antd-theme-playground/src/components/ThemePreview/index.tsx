@@ -371,21 +371,27 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
   const hasDarkBackground = !!activeTheme?.bgImgDark;
 
   const previewPaneOptionsLocalized: { label: string; value: PreviewPane }[] = [
-    { label: isJojo ? (localeType === "cn" ? "组件" : "Components") : "Components", value: "components" },
-    { label: isJojo ? (localeType === "cn" ? "仪表" : "Dashboard") : "Dashboard", value: "dashboard" },
+    {
+      label: isJojo ? (localeType === "cn" ? "组件" : "Components") : "Components",
+      value: "components",
+    },
+    {
+      label: isJojo ? (localeType === "cn" ? "仪表" : "Dashboard") : "Dashboard",
+      value: "dashboard",
+    },
   ];
 
   return (
     <Group
       title={
-        isJojo ? <span className={styles.groupTitleJojo}>{locale.themeTitle}</span> : locale.themeTitle
+        isJojo ? (
+          <span className={styles.groupTitleJojo}>{locale.themeTitle}</span>
+        ) : (
+          locale.themeTitle
+        )
       }
       description={
-        isJojo ? (
-          <span className={styles.groupDescJojo}>{locale.themeDesc}</span>
-        ) : (
-          locale.themeDesc
-        )
+        isJojo ? <span className={styles.groupDescJojo}>{locale.themeDesc}</span> : locale.themeDesc
       }
       collapse
       titleColor={hasDarkBackground ? "#fff" : isJojo ? jojoColors.ink : undefined}

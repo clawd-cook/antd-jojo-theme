@@ -10,8 +10,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
-Ant Design theme inspired by Hirohiko Araki / *JoJo's Bizarre Adventure* —
-especially *Golden Wind* cover art: sculptural hard edges, thick ink,
+Ant Design theme inspired by Hirohiko Araki / _JoJo's Bizarre Adventure_ —
+especially _Golden Wind_ cover art: sculptural hard edges, thick ink,
 crosshatching volume, chiaroscuro block shadows, and haute-couture clash color.
 
 [Overview](#overview) • [Install](#install) • [Usage](#usage) • [Playground](#playground) • [Development](#development)
@@ -22,10 +22,10 @@ crosshatching volume, chiaroscuro block shadows, and haute-couture clash color.
 
 This monorepo ships a drop-in [Ant Design](https://ant.design/) `ThemeConfig` plus supporting tokens (palette, ink shadows, hatch fills) so you can give any Ant Design app a JOJO cover-art look without hand-tuning every component token.
 
-| Package / app | Path | Role |
-| --- | --- | --- |
-| `@clawd-cook/antd-jojo-theme` | [`packages/antd-jojo-theme`](./packages/antd-jojo-theme) | Publishable theme package |
-| `antd-theme-playground` | [`apps/antd-theme-playground`](./apps/antd-theme-playground) | Live component gallery (GitHub Pages) |
+| Package / app                 | Path                                                         | Role                                  |
+| ----------------------------- | ------------------------------------------------------------ | ------------------------------------- |
+| `@clawd-cook/antd-jojo-theme` | [`packages/antd-jojo-theme`](./packages/antd-jojo-theme)     | Publishable theme package             |
+| `antd-theme-playground`       | [`apps/antd-theme-playground`](./apps/antd-theme-playground) | Live component gallery (GitHub Pages) |
 
 ### Design keywords
 
@@ -54,12 +54,7 @@ pnpm add @clawd-cook/antd-jojo-theme antd
 
 ```tsx
 import { ConfigProvider } from "antd";
-import {
-  jojoTheme,
-  jojoColors,
-  jojoHatch,
-  jojoInkShadow,
-} from "@clawd-cook/antd-jojo-theme";
+import { jojoTheme, jojoColors, jojoHatch, jojoInkShadow } from "@clawd-cook/antd-jojo-theme";
 
 export function App() {
   return (
@@ -74,24 +69,24 @@ export function App() {
 
 ### Exports
 
-| Export | Description |
-| --- | --- |
-| `jojoTheme` | Ant Design `ThemeConfig` (also the default export) |
-| `jojoColors` | Named cover-art palette hex tokens |
-| `jojoInkShadow` / `Sm` / `Lg` | Hard ink offset `box-shadow` strings |
-| `jojoHatch` / `jojoHatchDense` | CSS `background-image` crosshatch layers |
+| Export                         | Description                                        |
+| ------------------------------ | -------------------------------------------------- |
+| `jojoTheme`                    | Ant Design `ThemeConfig` (also the default export) |
+| `jojoColors`                   | Named cover-art palette hex tokens                 |
+| `jojoInkShadow` / `Sm` / `Lg`  | Hard ink offset `box-shadow` strings               |
+| `jojoHatch` / `jojoHatchDense` | CSS `background-image` crosshatch layers           |
 
 ### Palette
 
-| Token | Hex | Role |
-| --- | --- | --- |
-| `ink` | `#0D0D0D` | Thick contour |
-| `sky` | `#FFE566` | Yellow stage / Araki sky |
-| `purple` | `#6B1FA0` | Fashion primary |
-| `magenta` | `#E6007A` | Clash accent |
-| `gold` | `#F5C518` | Metal / embroidery |
-| `shade` | `#1A0A2E` | Hard chiaroscuro block |
-| `teal` / `cyan` | — | Unrealistic complements |
+| Token           | Hex       | Role                     |
+| --------------- | --------- | ------------------------ |
+| `ink`           | `#0D0D0D` | Thick contour            |
+| `sky`           | `#FFE566` | Yellow stage / Araki sky |
+| `purple`        | `#6B1FA0` | Fashion primary          |
+| `magenta`       | `#E6007A` | Clash accent             |
+| `gold`          | `#F5C518` | Metal / embroidery       |
+| `shade`         | `#1A0A2E` | Hard chiaroscuro block   |
+| `teal` / `cyan` | —         | Unrealistic complements  |
 
 ## Playground
 

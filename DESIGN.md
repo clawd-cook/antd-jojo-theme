@@ -1,9 +1,10 @@
 # Design System: Ant Design JOJO Theme
+
 **Project ID:** N/A (local design system — `@clawd-cook/antd-jojo-theme`; no Stitch project linked)
 
 ## 1. Visual Theme & Atmosphere
 
-Hirohiko Araki / *JoJo’s Bizarre Adventure* as a UI language — not soft anime, not SaaS chrome. The mood is sculptural and fashion-editorial: bold thick black outlines, sharp angular faces with intense eyes and full lips, exaggerated dynamic poses and pointing hands, classical sculpture anatomy under haute-couture tension. Surfaces feel hand-inked and printed; volume comes from dramatic solid-black shading and dense composition, never soft gradients or frosted glass.
+Hirohiko Araki / _JoJo’s Bizarre Adventure_ as a UI language — not soft anime, not SaaS chrome. The mood is sculptural and fashion-editorial: bold thick black outlines, sharp angular faces with intense eyes and full lips, exaggerated dynamic poses and pointing hands, classical sculpture anatomy under haute-couture tension. Surfaces feel hand-inked and printed; volume comes from dramatic solid-black shading and dense composition, never soft gradients or frosted glass.
 
 Color is vibrant, high-contrast, saturated, and non-naturalistic — yellow sky, fashion violet, magenta clash, metal gold — like Araki covers, not product-photo realism. Clothing energy translates into UI as intricate pattern, accessories, and jewelry accents (buckle gold, embroidery highlights) rather than quiet gray chrome. Interaction carries “JOJO pose” torsion: skew, snap motion, asymmetric weight — pointing-hand confidence over gentle ease.
 
@@ -11,25 +12,25 @@ Color is vibrant, high-contrast, saturated, and non-naturalistic — yellow sky,
 
 ## 2. Color Palette & Roles
 
-| Descriptive name | Hex | Role |
-| --- | --- | --- |
-| Manga Ink Black | `#0D0D0D` | Thick contours, primary text, hard shadow pigment |
-| Violet Dusk Mute | `#2B2140` | Secondary text / muted ink |
-| Carved Shade Purple | `#1A0A2E` | Block chiaroscuro fills, dark rails, sider ground |
-| Araki Yellow Sky | `#FFE566` | Page / layout stage background (cover “yellow sky”) |
-| Hot Stage Yellow | `#FFD400` | Intensified sky accent / active gold heat |
-| Cream Paper Panel | `#FFF8E7` | Container / elevated surfaces (flat paper, not marble wash) |
-| Deep Paper Gold | `#FFE08A` | Secondary panel / hover fill |
-| Fashion Violet | `#6B1FA0` | Primary actions, selected controls, brand force |
-| Hot Fashion Violet | `#9B2BC7` | Primary hover |
-| Deep Stand Violet | `#3B0A5C` | Primary pressed / deep structure |
-| Couture Magenta Clash | `#E6007A` | Accent clash (progress, tabs, triggers, drama) |
-| Metal Buckle Gold | `#F5C518` | Headers, metal/embroidery accents, warning |
-| Antique Metal Gold | `#D4A017` | Gold pressed / deeper metal |
-| Crimson Danger Slash | `#C41E3A` | Error / destructive |
-| Unreal Teal Complement | `#00C9B1` | Success (surreal complement, not “nature green”) |
-| Electric Cyan Info | `#00B7E0` | Informational |
-| Stand Aura Lilac | `#B388FF` | Soft primary wash / selected option ground (still flat, not pastel fog) |
+| Descriptive name       | Hex       | Role                                                                    |
+| ---------------------- | --------- | ----------------------------------------------------------------------- |
+| Manga Ink Black        | `#0D0D0D` | Thick contours, primary text, hard shadow pigment                       |
+| Violet Dusk Mute       | `#2B2140` | Secondary text / muted ink                                              |
+| Carved Shade Purple    | `#1A0A2E` | Block chiaroscuro fills, dark rails, sider ground                       |
+| Araki Yellow Sky       | `#FFE566` | Page / layout stage background (cover “yellow sky”)                     |
+| Hot Stage Yellow       | `#FFD400` | Intensified sky accent / active gold heat                               |
+| Cream Paper Panel      | `#FFF8E7` | Container / elevated surfaces (flat paper, not marble wash)             |
+| Deep Paper Gold        | `#FFE08A` | Secondary panel / hover fill                                            |
+| Fashion Violet         | `#6B1FA0` | Primary actions, selected controls, brand force                         |
+| Hot Fashion Violet     | `#9B2BC7` | Primary hover                                                           |
+| Deep Stand Violet      | `#3B0A5C` | Primary pressed / deep structure                                        |
+| Couture Magenta Clash  | `#E6007A` | Accent clash (progress, tabs, triggers, drama)                          |
+| Metal Buckle Gold      | `#F5C518` | Headers, metal/embroidery accents, warning                              |
+| Antique Metal Gold     | `#D4A017` | Gold pressed / deeper metal                                             |
+| Crimson Danger Slash   | `#C41E3A` | Error / destructive                                                     |
+| Unreal Teal Complement | `#00C9B1` | Success (surreal complement, not “nature green”)                        |
+| Electric Cyan Info     | `#00B7E0` | Informational                                                           |
+| Stand Aura Lilac       | `#B388FF` | Soft primary wash / selected option ground (still flat, not pastel fog) |
 
 Color philosophy: **unrealistic local color**. Yellow sky, violet surfaces, magenta accents — clash is intentional and emotional, like Araki covers.
 
@@ -42,12 +43,12 @@ Color philosophy: **unrealistic local color**. Yellow sky, violet surfaces, mage
 
 ## 4. Component Stylings
 
-* **Buttons:** Sharp, squared-off edges (no radius). Thick Manga Ink Black outline (~4px). Hard offset ink shadow (`5px 5px 0 #0D0D0D`), not blur. Primary fill Fashion Violet; default fill Cream Paper with gold hover. Uppercase, ultra-bold, wide tracking. Mild skew (`skewX(-2deg)`) suggesting pose tension / pointing-hand thrust; hover increases skew and lifts the hard shadow; press stamps down.
-* **Cards / Containers:** Zero corner radius. Cream Paper fill with optional crosshatching texture. Thick ink border + hard ink drop shadow. Feels like a cut panel stuck to yellow sky — sculptural block composition, not a floating Material card.
-* **Inputs / Forms:** Same ink-box language — sharp corners, thick black stroke, Cream Paper interior. Hover may flash Couture Magenta on the border; focus keeps ink contour with a smaller hard shadow. No soft glow rings.
-* **Modals / Popovers / Notifications:** Ink-boxed panels with hatch texture; modal headers sit on Metal Buckle Gold with heavy title case. Tooltips invert to ink ground with gold type and a magenta hard shadow accent — jewelry / accessory contrast.
-* **Progress / Tracks:** Flat block fills (magenta or violet) over Carved Shade rails with dense hatching — solid-black shading bars, not rounded pills.
-* **Chrome (layout):** Yellow Sky body; gold header band; deep carved violet sider. Menu selection uses magenta-tinted blocks and gold labels — high-fashion runway contrast, not quiet gray nav.
+- **Buttons:** Sharp, squared-off edges (no radius). Thick Manga Ink Black outline (~4px). Hard offset ink shadow (`5px 5px 0 #0D0D0D`), not blur. Primary fill Fashion Violet; default fill Cream Paper with gold hover. Uppercase, ultra-bold, wide tracking. Mild skew (`skewX(-2deg)`) suggesting pose tension / pointing-hand thrust; hover increases skew and lifts the hard shadow; press stamps down.
+- **Cards / Containers:** Zero corner radius. Cream Paper fill with optional crosshatching texture. Thick ink border + hard ink drop shadow. Feels like a cut panel stuck to yellow sky — sculptural block composition, not a floating Material card.
+- **Inputs / Forms:** Same ink-box language — sharp corners, thick black stroke, Cream Paper interior. Hover may flash Couture Magenta on the border; focus keeps ink contour with a smaller hard shadow. No soft glow rings.
+- **Modals / Popovers / Notifications:** Ink-boxed panels with hatch texture; modal headers sit on Metal Buckle Gold with heavy title case. Tooltips invert to ink ground with gold type and a magenta hard shadow accent — jewelry / accessory contrast.
+- **Progress / Tracks:** Flat block fills (magenta or violet) over Carved Shade rails with dense hatching — solid-black shading bars, not rounded pills.
+- **Chrome (layout):** Yellow Sky body; gold header band; deep carved violet sider. Menu selection uses magenta-tinted blocks and gold labels — high-fashion runway contrast, not quiet gray nav.
 
 ## 5. Layout Principles
 

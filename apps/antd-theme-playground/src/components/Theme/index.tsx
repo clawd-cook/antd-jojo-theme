@@ -17,6 +17,7 @@ import {
   SearchOutlined,
   SortAscendingOutlined,
 } from "@ant-design/icons";
+import { jojoRootClass } from "@clawd-cook/antd-jojo-theme";
 import type { ConfigProviderProps, MenuProps, TableProps } from "antd";
 import {
   App,
@@ -40,7 +41,6 @@ import {
   theme,
   Typography,
 } from "antd";
-import { jojoRootClass } from "@clawd-cook/antd-jojo-theme";
 import { createStaticStyles } from "antd-style";
 import { generateColor } from "antd/es/color-picker/util";
 import { clsx } from "clsx";
