@@ -2,7 +2,9 @@ import { defineConfig } from "vite-plus";
 
 export default defineConfig({
   fmt: {
-    ignorePatterns: ["ant-design/**"]
+    ignorePatterns: ["ant-design/**"],
+    sortImports: true,
+    sortPackageJson: true,
   },
   lint: {
     ignorePatterns: ["ant-design/**"],
