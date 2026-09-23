@@ -16,10 +16,10 @@
 
 </div>
 
-Sculptural hard edges, thick ink contours, crosshatching volume, chiaroscuro block shadows, and haute-couture clash color — especially the *Golden Wind* cover look. Drop it into `ConfigProvider` and your Ant Design app gets magazine-cover tension instead of soft SaaS chrome.
+Bold thick black outlines, sculptural anatomy, exaggerated pose tension, and vibrant non-naturalistic clash color — Hirohiko Araki / *JoJo’s Bizarre Adventure* as UI. Drop it into `ConfigProvider` and your Ant Design app gets magazine-cover tension instead of soft SaaS chrome.
 
 > [!NOTE]
-> **Design keywords:** sculptural hard edges · JOJO pose tension · thick contour + crosshatching · hard chiaroscuro · fashion clash color · Baroque metal · flat pop fills — not soft anime shadows.
+> **Design keywords:** thick black outlines · sharp angular faces / intense eyes · dynamic poses & pointing hands · saturated non-naturalistic color · high-fashion pattern & jewelry · classical sculpture anatomy · dramatic solid-black shading — not soft anime.
 
 ## Features
 

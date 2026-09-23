@@ -1,3 +1,4 @@
+import { jojoColors } from "@clawd-cook/antd-jojo-theme";
 import type { ConfigProviderProps, ThemeConfig } from "antd";
 import { theme } from "antd";
 import React from "react";
@@ -12,6 +13,8 @@ export interface PreviewThemeConfig {
   name: string;
   key?: string;
   props?: ConfigProviderProps;
+  /** Solid stage color or image URL passed to Group background */
+  background?: string;
   bgImg?: string;
   bgImgDark?: boolean;
   copyCode?: string;
@@ -21,11 +24,11 @@ export interface PreviewThemeConfig {
 const locales = {
   cn: {
     default: "Ant Design",
-    jojo: "JOJO",
+    jojo: "JOJO · 荒木",
   },
   en: {
     default: "Ant Design",
-    jojo: "JOJO",
+    jojo: "JOJO · Araki",
   },
 };
 
@@ -107,6 +110,7 @@ const usePreviewThemes = () => {
         name: locale.jojo,
         icon: JojoIcon,
         key: "jojo",
+        background: jojoColors.sky,
         colors: ["#6B1FA0", "#FFE566", "#E6007A", "#F5C518", "#0D0D0D"],
         props: jojoTheme,
         copyCode: jojoThemeSource,

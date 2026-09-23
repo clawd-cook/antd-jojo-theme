@@ -1,4 +1,5 @@
 import { BgColorsOutlined, CopyOutlined } from "@ant-design/icons";
+import { jojoColors, jojoInkShadow, jojoInkShadowSm } from "@clawd-cook/antd-jojo-theme";
 import { App, ConfigProvider, Flex, Segmented, theme, Tooltip } from "antd";
 import type { ThemeConfig } from "antd";
 import { createStyles } from "antd-style";
@@ -17,27 +18,28 @@ import { generateFullCopyFile } from "./themeCodeUtils";
 import ThemeIcon from "./ThemeIcon";
 
 const PREVIEW_CARD_RADIUS = 16;
+const JOJO_POSE_EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 const locales = {
   cn: {
-    themeTitle: "定制主题，随心所欲",
-    themeDesc: "开放样式算法与语义化结构，让你与 AI 一起轻松定制主题",
+    themeTitle: "荒木流 · JOJO 主题",
+    themeDesc: "粗黑描边、雕塑解剖、夸张 pose、高饱和非写实配色 — 杂志封面张力，不是柔和 SaaS",
     aiGenerate: "AI 主题生成",
     aiGenerateDesc: "用一句话描述你想要的风格",
     copyTheme: "复制主题代码",
-    copySuccess: "已复制",
+    copySuccess: "已复制 · やれやれ",
     exploreThemes: "探索主题",
     editTheme: "主题编辑",
     contribution: "贡献",
   },
   en: {
-    themeTitle: "Flexible theme customization",
+    themeTitle: "Araki · JOJO Theme",
     themeDesc:
-      "Open style algorithms and semantic structures make it easy for you and AI to customize themes",
+      "Thick ink outlines, sculptural anatomy, exaggerated poses, saturated non-naturalistic color — magazine-cover tension, not soft SaaS",
     aiGenerate: "AI Theme Generator",
     aiGenerateDesc: "Describe your desired style",
     copyTheme: "Copy theme code",
-    copySuccess: "Copied",
+    copySuccess: "Copied · Yare Yare",
     exploreThemes: "Explore Themes",
     editTheme: "Theme Editor",
     contribution: "Contribution",
@@ -92,6 +94,21 @@ const useStyles = createStyles(({ css, cssVar }) => ({
       width: "60%",
     },
   }),
+  previewTabsJojo: css({
+    padding: 0,
+    borderRadius: 0,
+    background: jojoColors.paper,
+    border: `3px solid ${jojoColors.ink}`,
+    boxShadow: jojoInkShadowSm,
+    ".ant-segmented-group": {
+      gap: 0,
+    },
+    ".ant-segmented-thumb": {
+      borderRadius: 0,
+      background: jojoColors.magenta,
+      boxShadow: "none",
+    },
+  }),
   tabsDark: css({
     backgroundColor: "rgba(255, 255, 255, 0.14)",
     backdropFilter: "blur(18px)",
@@ -113,6 +130,22 @@ const useStyles = createStyles(({ css, cssVar }) => ({
       minWidth: 0,
       paddingInline: 12,
       fontSize: 16,
+    },
+  }),
+  tabsItemJojo: css({
+    borderRadius: 0,
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    color: jojoColors.inkMuted,
+    transform: "skewX(-2deg)",
+    transition: `transform 0.12s ${JOJO_POSE_EASE}, color 0.12s ${JOJO_POSE_EASE}`,
+    "&:hover": {
+      transform: "skewX(-4deg)",
+      color: jojoColors.ink,
+    },
+    "&.ant-segmented-item-selected": {
+      color: jojoColors.gold,
     },
   }),
   tabsItemDark: css({
@@ -156,8 +189,27 @@ const useStyles = createStyles(({ css, cssVar }) => ({
       borderRadius: "100%",
     },
   }),
+  themeBlockJojo: css({
+    borderRadius: 0,
+    boxShadow: jojoInkShadowSm,
+    outline: `2px solid ${jojoColors.ink}`,
+    transition: `transform 0.12s ${JOJO_POSE_EASE}, box-shadow 0.12s ${JOJO_POSE_EASE}`,
+    "&:hover, &:focus-within": {
+      outline: `2px solid ${jojoColors.ink}`,
+      transform: "skewX(-6deg) scale(1.12)",
+      boxShadow: jojoInkShadow,
+    },
+    "> img": {
+      borderRadius: 0,
+    },
+  }),
   active: css({
     outline: `2px solid ${cssVar.colorPrimaryBorder}`,
+  }),
+  activeJojo: css({
+    outline: `3px solid ${jojoColors.magenta}`,
+    boxShadow: `3px 3px 0 ${jojoColors.gold}`,
+    transform: "skewX(-4deg)",
   }),
   switch: css({
     alignItems: "center",
@@ -184,14 +236,37 @@ const useStyles = createStyles(({ css, cssVar }) => ({
       display: "none",
     },
   }),
+  buttonBlockJojo: css({
+    borderRadius: 0,
+    color: jojoColors.ink,
+    border: `2px solid ${jojoColors.ink}`,
+    background: jojoColors.paper,
+    boxShadow: jojoInkShadowSm,
+    transform: "skewX(-2deg)",
+    transition: `transform 0.12s ${JOJO_POSE_EASE}, box-shadow 0.12s ${JOJO_POSE_EASE}`,
+    "&:hover": {
+      backgroundColor: jojoColors.gold,
+      transform: "skewX(-5deg) translate(-2px, -2px)",
+      boxShadow: jojoInkShadow,
+    },
+  }),
+  groupTitleJojo: css({
+    fontFamily:
+      '"Arial Narrow", "Futura Condensed", "Helvetica Neue Condensed", Impact, "Gill Sans", sans-serif',
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    transform: "skewX(-3deg)",
+    display: "inline-block",
+  }),
+  groupDescJojo: css({
+    fontWeight: 700,
+    letterSpacing: "0.03em",
+    maxWidth: 720,
+    marginInline: "auto",
+  }),
 }));
 
 type PreviewPane = "components" | "dashboard";
-
-const previewPaneOptions: { label: string; value: PreviewPane }[] = [
-  { label: "Components", value: "components" },
-  { label: "Dashboard", value: "dashboard" },
-];
 
 const getPreviewThemeKey = (previewTheme: PreviewThemeConfig) =>
   previewTheme.key ?? previewTheme.name;
@@ -286,18 +361,34 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
   const editPath =
     localeType === "cn" ? "https://ant.design/theme-editor-cn" : "https://ant.design/theme-editor";
 
-  const background = activeTheme?.bgImg
-    ? activeTheme.bgImg
-    : "linear-gradient(180deg, #ffffff 0%, #F5F8FF 100%)";
+  const isJojo = activeThemeKey === "jojo";
+
+  const background =
+    activeTheme?.background ??
+    activeTheme?.bgImg ??
+    "linear-gradient(180deg, #ffffff 0%, #F5F8FF 100%)";
 
   const hasDarkBackground = !!activeTheme?.bgImgDark;
 
+  const previewPaneOptionsLocalized: { label: string; value: PreviewPane }[] = [
+    { label: isJojo ? (localeType === "cn" ? "组件" : "Components") : "Components", value: "components" },
+    { label: isJojo ? (localeType === "cn" ? "仪表" : "Dashboard") : "Dashboard", value: "dashboard" },
+  ];
+
   return (
     <Group
-      title={locale.themeTitle}
-      description={locale.themeDesc}
+      title={
+        isJojo ? <span className={styles.groupTitleJojo}>{locale.themeTitle}</span> : locale.themeTitle
+      }
+      description={
+        isJojo ? (
+          <span className={styles.groupDescJojo}>{locale.themeDesc}</span>
+        ) : (
+          locale.themeDesc
+        )
+      }
       collapse
-      titleColor={hasDarkBackground ? "#fff" : undefined}
+      titleColor={hasDarkBackground ? "#fff" : isJojo ? jojoColors.ink : undefined}
       background={background}
       backgroundPrefetchList={backgroundPrefetchList}
     >
@@ -307,10 +398,16 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
             <Segmented<PreviewPane>
               classNames={{
                 label: clsx(styles.previewTabsLabel),
-                root: clsx(styles.previewTabs, { [styles.tabsDark]: hasDarkBackground }),
-                item: clsx(styles.tabsItem, { [styles.tabsItemDark]: hasDarkBackground }),
+                root: clsx(styles.previewTabs, {
+                  [styles.tabsDark]: hasDarkBackground && !isJojo,
+                  [styles.previewTabsJojo]: isJojo,
+                }),
+                item: clsx(styles.tabsItem, {
+                  [styles.tabsItemDark]: hasDarkBackground && !isJojo,
+                  [styles.tabsItemJojo]: isJojo,
+                }),
               }}
-              options={previewPaneOptions}
+              options={previewPaneOptionsLocalized}
               value={activePane}
               onChange={setActivePane}
             />
@@ -323,7 +420,11 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
                   <Tooltip placement="top" key={`item-${themeKey}`} title={name}>
                     <div
                       role="tab"
-                      className={clsx(styles.themeBlock, { [styles.active]: isSelected })}
+                      className={clsx(styles.themeBlock, {
+                        [styles.themeBlockJojo]: isJojo,
+                        [styles.active]: isSelected && !isJojo,
+                        [styles.activeJojo]: isSelected && isJojo,
+                      })}
                       tabIndex={isSelected ? 0 : -1}
                       aria-selected={isSelected}
                       data-theme-key={themeKey}
@@ -339,20 +440,26 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
                 );
               })}
               <Tooltip placement="top" title={locale.copyTheme}>
-                <div className={styles.buttonBlock} onClick={handleCopyTheme}>
+                <div
+                  className={clsx(styles.buttonBlock, { [styles.buttonBlockJojo]: isJojo })}
+                  onClick={handleCopyTheme}
+                >
                   <CopyOutlined />
                 </div>
               </Tooltip>
               <Tooltip placement="top" title={locale.editTheme}>
                 <a href={editPath} target="_blank" rel="noreferrer" title="editTheme">
-                  <div className={styles.buttonBlock}>
+                  <div className={clsx(styles.buttonBlock, { [styles.buttonBlockJojo]: isJojo })}>
                     <BgColorsOutlined />
                   </div>
                 </a>
               </Tooltip>
               {onOpenPromptDrawer ? (
                 <Tooltip placement="top" title={locale.aiGenerate}>
-                  <div className={styles.buttonBlock} onClick={onOpenPromptDrawer}>
+                  <div
+                    className={clsx(styles.buttonBlock, { [styles.buttonBlockJojo]: isJojo })}
+                    onClick={onOpenPromptDrawer}
+                  >
                     <ThemeIcon />
                   </div>
                 </Tooltip>
@@ -368,6 +475,7 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
               config={activeTheme?.props}
               className={styles.componentsBlock}
               containerClassName={styles.componentsBlockContainer}
+              copyFlavor={isJojo ? "jojo" : "default"}
             />
           ) : (
             <ThemeDashboard
@@ -375,7 +483,7 @@ const ThemePreviewContent: React.FC<ThemePreviewProps> = (props) => {
               className={styles.dashboardBlock}
               config={activeTheme?.props}
               activeTheme={activeTheme}
-              style={{ borderRadius: PREVIEW_CARD_RADIUS }}
+              style={{ borderRadius: isJojo ? 0 : PREVIEW_CARD_RADIUS }}
             />
           )}
         </Flex>

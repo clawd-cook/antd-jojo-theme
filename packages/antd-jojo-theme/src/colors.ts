@@ -1,7 +1,8 @@
 /**
- * Hirohiko Araki / JoJo — Golden Wind cover palette.
- * Surreal clash colors, ink outlines, metal gold, pop flat fills.
- * Not realistic local color: sky can be yellow, surfaces can run violet.
+ * Hirohiko Araki / JoJo’s Bizarre Adventure palette.
+ * Bold ink outlines, vibrant saturated non-naturalistic clash color,
+ * metal gold / jewelry accents, pop flat fills. Sky can be yellow;
+ * surfaces can run violet — never product-photo realism.
  */
 export const jojoColors = {
   /** Thick manga ink */

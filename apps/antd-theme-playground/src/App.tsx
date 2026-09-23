@@ -1,3 +1,4 @@
+import { jojoColors, jojoInkShadowSm } from "@clawd-cook/antd-jojo-theme";
 import { ConfigProvider, Flex, Segmented, theme } from "antd";
 import enUS from "antd/locale/en_US";
 import zhCN from "antd/locale/zh_CN";
@@ -22,7 +23,7 @@ const App = () => {
         <LocaleContext value={localeType}>
           <DarkContext value={isDark}>
             <SiteContextProvider>
-              <Flex vertical style={{ minHeight: "100vh" }}>
+              <Flex vertical style={{ minHeight: "100vh", background: jojoColors.sky }}>
                 <Flex
                   justify="flex-end"
                   align="center"
@@ -32,9 +33,9 @@ const App = () => {
                     top: 0,
                     zIndex: 10,
                     padding: "12px 24px",
-                    background: isDark ? "rgba(0,0,0,0.65)" : "rgba(255,255,255,0.85)",
-                    backdropFilter: "blur(8px)",
-                    borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}`,
+                    background: jojoColors.gold,
+                    borderBottom: `4px solid ${jojoColors.ink}`,
+                    boxShadow: jojoInkShadowSm,
                   }}
                 >
                   <Segmented
@@ -45,6 +46,11 @@ const App = () => {
                       { label: "中文", value: "cn" },
                       { label: "EN", value: "en" },
                     ]}
+                    style={{
+                      borderRadius: 0,
+                      border: `2px solid ${jojoColors.ink}`,
+                      background: jojoColors.paper,
+                    }}
                   />
                   <Segmented
                     size="small"
@@ -54,6 +60,11 @@ const App = () => {
                       { label: "Light", value: "light" },
                       { label: "Dark", value: "dark" },
                     ]}
+                    style={{
+                      borderRadius: 0,
+                      border: `2px solid ${jojoColors.ink}`,
+                      background: jojoColors.paper,
+                    }}
                   />
                 </Flex>
                 <ThemePreview />

@@ -72,6 +72,8 @@ interface ComponentsBlockProps {
   inherit?: boolean;
   isDark?: boolean;
   isDarkTheme?: boolean;
+  /** JOJO stage copy when previewing the Araki theme */
+  copyFlavor?: "default" | "jojo";
 }
 
 const useStyle = createStyles(({ css, token }) => {
@@ -120,6 +122,9 @@ const useStyle = createStyles(({ css, token }) => {
       borderRadius: 16,
       backgroundSize: "cover",
       backgroundPosition: "center",
+    }),
+    mainCardJojo: css({
+      borderRadius: 0,
     }),
     avatarGroup: css({
       marginBlockEnd: 16,
@@ -275,10 +280,23 @@ const buttonList: ButtonProps[] = [
   { danger: true, shape: "round", children: "Round button" },
 ];
 
+const jojoButtonList: ButtonProps[] = [
+  { type: "primary", children: "ゴゴゴ Ready" },
+  { danger: true, children: "Ora Ora!" },
+  { type: "dashed", variant: "outlined", children: "Pose Snap" },
+  { danger: true, children: "Menacing" },
+];
+
 const stepsItems: StepItem[] = [
   { title: "Finished" },
   { title: "In Process" },
   { title: "Waiting" },
+];
+
+const jojoStepsItems: StepItem[] = [
+  { title: "Stand" },
+  { title: "Pose" },
+  { title: "Clash" },
 ];
 
 const botExcludes = [
@@ -335,9 +353,13 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
     inherit = false,
     isDark = false,
     isDarkTheme = false,
+    copyFlavor = "default",
   } = props;
 
   const { styles } = useStyle();
+  const isJojo = copyFlavor === "jojo";
+  const demoButtons = isJojo ? jojoButtonList : buttonList;
+  const demoSteps = isJojo ? jojoStepsItems : stepsItems;
 
   const {
     data: contributors,
@@ -394,14 +416,18 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
               styles={{
                 root: {
                   backgroundColor: genBackgroundColor,
-                  backdropFilter: "blur(12px)",
-                  boxShadow: "0 4px 12px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.08)",
+                  backdropFilter: isJojo ? "none" : "blur(12px)",
+                  boxShadow: isJojo
+                    ? "5px 5px 0 #0D0D0D"
+                    : "0 4px 12px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.08)",
+                  borderRadius: isJojo ? 0 : undefined,
+                  border: isJojo ? "4px solid #0D0D0D" : undefined,
                 },
                 body: {
                   padding: 0,
                 },
               }}
-              className={clsx(className, styles.mainCard)}
+              className={clsx(className, styles.mainCard, { [styles.mainCardJojo]: isJojo })}
             >
               <div className={styles.layoutRow}>
                 {/* ================= LEFT COLUMN ================= */}
@@ -440,7 +466,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                         <Progress type="circle" percent={25} size={20} showInfo={false} />
                       </Flex>
                       <div className={styles.stepsWrapper}>
-                        <Steps current={1} status="error" items={stepsItems} />
+                        <Steps current={1} status="error" items={demoSteps} />
                       </div>
                     </Flex>
                   </div>
@@ -492,7 +518,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                         </Flex>
                       </Card>
                       <InternalPopconfirm
-                        title="Are you OK?"
+                        title={isJojo ? "Is that a Stand?!" : "Are you OK?"}
                         placement="topRight"
                         className={styles.popconfirmFull}
                       />
@@ -538,8 +564,12 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                         +5
                       </Avatar>
                     </Avatar.Group>
-                    <Title level={5}>Verify account</Title>
-                    <Text type="secondary">We've sent a code to a****@gmail.com</Text>
+                    <Title level={5}>{isJojo ? "Verify your Stand" : "Verify account"}</Title>
+                    <Text type="secondary">
+                      {isJojo
+                        ? "We've sent a code to a****@passione.mail"
+                        : "We've sent a code to a****@gmail.com"}
+                    </Text>
                     <div className={styles.otpWrapper}>
                       <Input.OTP size="large" length={6} defaultValue="4320" variant="filled" />
                     </div>
@@ -549,7 +579,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                   </div>
                   <Flex gap="large" vertical>
                     <Flex gap="middle" justify="center">
-                      {buttonList.slice(0, 2).map((props, idx) => {
+                      {demoButtons.slice(0, 2).map((props, idx) => {
                         const { children, ...restProps } = props;
                         return (
                           <Button key={`item-${idx}`} {...restProps}>
@@ -559,7 +589,7 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                       })}
                     </Flex>
                     <Flex gap="middle" justify="center">
-                      {buttonList.slice(-2).map((props, idx) => {
+                      {demoButtons.slice(-2).map((props, idx) => {
                         const { children, ...restProps } = props;
                         return (
                           <Button key={`item-${idx}`} {...restProps}>
@@ -579,21 +609,27 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                       />
                       <div className={styles.profileInfo}>
                         <Title level={5} className={styles.profileTitle}>
-                          Ant Design
+                          {isJojo ? "Golden Wind" : "Ant Design"}
                         </Title>
                         <Text type="secondary" className={styles.profileHandle}>
-                          @ant-design
+                          {isJojo ? "@araki.jojo" : "@ant-design"}
                         </Text>
                         <p className={styles.profileDesc}>
-                          Building the future of UI for web & mobile.
+                          {isJojo
+                            ? "Thick ink. Fashion clash. Pose snap — not soft anime."
+                            : "Building the future of UI for web & mobile."}
                         </p>
                       </div>
                     </Flex>
                   </Card>
                   <InternalPanel
                     styles={{ root: { width: "100%" } }}
-                    title="Ant Design"
-                    description="An enterprise-class design system for building modern, intelligent, and delightful user experiences."
+                    title={isJojo ? "Stand Manifested" : "Ant Design"}
+                    description={
+                      isJojo
+                        ? "Sculptural hard edges, solid-black shading, and haute-couture clash color."
+                        : "An enterprise-class design system for building modern, intelligent, and delightful user experiences."
+                    }
                     type="success"
                   />
                 </div>
@@ -611,27 +647,31 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                       className={styles.signupAvatar}
                       draggable={false}
                     />
-                    <Title level={4}>Create an account</Title>
+                    <Title level={4}>{isJojo ? "Awaken your Stand" : "Create an account"}</Title>
                     <Text type="secondary" className={styles.signupText}>
-                      Start your free 7-day trial. No credit card required.
+                      {isJojo
+                        ? "Seven days of yellow sky. No soft SaaS required."
+                        : "Start your free 7-day trial. No credit card required."}
                     </Text>
                     <Button type="primary" block size="large" className={styles.signupBtn}>
-                      Get Started
+                      {isJojo ? "やれやれだぜ" : "Get Started"}
                     </Button>
                     <Divider className={styles.signupDivider}>OR</Divider>
                     <Flex vertical gap="small">
                       <Button block size="large" icon={<GoogleOutlined />}>
-                        Continue with Google
+                        {isJojo ? "Continue with Pose" : "Continue with Google"}
                       </Button>
                       <Button block size="large" icon={<AppleFilled />}>
-                        Continue with Apple
+                        {isJojo ? "Continue with Gold" : "Continue with Apple"}
                       </Button>
                     </Flex>
                   </Card>
 
-                  <ModalInternalPanel title="Ant Design">
+                  <ModalInternalPanel title={isJojo ? "JOJO Theme" : "Ant Design"}>
                     <div>
-                      Ant Design use CSS-in-JS technology to provide dynamic & mix theme ability.
+                      {isJojo
+                        ? "Bold thick black outlines, exaggerated dynamic poses, and vibrant non-naturalistic color — drop into ConfigProvider."
+                        : "Ant Design use CSS-in-JS technology to provide dynamic & mix theme ability."}
                     </div>
                   </ModalInternalPanel>
                 </div>

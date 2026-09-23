@@ -4,11 +4,12 @@ import { theme } from "antd";
 import { jojoColors, jojoInkShadow, jojoInkShadowLg, jojoInkShadowSm } from "./colors.ts";
 
 /**
- * Ant Design theme — Hirohiko Araki / JoJo Golden Wind cover art.
+ * Ant Design theme — Hirohiko Araki / JoJo’s Bizarre Adventure.
  *
- * Keywords: sculptural hard edges, JOJO pose tension (asymmetric weight),
- * thick ink + crosshatching feel, chiaroscuro block shadows, haute couture
- * clash color, Baroque metal detail, pop flat fills — not soft anime.
+ * Keywords: bold thick black outlines, sharp angular / sculptural anatomy,
+ * exaggerated dynamic poses (pointing-hand tension), vibrant saturated
+ * non-naturalistic color, high-fashion pattern & jewelry accents, dramatic
+ * solid-black shading — not soft anime.
  */
 export const jojoTheme: ThemeConfig = {
   algorithm: theme.defaultAlgorithm,
