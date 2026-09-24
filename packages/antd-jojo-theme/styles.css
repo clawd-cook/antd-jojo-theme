@@ -30,9 +30,11 @@
   --jojo-ink-shadow-sm: 2px 2px 0 #0a0a0c;
   --jojo-magenta-shadow: 2px 3px 0 #ff2d9b;
   --jojo-gold-shadow: 2px 3px 0 #f0c14a;
-  --jojo-radius: 2px;
-  --jojo-radius-lg: 4px;
-  --jojo-line: 2.5px;
+  --jojo-radius: 0px;
+  --jojo-radius-lg: 0px;
+  --jojo-line: 3.5px;
+  --jojo-panel: 4.5px;
+  --jojo-gutter: 10px;
   --jojo-ink-rough: url(#jojo-ink-rough);
   --jojo-ink-rough-strong: url(#jojo-ink-rough-strong);
 
@@ -116,9 +118,9 @@
   --jojo-speed-lines: repeating-conic-gradient(
     from 205deg at 100% 0%,
     transparent 0deg,
-    transparent 7deg,
-    rgba(10, 10, 12, 0.1) 7deg,
-    rgba(10, 10, 12, 0.1) 8deg
+    transparent 5deg,
+    rgba(10, 10, 12, 0.28) 5deg,
+    rgba(10, 10, 12, 0.28) 6.5deg
   );
 
   /* Fashion hardware — seam accents only */
@@ -160,27 +162,49 @@
   }
 }
 
-/* Floating ゴゴゴ watermark on stage */
+/* Floating ゴゴゴ — must read as JoJo SFX at a glance (not ambient texture) */
+.jojo-theme::before {
+  content: "ゴゴゴ";
+  position: absolute;
+  left: 1.5%;
+  top: 18%;
+  writing-mode: vertical-rl;
+  font-family: var(--jojo-font-display), serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--jojo-ink);
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+  text-shadow: 3px 3px 0 var(--jojo-paper);
+  transform: skewY(-2deg);
+}
+
 .jojo-theme::after {
   content: "ゴゴゴゴゴ";
   position: absolute;
-  right: 2%;
-  bottom: 4%;
-  font-size: clamp(48px, 8vw, 96px);
+  right: 1%;
+  bottom: 3%;
+  font-family: var(--jojo-font-display), serif;
+  font-size: clamp(56px, 10vw, 120px);
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--jojo-ink);
-  opacity: 0.045;
+  opacity: 0.14;
   pointer-events: none;
   z-index: 0;
-  transform: skewX(-4deg);
-  line-height: 1;
+  transform: skewX(-8deg) rotate(-2deg);
+  line-height: 0.85;
+  text-shadow: 4px 4px 0 var(--jojo-paper);
 }
 
 /* —— Rough ink shell —— */
 .jojo-theme .ant-btn,
 .jojo-theme .ant-card,
 .jojo-theme .ant-modal-content,
+.jojo-theme .ant-drawer-content,
 .jojo-theme .ant-notification-notice,
 .jojo-theme .ant-popover-inner,
 .jojo-theme .ant-alert,
@@ -213,13 +237,13 @@
 .jojo-theme .ant-message-notice-content::before {
   content: "";
   position: absolute;
-  inset: -1px;
-  border: 3px solid var(--jojo-ink);
-  border-radius: inherit;
+  inset: -2px;
+  border: 4px solid var(--jojo-ink);
+  border-radius: 0;
   pointer-events: none;
   z-index: 2;
   filter: var(--jojo-ink-rough);
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 /* —— Buttons: flat fill + hatched shade edge —— */
@@ -280,7 +304,7 @@
   transition-duration: 0.06s;
 }
 
-/* —— Cards: paper + hatch volume (not motif wallpaper) —— */
+/* —— Cards: manga panels (thick ink frame + gutter shadow) —— */
 .jojo-theme .ant-card,
 .jojo-theme .ant-modal-content,
 .jojo-theme .ant-notification-notice,
@@ -289,9 +313,9 @@
 .jojo-theme .ant-select-dropdown,
 .jojo-theme .ant-picker-dropdown .ant-picker-panel-container,
 .jojo-theme .ant-message-notice-content {
-  border: var(--jojo-line) solid var(--jojo-ink) !important;
-  border-radius: var(--jojo-radius-lg) !important;
-  box-shadow: var(--jojo-ink-shadow) !important;
+  border: var(--jojo-panel) solid var(--jojo-ink) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--jojo-ink-shadow-lg) !important;
   background-color: var(--jojo-paper);
   background-image: var(--jojo-hatch-volume), var(--jojo-paper-grain);
   background-size:
@@ -325,16 +349,24 @@
 }
 
 .jojo-theme .ant-card-head {
-  border-bottom: var(--jojo-line) solid var(--jojo-ink) !important;
+  border-bottom: var(--jojo-panel) solid var(--jojo-ink) !important;
   font-family: var(--jojo-font-display) !important;
   font-weight: 900;
   text-transform: none;
-  letter-spacing: 0.02em;
-  background: var(--jojo-gold) !important;
+  letter-spacing: 0.06em;
+  /* Manga caption bar — solid ink, not boutique gold */
+  background: var(--jojo-ink) !important;
   background-image: var(--jojo-hatch-dense) !important;
-  color: var(--jojo-ink);
-  text-shadow: 1px 1px 0 rgba(255, 254, 248, 0.35);
+  color: var(--jojo-paper);
+  text-shadow: 2px 2px 0 rgba(232, 49, 138, 0.55);
   position: relative;
+  min-height: 48px;
+}
+
+.jojo-theme .ant-card-head-title {
+  color: var(--jojo-paper) !important;
+  font-family: var(--jojo-font-display) !important;
+  font-weight: 900 !important;
 }
 
 .jojo-theme .ant-card-head::after {
@@ -350,6 +382,7 @@
   opacity: 0.95;
   z-index: 3;
   pointer-events: none;
+  filter: drop-shadow(1px 1px 0 var(--jojo-paper));
 }
 
 .jojo-theme .ant-modal-content {
@@ -357,12 +390,12 @@
 }
 
 .jojo-theme .ant-modal-header {
-  border-bottom: var(--jojo-line) solid var(--jojo-ink) !important;
+  border-bottom: var(--jojo-panel) solid var(--jojo-ink) !important;
   font-family: var(--jojo-font-display) !important;
   font-weight: 900;
   text-transform: none;
-  letter-spacing: 0.02em;
-  background: var(--jojo-gold) !important;
+  letter-spacing: 0.06em;
+  background: var(--jojo-ink) !important;
   background-image: var(--jojo-hatch-dense) !important;
 }
 
@@ -370,8 +403,9 @@
   font-family: var(--jojo-font-display) !important;
   font-weight: 900;
   text-transform: none;
-  letter-spacing: 0.02em;
-  text-shadow: 1px 1px 0 rgba(10, 10, 12, 0.2);
+  letter-spacing: 0.06em;
+  color: var(--jojo-paper) !important;
+  text-shadow: 2px 2px 0 rgba(232, 49, 138, 0.55);
 }
 
 /* —— Alerts —— */
@@ -570,15 +604,76 @@
 
 .jojo-theme .ant-table-thead > tr > th {
   font-weight: 900 !important;
-  letter-spacing: 0.02em;
-  border-bottom: var(--jojo-line) solid var(--jojo-ink) !important;
-  background: var(--jojo-gold) !important;
+  letter-spacing: 0.06em;
+  border-bottom: var(--jojo-panel) solid var(--jojo-ink) !important;
+  background: var(--jojo-ink) !important;
   background-image: var(--jojo-hatch-dense) !important;
+  color: var(--jojo-paper) !important;
+  text-shadow: 2px 2px 0 rgba(232, 49, 138, 0.45);
 }
 
 .jojo-theme .ant-collapse-header {
   font-weight: 900 !important;
   letter-spacing: 0.02em;
+}
+
+/* —— Component SFX: JoJo reads from antd widgets, not playground chrome —— */
+.jojo-theme .ant-card::after,
+.jojo-theme .ant-modal-content::after,
+.jojo-theme .ant-drawer-content::after,
+.jojo-theme .ant-notification-notice::after,
+.jojo-theme .ant-alert::after {
+  content: "ゴゴゴ";
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
+  font-family: var(--jojo-font-display), serif;
+  font-size: clamp(14px, 1.6vw, 22px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--jojo-ink);
+  opacity: 0.28;
+  transform: skewX(-12deg);
+  pointer-events: none;
+  z-index: 4;
+  text-shadow: 2px 2px 0 var(--jojo-paper);
+}
+
+.jojo-theme .ant-typography h1::before,
+.jojo-theme .ant-typography h2::before,
+.jojo-theme h1.ant-typography::before,
+.jojo-theme h2.ant-typography::before,
+.jojo-theme .ant-modal-title::before,
+.jojo-theme .ant-drawer-title::before,
+.jojo-theme .ant-notification-notice-message::before,
+.jojo-theme .ant-page-header-heading-title::before {
+  content: "ゴゴゴ ";
+  font-family: var(--jojo-font-display), serif;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+  text-shadow: 2px 2px 0 var(--jojo-gold);
+}
+
+.jojo-theme .ant-steps-item-title {
+  font-family: var(--jojo-font-display), serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.jojo-theme .ant-statistic-title::before,
+.jojo-theme .ant-list-header::before {
+  content: "メ ";
+  font-weight: 900;
+  opacity: 0.45;
+  letter-spacing: 0.06em;
+}
+
+.jojo-theme .ant-tabs-tab-active .ant-tabs-tab-btn::after {
+  content: " ✦";
+  color: var(--jojo-magenta);
+  font-weight: 900;
 }
 
 /* Layout chrome inside jojo root */
@@ -603,9 +698,10 @@
 .jojo-theme .ant-empty-description::before,
 .jojo-theme .ant-result-title::before {
   content: "ゴゴゴ ";
-  opacity: 0.45;
+  opacity: 0.85;
   letter-spacing: 0.14em;
   font-weight: 900;
+  font-family: var(--jojo-font-display), serif;
   color: var(--jojo-ink);
   text-shadow: 2px 2px 0 var(--jojo-gold);
 }
@@ -740,4 +836,27 @@
 
 .jojo-theme .jojo-heart::after {
   background: var(--jojo-motif-heart) center / contain no-repeat;
+}
+
+/* Opt-in manga SFX stamp */
+.jojo-theme .jojo-sfx {
+  position: relative;
+}
+
+.jojo-theme .jojo-sfx::after {
+  content: "ゴゴゴ";
+  position: absolute;
+  right: -0.15em;
+  bottom: -0.35em;
+  font-family: var(--jojo-font-display), serif;
+  font-size: 1.35em;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--jojo-ink);
+  opacity: 0.28;
+  transform: skewX(-12deg);
+  pointer-events: none;
+  z-index: 0;
+  text-shadow: 2px 2px 0 var(--jojo-paper);
+  line-height: 1;
 }

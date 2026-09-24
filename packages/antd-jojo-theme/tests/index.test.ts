@@ -1,6 +1,7 @@
 import { expect, test } from "vite-plus/test";
 
 import {
+  JojoProvider,
   jojoColors,
   jojoFontDisplay,
   jojoFontUi,
@@ -64,4 +65,11 @@ test("jojoMotifs expose fashion hardware data-URIs", () => {
   expect(jojoMotifBuckle).toContain("data:image/svg+xml");
   expect(jojoMotifClass.ladybug).toBe("jojo-ladybug");
   expect(jojoMotifClass.zip).toBe("jojo-zip");
+  expect(jojoMotifClass.sfx).toBe("jojo-sfx");
+});
+
+test("JojoProvider is the one-shot consumer entry", () => {
+  expect(typeof JojoProvider).toBe("function");
+  expect(jojoTheme.components?.Card?.headerBg).toBe(jojoColors.ink);
+  expect(jojoTheme.components?.Modal?.titleColor).toBe(jojoColors.paper);
 });

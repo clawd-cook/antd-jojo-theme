@@ -6,9 +6,9 @@
 
 ## 1. Visual Theme & Atmosphere
 
-**Priority:** Pose (A) → **Line / 荒木线 (B)** → Fashion motifs → Color (last).
+**Priority:** Pose (A) → **Line / 荒木线 (B)** → Fashion motifs (C) → **Manga page / SFX (D)** → Color (last).
 
-Recognition comes from **sculpted volume via ink lines** and **group-portrait composition**. Color is an optional mood filter. Grayscale must still feel like JoJo: hatched shade, rough contours, interlocking panels.
+Recognition comes from **comic-page reading** first: readable ゴゴゴ, panel frames, caption bars — then sculpted hatch and fashion hardware. Color is an optional mood filter. Grayscale must still feel like JoJo: SFX + panels + hatched shade.
 
 **Avoid:** motif wallpaper as the whole identity, flat dual-tone color slabs posing as “cell shade”, equal SaaS grids, soft blur glass, neo-brutal “thick black box + one accent color”.
 
@@ -105,29 +105,41 @@ Hardware is **couture accent**, not wallpaper. Zippers, ladybugs, buckles sit on
 
 **Anti-patterns:** repeating ladybugs as background; zipper tiles filling card bodies; motif density competing with pose/hatch.
 
+### Manga page grammar (D) — 一眼分镜
+
+Instant JoJo recognition is **comic-page**, not boutique UI. If the first glance could be any fashion SaaS after removing pink/gold, the page grammar failed.
+
+| Rule              | Meaning                              | Implementation                                                            |
+| ----------------- | ------------------------------------ | ------------------------------------------------------------------------- |
+| **SFX readable**  | ゴゴゴ is a graphic, not fog         | Stage `::before`/`::after` SFX ~0.14–0.16 opacity; `.jojo-sfx` stamp      |
+| **JOJO as logo**  | Title behind cast must hold          | Large display watermark + paper stroke + pink offset                      |
+| **Panel = frame** | Cards are manga panels               | `--jojo-panel` (~4.5px) ink border, `border-radius: 0`, hard stamp shadow |
+| **Caption bar**   | Black title strip like chapter cards | `Card`/`Modal` head = ink fill + paper type (not gold boutique bar)       |
+| **Concentration** | Drama spokes visible                 | Stronger `jojoSpeedLines` on alerts                                       |
+| **Gutter**        | White air between panels             | Playground column gap ≥12px; stage stays paper tooth                      |
+
+**Anti-patterns:** SFX at ≤5% opacity; soft rounded “app cards”; gold header bars reading as e-commerce chrome; quiet lavender SaaS stage with no lettering layer.
+
 ## 6. Package delivery
 
-| Layer                                             | What it does                                            |
-| ------------------------------------------------- | ------------------------------------------------------- |
-| `jojoTheme`                                       | Ant Design `ThemeConfig` — tokens + component overrides |
-| `jojoColors` / shadows / hatch / grain            | Programmatic tokens for custom surfaces                 |
-| `jojoInkFilterSvg` / `jojoInkFilterId`            | Manga rough-ink SVG filters (inject once)               |
-| `jojoMotion` / `jojoPoseSkew*` / `jojoPoseFigure` | Pose timing + group-portrait transforms                 |
-| `jojoFontDisplay` / `jojoFontUi` / `jojoType`     | Serif stage titles + condensed UI chrome                |
-| `jojoMotif*` / `jojoMotifClass`                   | Fashion hardware SVG data-URIs + opt-in class names     |
-| `styles.css` + `jojoRootClass`                    | Scoped chrome: grain, hatch, rough shells, type, pose   |
+| Layer                                             | What it does                                             |
+| ------------------------------------------------- | -------------------------------------------------------- |
+| `JojoProvider`                                    | Root class + ink filter + `jojoTheme` (preferred entry)  |
+| `jojoTheme`                                       | Ant Design `ThemeConfig` — tokens + component overrides  |
+| `jojoColors` / shadows / hatch / grain            | Programmatic tokens for custom surfaces                  |
+| `jojoInkFilterSvg` / `jojoInkFilterId`            | Manga rough-ink SVG filters (inject once)                |
+| `jojoMotion` / `jojoPoseSkew*` / `jojoPoseFigure` | Pose timing + group-portrait transforms                  |
+| `jojoFontDisplay` / `jojoFontUi` / `jojoType`     | Serif stage titles + condensed UI chrome                 |
+| `jojoMotif*` / `jojoMotifClass`                   | Fashion hardware SVG data-URIs + opt-in class names      |
+| `styles.css` + `jojoRootClass`                    | **Required** for JoJo: SFX on components, panels, motifs |
 
 Recommended consumer setup:
 
 ```tsx
-import { ConfigProvider } from "antd";
-import { jojoTheme, jojoRootClass, jojoInkFilterSvg } from "@clawd-cook/antd-jojo-theme";
+import { JojoProvider } from "@clawd-cook/antd-jojo-theme";
 import "@clawd-cook/antd-jojo-theme/styles.css";
 
-<div className={jojoRootClass}>
-  <div dangerouslySetInnerHTML={{ __html: jojoInkFilterSvg }} aria-hidden />
-  <ConfigProvider theme={jojoTheme}>{/* … */}</ConfigProvider>
-</div>;
+<JojoProvider>{/* antd components */}</JojoProvider>;
 ```
 
 ## Prompting Keywords (for Stitch / generative UI)

@@ -75,4 +75,5 @@ export const jojoMotifClass = {
   ladybug: "jojo-ladybug",
   buckle: "jojo-buckle",
   heart: "jojo-heart",
+  sfx: "jojo-sfx",
 } as const;

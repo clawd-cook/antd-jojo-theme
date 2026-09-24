@@ -35,13 +35,16 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
+    "@types/react": "catalog:",
     "antd": "catalog:",
     "bumpp": "^11.1.0",
+    "react": "catalog:",
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
   "peerDependencies": {
-    "antd": ">=5.0.0"
+    "antd": ">=5.0.0",
+    "react": ">=18.0.0"
   }
 }

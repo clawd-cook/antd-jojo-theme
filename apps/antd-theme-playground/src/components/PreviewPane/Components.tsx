@@ -99,29 +99,59 @@ const useStyle = createStyles(({ css, token }) => {
      * Grayscale must still read as interlocking figures.
      */
     layoutRowJojo: css({
-      gap: 8,
+      gap: 14,
       alignItems: "flex-start",
       position: "relative",
       minHeight: 620,
-      padding: "40px 20px 64px",
+      padding: "48px 28px 72px",
       overflow: "visible",
       perspective: 1400,
+      /* Manga page field — paper with faint speed wash */
+      backgroundImage: `
+        repeating-conic-gradient(
+          from 200deg at 92% 8%,
+          transparent 0deg,
+          transparent 6deg,
+          rgba(10, 10, 12, 0.06) 6deg,
+          rgba(10, 10, 12, 0.06) 7deg
+        )
+      `,
       "&::before": {
         content: '"JOJO"',
         position: "absolute",
         left: "50%",
-        top: "6%",
-        transform: "translateX(-50%)",
+        top: "2%",
+        transform: "translateX(-50%) skewX(-4deg)",
         fontFamily: 'Georgia, "Times New Roman", "Noto Serif", serif',
-        fontSize: "clamp(96px, 22vw, 210px)",
+        fontSize: "clamp(110px, 26vw, 240px)",
         fontWeight: 900,
-        letterSpacing: "0.04em",
-        lineHeight: 0.85,
-        color: "rgba(10, 10, 12, 0.07)",
+        letterSpacing: "0.02em",
+        lineHeight: 0.8,
+        color: "rgba(10, 10, 12, 0.2)",
+        WebkitTextStroke: "3px rgba(255, 254, 248, 0.65)",
+        paintOrder: "stroke fill",
         pointerEvents: "none",
         zIndex: 0,
         userSelect: "none",
         whiteSpace: "nowrap",
+        textShadow: "6px 6px 0 rgba(232, 49, 138, 0.35)",
+      },
+      "&::after": {
+        content: '"ゴゴゴゴゴ"',
+        position: "absolute",
+        right: "2%",
+        bottom: "8%",
+        fontFamily: 'Georgia, "Times New Roman", "Noto Serif", serif',
+        fontSize: "clamp(48px, 9vw, 96px)",
+        fontWeight: 900,
+        letterSpacing: "0.08em",
+        lineHeight: 0.85,
+        color: "rgba(10, 10, 12, 0.22)",
+        transform: "skewX(-10deg) rotate(-3deg)",
+        pointerEvents: "none",
+        zIndex: 0,
+        userSelect: "none",
+        textShadow: "3px 3px 0 rgba(255, 254, 248, 0.9)",
       },
     }),
     colLeft: css({
@@ -648,7 +678,9 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                           +5
                         </Avatar>
                       </Avatar.Group>
-                      <Title level={5}>{isJojo ? "Verify your Stand" : "Verify account"}</Title>
+                      <Title level={5} className={isJojo ? "jojo-sfx" : undefined}>
+                        {isJojo ? "Verify your Stand" : "Verify account"}
+                      </Title>
                       <Text type="secondary">
                         {isJojo
                           ? "We've sent a code to a****@passione.mail"
@@ -732,7 +764,9 @@ const ComponentsBlock: React.FC<ComponentsBlockProps> = (props) => {
                         className={styles.signupAvatar}
                         draggable={false}
                       />
-                      <Title level={4}>{isJojo ? "Awaken your Stand" : "Create an account"}</Title>
+                      <Title level={4} className={isJojo ? "jojo-sfx" : undefined}>
+                        {isJojo ? "Awaken your Stand" : "Create an account"}
+                      </Title>
                       <Text type="secondary" className={styles.signupText}>
                         {isJojo
                           ? "Seven days of Naples haze. No soft SaaS required."

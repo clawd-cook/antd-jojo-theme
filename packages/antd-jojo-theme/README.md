@@ -16,21 +16,21 @@
 
 </div>
 
-Passione couture as UI: Gold Experience pink, antique buckle gold, ladybug-dot fabric, jewelry badge radius, light JOJO pose skew — Hirohiko Araki _Part 5_ energy, not neo-brutal bricks and not soft SaaS chrome.
+Passione couture as UI: Gold Experience pink, antique buckle gold, ladybug-dot fabric, manga panel frames, readable ゴゴゴ on components — Hirohiko Araki _Part 5_ energy, not neo-brutal bricks and not soft SaaS chrome.
 
 > [!NOTE]
-> **Design keywords:** Vento Aureo · ladybug emblems · zipper / diamond weave · Passione pink + antique gold · Naples haze · thin ink contours · gold/rose stamp shadows · jewelry radius — not neo-brutalism, not soft anime.
+> **Design keywords:** Vento Aureo · manga panels · ゴゴゴ SFX · ladybug emblems · zipper seams · Passione pink + antique gold · 荒木线 hatch · rough ink contours — not neo-brutalism, not soft anime.
 
 ## Features
 
+- **`JojoProvider`** — root class + ink filter + `jojoTheme` in one wrapper (components read as JoJo without playground chrome)
 - **Ready-made `ThemeConfig`** — Button, Input, Card, Modal, Layout, Menu, Table, Segmented, Drawer, and more
 - **VA / Passione palette** — wine ink, Naples haze, Gold Experience pink, clash rose, buckle gold
-- **Jewelry stamp shadows** — gold / rose offsets (`2px` / `3px` / `5px`), not fat black bricks
-- **Optional `styles.css`** — pose skew, paper grain, 荒木线, rough ink shells under `.jojo-theme`
-- **Manga ink filters** — `jojoInkFilterSvg` for hand-wobbled contours (text stays crisp)
-- **Fashion + print textures** — screentone, grain, speed-lines helpers
-- **Badge geometry** — radius `4` / `6`; thin contours; focus rings off
-- **antd 5+ peer** — `ConfigProvider theme={jojoTheme}`
+- **Required `styles.css`** — component SFX, panel frames, paper grain, 荒木线, fashion hardware under `.jojo-theme`
+- **Manga ink filters** — `jojoInkFilterSvg` (auto via `JojoProvider`)
+- **Fashion + print textures** — zipper dividers, ladybug stamps, buckle tags, speed-lines
+- **Square manga cuts** — radius `0`; thick ink contours
+- **antd 5+ / React 18+ peers**
 
 ## Installation
 
@@ -51,7 +51,25 @@ yarn add @clawd-cook/antd-jojo-theme antd
 
 ## Usage
 
-Pass `jojoTheme`, import the chrome CSS, and inject the manga ink filter SVG once:
+`styles.css` is required for JoJo recognition — tokens alone look like a pink Ant Design skin. Prefer `JojoProvider`:
+
+```tsx
+import { Button, Card } from "antd";
+import { JojoProvider } from "@clawd-cook/antd-jojo-theme";
+import "@clawd-cook/antd-jojo-theme/styles.css";
+
+export function App() {
+  return (
+    <JojoProvider>
+      <Card title="Passione">
+        <Button type="primary">Ready</Button>
+      </Card>
+    </JojoProvider>
+  );
+}
+```
+
+Manual wiring (same result):
 
 ```tsx
 import { ConfigProvider, Button, Card } from "antd";
@@ -63,8 +81,8 @@ export function App() {
     <div className={jojoRootClass}>
       <div dangerouslySetInnerHTML={{ __html: jojoInkFilterSvg }} aria-hidden />
       <ConfigProvider theme={jojoTheme}>
-        <Card>
-          <Button type="primary">ゴゴゴ Ready</Button>
+        <Card title="Passione">
+          <Button type="primary">Ready</Button>
         </Card>
       </ConfigProvider>
     </div>
@@ -72,7 +90,7 @@ export function App() {
 }
 ```
 
-Tokens alone still work without `styles.css`. The CSS layer adds paper grain, 荒木线 screentone, rough ink border shells, runway pose motion, and boutique uppercase type. Without `jojoInkFilterSvg`, borders stay sharp (filter simply no-ops).
+Cards, modals, alerts, H1/H2, and notifications carry **ゴゴゴ** stamps; dividers read as zippers; primary buttons get a ladybug; card/modal heads are black manga caption bars. That identity lives in the package CSS — not the playground.
 
 Default export is the same theme object:
 

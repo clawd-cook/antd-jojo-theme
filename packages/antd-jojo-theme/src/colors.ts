@@ -134,13 +134,13 @@ export const jojoHatchFashion = [
 ].join(", ");
 export const jojoHatchFashionSize = "14px 12px";
 
-/** Concentration lines — drama panels / alerts */
+/** Concentration lines — drama panels / alerts (readable ink spokes) */
 export const jojoSpeedLines = `repeating-conic-gradient(
   from 205deg at 100% 0%,
   transparent 0deg,
-  transparent 7deg,
-  rgba(10, 10, 12, 0.1) 7deg,
-  rgba(10, 10, 12, 0.1) 8deg
+  transparent 5deg,
+  rgba(10, 10, 12, 0.28) 5deg,
+  rgba(10, 10, 12, 0.28) 6.5deg
 )`;
 
 /**

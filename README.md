@@ -52,39 +52,40 @@ pnpm add @clawd-cook/antd-jojo-theme antd
 
 ## Usage
 
+`styles.css` is required for JoJo recognition. Prefer `JojoProvider`:
+
 ```tsx
-import { ConfigProvider, Button, Card } from "antd";
-import { jojoTheme, jojoRootClass } from "@clawd-cook/antd-jojo-theme";
+import { Button, Card } from "antd";
+import { JojoProvider } from "@clawd-cook/antd-jojo-theme";
 import "@clawd-cook/antd-jojo-theme/styles.css";
 
 export function App() {
   return (
-    <div className={jojoRootClass}>
-      <ConfigProvider theme={jojoTheme}>
-        <Card>
-          <Button type="primary">ゴゴゴ Ready</Button>
-        </Card>
-      </ConfigProvider>
-    </div>
+    <JojoProvider>
+      <Card title="Passione">
+        <Button type="primary">Ready</Button>
+      </Card>
+    </JojoProvider>
   );
 }
 ```
 
-`jojoTheme` works without `styles.css`. The CSS layer adds pose motion, ladybug fabric, and uppercase editorial type.
+Cards, titles, modals, and alerts carry ゴゴゴ / panel / zipper chrome from the package — not playground-only décor.
 
 ### Exports
 
 | Export                                 | Description                                        |
 | -------------------------------------- | -------------------------------------------------- |
+| `JojoProvider`                         | Root class + ink filter + `jojoTheme` (preferred)  |
 | `jojoTheme`                            | Ant Design `ThemeConfig` (also the default export) |
 | `jojoColors`                           | Named Passione palette hex tokens                  |
 | `jojoRootClass`                        | `"jojo-theme"` — root class for scoped chrome CSS  |
 | `jojoMotion` / `jojoPoseSkew*`         | Pose-snap durations, easing, transform strings     |
-| `jojoInkShadow` / `Sm` / `Lg`          | Gold stamp `box-shadow` strings                    |
-| `jojoMagentaShadow` / `jojoGoldShadow` | Jewelry accent shadows                             |
-| `jojoHatch` / `Dense` / `Fashion`      | Ladybug dots + diamond weave `background-image`    |
-| `jojoHatchSize` / `FashionSize`        | Background sizes for radial patterns               |
-| `styles.css`                           | Optional pose / fabric / uppercase chrome          |
+| `jojoInkShadow` / `Sm` / `Lg`          | Ink stamp `box-shadow` strings                     |
+| `jojoMagentaShadow` / `jojoGoldShadow` | Accent shadows                                     |
+| `jojoHatch` / `Dense` / `Volume`       | 荒木线 hatch `background-image` helpers            |
+| `jojoMotif*` / `jojoMotifClass`        | Fashion hardware tokens + opt-in classes           |
+| `styles.css`                           | **Required** component SFX / panels / motifs       |
 
 ### Palette (highlights)
 

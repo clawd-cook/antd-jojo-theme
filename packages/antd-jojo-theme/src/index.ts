@@ -1,3 +1,4 @@
+export { JojoProvider, type JojoProviderProps } from "./JojoProvider.ts";
 export {
   jojoCellShade,
   jojoColors,
